@@ -1,3 +1,11 @@
+/*
+GAME_STATE
+0 : ready
+1 : play
+2 : die
+3 : all die
+*/
+var GAME_STATE
 //img Option
 var backgroundIMG = new Image();
 var TOP_SLOT_IMG1 = new Image();
@@ -264,3 +272,4 @@ function test() {
 	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
 	time_related++;
 }
+
