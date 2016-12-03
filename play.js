@@ -26,7 +26,9 @@ var interval_speed=100;
 //top canvas
 var topCanvas;
 var topCTX;
-
+//character parameters
+var Itsme;
+var accel = false;
 //allocate IMG
 function initIMG(){
 	//img Option
@@ -167,6 +169,60 @@ function update_map_cursor(TIME_RELATED, DEATH_TIME) {
 	topCTX.drawImage(TOP_LIVE_CURSOR_IMG, 1070 + TIME_RELATED, 40);
 	topCTX.restore();
 };
+//Making Character
+function character(width,height,x,y,ID,color){
+	this. width = width;
+	this.height = height;
+	this.speedY = 0;
+	this.gravity = 0.3;
+	this.gravitySpeed = 0;
+	this.x = x;
+	this.y = y;
+	this.id = ID;
+	this.color = color;
+	this.update = function(){
+		mainCtx.fillStyle = color;
+		mainCtx.fillRect(this.x,this.y,this.width,this.height);
+	}
+	this.newPos = function(){ //Goes up and down
+		this.gravitySpeed += this.gravity;
+		this.y += this.speedY+this.gravitySpeed;
+		this.hitRock();
+	}
+	this.hitRock = function(){
+		var rockBottom = canvasHeight-100 - this.height;
+		var rockTop = 100;
+		if(this.y > rockBottom){
+			this.y = rockBottom;
+			this.gravitySpeed = 0;
+		}
+		if(this.y < rockTop){
+			this.y = rockTop;
+			this.gravitySpeed = 0;
+		}
+	}
+}
+
+//Update Character Status
+function updateGame(){
+	Itsme.newPos();
+	Itsme.update();
+}
+function accelerate(n){
+	Itsme.gravity = n;
+}
+function charUP(){
+	if(accel)
+		accelerate(-0.15);
+	else
+		accelerate(-0.3);
+}
+function charSTOP(){
+	if(accel)
+		accelerate(0.3);
+	else
+		accelerate(0.15);
+}
 
 var CLIENT_SLOT;
 var CLIENT_NAME;
@@ -179,7 +235,7 @@ var death_time;
 $(document).ready(function(){
 	initIMG();
 	initCanvas();
-
+	Itsme = new character(50,50,100,300,1,"red");
 	CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
 	CLIENT_NAME = ["123","123","123","123","122"];
 	CLIENT_SIZE = 5;
@@ -188,9 +244,28 @@ $(document).ready(function(){
 	time_related = 300;
 	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
 	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
-
+	$(document).on("mousedown", "#MAIN-CANVAS", function(e){
+		console.log("click");
+		charUP();
+	});
+	$(document).on("mouseup", "#MAIN-CANVAS", function(e){
+		charSTOP();
+		console.log("bye");
+	});
+	window.addEventListener("keydown",function(e){
+		if(e.keyCode === 32){
+			console.log("SPACE");
+			accel = true;
+		}
+	});
+	window.addEventListener("keyup", function(e){
+		if(e.keyCode === 32){
+			console.log("NOOOOO");
+			accel = false;
+		}
+	});
 	var intervalID=setInterval(update_bg,interval_speed);
-
+	var intervalChar = setInterval(updateGame,20);
 	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
 });
 
