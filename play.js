@@ -4,24 +4,20 @@ backgroundIMG.src="image/back_cave.png";
 var TOP_SLOT_IMG = new Image();
 TOP_SLOT_IMG.src = "image/TOP_ClIENTSLOT.png";
 var TOP_MAP_IMG = new Image();
-<<<<<<< HEAD
-TOP_MAP_IMG = "image/TOP_MAP.png";
-var wallIMG = new Image();
-wallIMG = "image/wall.png";
-=======
 TOP_MAP_IMG.src = "image/TOP_MAP.png";
 var TOP_HP_IMG = new Image();
 TOP_HP_IMG.src = "image/TOP_HP.png";
 var TOP_HP_EMPTY_IMG = new Image();
 TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
+var wallIMG = new Image();
+wallIMG.src = "image/wall.png";
+
 /*
 var TOP_LIVE_CURSOR_IMG = new Image();
 TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
 var TOP_DEATH_CURSOR_IMG = new Image();
 TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
 */
-
->>>>>>> 5cf5784b09ec6f57aba39a1df142aeb15838826e
 
 //canvas Option
 var canvasHeight=600;
@@ -33,19 +29,18 @@ var scrollVal=0;
 var speed=50;
 var interval_speed=100;
 
+//top canvas
+var topCanvas;
+var topCTX;
+
 //allocate canvas
 function initCanvas(){
 	mainCanvas = document.getElementById("MAIN-CANVAS");
 	mainCtx = mainCanvas.getContext("2d");
 }
 
-<<<<<<< HEAD
-//scroll background image
-=======
-var topCanvas;
-var topCTX;
 
->>>>>>> 5cf5784b09ec6f57aba39a1df142aeb15838826e
+//scroll background image
 function update_bg(){
 	mainCtx.clearRect(0,0,canvasWidth,canvasHeight);
 
@@ -57,14 +52,17 @@ function update_bg(){
     }
 };
 
-<<<<<<< HEAD
 //render wall img
 function draw_wall(){
-	mainCtx.createPattern(wallIMG,"repeat");
+	var wall = mainCtx.createPattern(wallIMG,"repeat");
 	mainCtx.rect(0,0,1500,100);
+	mainCtx.fillStyle=wall;
+	mainCtx.fill();
+	mainCtx.rect(0,500,1500,100);
+	mainCtx.fillStyle=wall;
+	mainCtx.fill();
 };
 
-=======
 function update_top(HPLEFT, HPMAX) {
 	topCTX.save();
 	topCTX.fillStyle = "#ff6666";
@@ -128,9 +126,8 @@ window.onload=function(){
 	update_top(HPLEFT, HPMAX);	// FOR TESTING PURPOSE
 };
 
-
->>>>>>> 5cf5784b09ec6f57aba39a1df142aeb15838826e
 $(document).ready(function(){
 	initCanvas();
 	var intervalID=setInterval(update_bg,interval_speed);
+	draw_wall();
 });
