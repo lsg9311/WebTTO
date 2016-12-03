@@ -92,7 +92,10 @@ function draw_bg(){
     draw_wall(scrollVal);
 
     //draw character
-    ctxBuffer.drawImage(bird1, cx, cy, 50, 50);
+    if(frame1==1){ctxBuffer.drawImage(bird1, cx, cy, 50, 50);}
+    else if (frame1==2){ctxBuffer.drawImage(bird2, cx, cy, 50, 50);}
+    else if (frame1==3){ctxBuffer.drawImage(bird3, cx, cy, 50, 50);}
+    else {ctxBuffer.drawImage(bird4, cx, cy, 50, 50);}
 
     //main canvas
     mainCanvas = document.getElementById("MAIN-CANVAS");
@@ -106,7 +109,6 @@ function draw_bg(){
 }
 
 function flying(){
-	bird1.src ="image/bird/PNG/frame-"+frame1.toString()+".png";
 		frame1++;
 		if (frame1>4)
 			{frame1=1;}
@@ -285,7 +287,7 @@ $(document).ready(function(){
 	
 
 	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
-	setInterval(function(){flying();}, 250);
+	setInterval(function(){flying();}, 100);
 	setInterval(function(){update_bg();}, 30);
 	setInterval(function(){update_position();}, 30);
 
