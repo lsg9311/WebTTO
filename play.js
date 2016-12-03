@@ -13,6 +13,10 @@ var TOP_HP_IMG = new Image();
 TOP_HP_IMG.src = "image/TOP_HP.png";
 var TOP_HP_EMPTY_IMG = new Image();
 TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
+var TOP_LIVE_CURSOR_IMG = new Image();
+TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
+var TOP_DEATH_CURSOR_IMG = new Image();
+TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
 var wallIMG = new Image();
 wallIMG.src = "image/wall.png";
 
