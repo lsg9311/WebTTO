@@ -24,12 +24,12 @@
 	var canvasWidth=1500;
 	var mainCanvas,mainCtx;
 
-	//scroll Option
-	var scrollVal=0;
-	var scrollWall=0;
-	var Walldir=1;
-	var speed=50;
-	var interval_speed=100;
+//scroll Option
+var scrollVal=0;
+var scrollWall=0;
+var Walldir=1;
+var speed=50;
+var interval_speed=30;
 
 	//top canvas
 	var topCanvas;
@@ -246,12 +246,31 @@
 	var HPLEFT;
 	var time_related;
 	var death_time;
+	
+
+	//ready state show
+	function ready_canvas(){
+		update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
+		update_bg();
+		updateGame();
+		test();
+	}
 
 	$(document).ready(function(){
 		initIMG();
 		initCanvas();
+		Itsme = new character(50,50,100,300,1,"red");
+		CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
+		CLIENT_NAME = ["123","123","123","123","122"];
+		CLIENT_SIZE = 5;
+		HPMAX = 8;
+		HPLEFT = 6;
+		time_related = 300;
+		death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
+		
 		switch(GAME_STATE){
 			case 0:
+				ready_canvas();
 			break;
 			case 1:
 				Itsme = new character(50,50,100,300,1,"red");
@@ -278,35 +297,35 @@
 					}
 				});
 				window.addEventListener("keyup", function(e){
-					if(e.keyCode === 65){
-						console.log("Aouch!");
-						hitted();
+					if(e.keyCode === 32){
+						console.log("NOOOOO");
+						accel = false;
 					}
 				});
 
-				//test for hit
 				$(document).on("keydown", function(e){
-					if(e.key)
-					hitted();
-				});
+						if(e.key)
+						hitted();
+					});//
 
-
-				var intervalID=setInterval(update_bg,interval_speed);
-				var intervalChar = setInterval(updateGame,20);
-				var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
-				
 				var intervalHIT = setInterval(function(){
-					if(hit_state > 0) hit_state--;
-				},hit_speed); // for hit state change
+						if(hit_state > 0) hit_state--;
+					},hit_speed); // for hit state change
 
+				var intervalMAIN=setInterval(update_all, interval_speed);
 			break;
 			case 2:
+			break;
+			case 3:
 			break;
 		}	
 	});
 
-
-
+	function update_all() {
+		update_bg();
+		updateGame();
+		test();	// FOR TESTING PURPOSE
+	}
 
 	// FOR TESTING PURPOSE
 	function test() {
