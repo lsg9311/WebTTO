@@ -59,7 +59,24 @@ function draw_wall(scroll){
 	mainCtx.translate(scroll*3,0);
     // draw
     mainCtx.fillRect(-scroll*3, 0, 1500, 100);
+    
+    mainCtx.moveTo(-scroll*3,100);
+    mainCtx.lineTo(-scroll*3,200);
+    mainCtx.bezierCurveTo(1000-(scroll*3),100,1000-(scroll*3),100,1500-(scroll*3),100);
+    mainCtx.lineTo(-scroll*3,100);
+
+    mainCtx.fill();
+    mainCtx.fillStyle=wall;
+
     mainCtx.fillRect(-scroll*3, 500, 1500, 100);
+    mainCtx.moveTo(-scroll*3,500);
+    mainCtx.bezierCurveTo(1000-(scroll*3),400,1000-(scroll*3),400,1500-(scroll*3),400);
+    mainCtx.lineTo(1500-(scroll*3),500);
+    mainCtx.lineTo(-scroll*3,500);
+
+    mainCtx.fill();
+    mainCtx.fillStyle=wall;
+
     // undo offset
     mainCtx.translate(-scroll*3, 0);
 };
