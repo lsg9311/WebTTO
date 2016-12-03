@@ -42,6 +42,11 @@ function initCanvas(){
 	mainCtx = mainCanvas.getContext("2d");
 }
 
+
+//scroll background image
+var topCanvas;
+var topCTX;
+
 function update_bg(){
 
     scrollVal+=speed;                   
