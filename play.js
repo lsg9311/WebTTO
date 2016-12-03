@@ -47,7 +47,6 @@ function initCanvas(){
 var topCanvas;
 var topCTX;
 
->>>>>>> 5d7d48e8d256d4282c192b308c8f9e58859cf02c
 function update_bg(){
 
     scrollVal+=speed;                   
