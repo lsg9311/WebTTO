@@ -42,25 +42,27 @@ function initCanvas(){
 
 //scroll background image
 function update_bg(){
-	mainCtx.clearRect(0,0,canvasWidth,canvasHeight);
 
     scrollVal+=speed;                   
     mainCtx.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
     mainCtx.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
+    draw_wall(scrollVal);
     if(scrollVal >= 2000){
         scrollVal = 0;
     }
 };
 
 //render wall img
-function draw_wall(){
+function draw_wall(scroll){
 	var wall = mainCtx.createPattern(wallIMG,"repeat");
-	mainCtx.rect(0,0,1500,100);
 	mainCtx.fillStyle=wall;
-	mainCtx.fill();
-	mainCtx.rect(0,500,1500,100);
-	mainCtx.fillStyle=wall;
-	mainCtx.fill();
+	
+	mainCtx.translate(scroll*3,0);
+    // draw
+    mainCtx.fillRect(-scroll*3, 0, 1500, 100);
+    mainCtx.fillRect(-scroll*3, 500, 1500, 100);
+    // undo offset
+    mainCtx.translate(-scroll*3, 0);
 };
 
 function update_top(HPLEFT, HPMAX) {
@@ -129,5 +131,4 @@ window.onload=function(){
 $(document).ready(function(){
 	initCanvas();
 	var intervalID=setInterval(update_bg,interval_speed);
-	draw_wall();
 });
