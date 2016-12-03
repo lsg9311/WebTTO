@@ -13,12 +13,10 @@ var TOP_HP_IMG = new Image();
 TOP_HP_IMG.src = "image/TOP_HP.png";
 var TOP_HP_EMPTY_IMG = new Image();
 TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
-/*
 var TOP_LIVE_CURSOR_IMG = new Image();
 TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
 var TOP_DEATH_CURSOR_IMG = new Image();
 TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
-*/
 
 //canvas Option
 var canvasHeight=600;
@@ -112,19 +110,29 @@ function update_HP(HPLOC, HPLEFT, HPLIMIT) {
 };
 // update CURSORS in MAP UI
 function update_map_cursor(TIME_RELATED, DEATH_TIME) {
-
+	topCTX.save();
+	var i=0;
+	while(i < DEATH_TIME.length) {
+		topCTX.drawImage(TOP_DEATH_CURSOR_IMG, 1070 + DEATH_TIME[i].TIME, 40);
+		topCTX.font = "15px Arial";
+		topCTX.fillStyle = "black";
+		topCTX.fillText(DEATH_TIME[i].CLIENT_ID, 1070 + DEATH_TIME[i].TIME + 10 - (DEATH_TIME[i].CLIENT_ID.length) * 4, 74);
+		i++;
+	}
+	topCTX.drawImage(TOP_LIVE_CURSOR_IMG, 1070 + TIME_RELATED, 40);
+	topCTX.restore();
 };
 
 window.onload=function(){
 	topCanvas = document.getElementById("TOP-CANVAS");
 	topCTX = topCanvas.getContext("2d");
 	var CLIENT_SLOT = [TOP_SLOT_IMG, TOP_SLOT_IMG, TOP_SLOT_IMG, TOP_SLOT_IMG, TOP_SLOT_IMG];
-	var CLIENT_NAME = ["123","123","123","123","123"];
+	var CLIENT_NAME = ["123","123","123","123","122"];
 	var CLIENT_SIZE = 5;
 	var HPMAX = 8;
 	var HPLEFT = 6;
-	var time_related = 100;
-	var death_time = [{CLIENT_ID : 2, TIME : 10}, {CLIENT_ID : 2, TIME : 25}]
+	var time_related = 300;
+	var death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}]
 	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
 };
 
