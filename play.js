@@ -327,6 +327,7 @@ function ready_indicate(){
 	indicate_time-=1;
 }
 
+var intervalMain;
 $(document).ready(function(){
 	initIMG();
 	initCanvas();
@@ -340,7 +341,7 @@ $(document).ready(function(){
 	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
 	
 	
-	var intervalMain = setInterval(update_all, interval_speed);
+	intervalMain = setInterval(update_all, interval_speed);
 	/*
 	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
 	setInterval(function(){flying();}, 100);
@@ -362,12 +363,18 @@ function update_all() {
 			$(document).on("keydown", function(e){
 				if(e.key == 'a'){
 					hitted();
+				} else if(e.key == 's'){
+					//FOR TESTING PURPOSE
+					GAME_STATE = 2;
+				} else if(e.key == 'd'){
+					//FOR TESTING PURPOSE
+					GAME_STATE = 3;
+				} else if(e.key == 'f'){
+					//FOR TESTING PURPOSE
 				}
 			});//
 
-			var intervalHIT = setInterval(function(){
-				if(hit_state > 0) hit_state--;
-			},hit_speed); // for hit state change
+			if(hit_state > 0) hit_state--;
 
 			//var intervalMAIN=setInterval(update_all, interval_speed);
 			flying();
@@ -392,6 +399,8 @@ function update_all() {
 2. after some time, go to result status/page with some data used for ranking (ex)dead time, live time, health point ...)
 */
 function game_halt() {
+	clearInterval(intervalMain);
+	GAME_STATE = 1;
 	return;
 }
 
@@ -407,5 +416,5 @@ function test() {
 //WHEN HITTED
 function hitted() {
 	
-	if(hit_state == 0) HPLEFT--, hit_state=3;
+	if(hit_state == 0) HPLEFT--, hit_state=30;
 }
