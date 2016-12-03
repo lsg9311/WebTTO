@@ -59,7 +59,7 @@
 </head>
 <body bgcolor = "#A9D0F5">
 	<div id = "head_container">
-		<img src="" id="img_star" width="65px" height="65px">
+		<img src="image/logo.png" id="img_star" width="100px" height="100px">
 		<h1>웹또</h1>
 	</div>
 
