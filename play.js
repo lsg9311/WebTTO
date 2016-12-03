@@ -85,12 +85,10 @@ function update_bg(){
 };
 
 function scroll_bg(){
+	scrollVal+=speed;
 	if(scrollVal >= 2000) scrollVal = 0;
-	//if(Math.abs(scrollWall) >=50) Walldir*=-1;
-	if(GAME_STATE!=0){
-		scrollVal+=speed;
-		scrollWall+=Walldir*speed;   
-	}
+	if(Math.abs(scrollWall) >=50) Walldir*=-1;
+	scrollWall+=Walldir*speed;   
 	if(scrollVal >= 2000){
 		scrollVal = 0;
 	}
@@ -110,7 +108,7 @@ function draw_bg(){
 	//draw bg
     ctxBuffer.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
     ctxBuffer.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
-    draw_wall(ctxBuffer,scrollVal,scrollWall);
+    draw_wall(scrollVal,scrollWall);
 
     //draw character
     if(frame1<RPM+1){ctxBuffer.drawImage(bird1, cx, cy, 50, 50);}
@@ -138,16 +136,16 @@ function flying(){
 
 
 //render wall img
-function draw_wall(ctx,scroll,scrollWall){
-	ctx.save();
-	var wall = ctx.createPattern(wallIMG,"repeat");
-	ctx.fillStyle=wall;
+function draw_wall(scroll,scrollWall){
+	mainCtx.save();
+	var wall = mainCtx.createPattern(wallIMG,"repeat");
+	mainCtx.fillStyle=wall;
 	
-	var scrollCoef=scroll*5;
+	var scrollCoef=scroll*2;
 
-	ctx.translate(scrollCoef,0);
+	mainCtx.translate(scrollCoef,0);
     // draw
-    ctx.fillRect(-scrollCoef, 0, 1500, 100);
+    mainCtx.fillRect(-scrollCoef, 0, 1500, 100);
 /*
     
     mainCtx.moveTo(-scrollCoef,100);
@@ -158,7 +156,7 @@ function draw_wall(ctx,scroll,scrollWall){
 
     mainCtx.fill();
     mainCtx.fillStyle=wall;
-*/   ctx.fillRect(-scrollCoef, 500, 1500, 100);
+*/    mainCtx.fillRect(-scrollCoef, 500, 1500, 100);
 /*    mainCtx.moveTo(-scrollCoef,500);
     mainCtx.lineTo(-scrollCoef,500-scrollWall)
     mainCtx.bezierCurveTo(1000-(scrollCoef),400+scrollWall,1000-(scrollCoef),400+scrollWall,1500-(scrollCoef),400+scrollWall);
@@ -169,8 +167,8 @@ function draw_wall(ctx,scroll,scrollWall){
     mainCtx.fillStyle=wall;
 */
     // undo offset
-    ctx.translate(-scrollCoef, 0);
-    ctx.restore();
+    mainCtx.translate(-scrollCoef, 0);
+    mainCtx.restore();
 };
 
 // update top canvas
@@ -352,12 +350,14 @@ $(document).ready(function(){
 
 function update_all() {
 	switch(GAME_STATE){
+		// ready status
 		case 0:
 			ready_canvas();
 			ready_indicate();
 			console.log(indicate_time);
 			if(indicate_time==0) GAME_STATE=1;
 		break;
+		// on running status
 		case 1:
 			$(document).on("keydown", function(e){
 				if(e.key == 'a'){
@@ -375,8 +375,10 @@ function update_all() {
 			update_position();
 			test();	// FOR TESTING PURPOSE
 		break;
+		// on dead status
 		case 2:
 		break;
+		// all player dead status. the game is goning to be halt
 		case 3:
 		break;
 	}
@@ -397,4 +399,3 @@ function hitted() {
 	
 	if(hit_state == 0) HPLEFT--, hit_state=3;
 }
-
