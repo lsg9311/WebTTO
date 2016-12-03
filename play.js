@@ -1,4 +1,3 @@
-
 /*
 GAME_STATE
 0 : ready
@@ -6,7 +5,7 @@ GAME_STATE
 2 : die
 3 : all die
 */
-var GAME_STATE=1;
+var GAME_STATE=0;
 //img Option
 var backgroundIMG = new Image();
 var TOP_SLOT_IMG1 = new Image();
@@ -317,6 +316,21 @@ function ready_canvas(){
 	test();
 }
 
+var indicate_time=3000/interval_speed;
+
+function ready_indicate(){
+	var count=Math.floor(indicate_time/interval_speed);
+	mainCtx.font="50px Arial";
+	mainCtx.fillStyle="#000000";	
+	if(count>0){
+		mainCtx.fillText(count,690,300);
+	}
+	else{
+		mainCtx.fillText("START!",650,300);
+	}
+	indicate_time-=1;
+}
+
 $(document).ready(function(){
 	initIMG();
 	initCanvas();
@@ -329,38 +343,7 @@ $(document).ready(function(){
 	time_related = 300;
 	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
 	
-	switch(GAME_STATE){
-		case 0:
-			ready_canvas();
-		break;
-		case 1:
-		CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
-		CLIENT_NAME = ["123","123","123","123","122"];
-		CLIENT_SIZE = 5;
-		HPMAX = 8;
-		HPLEFT = 6;
-		time_related = 300;
-		death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
-		update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
-
-
-		$(document).on("keydown", function(e){
-			if(e.key == 'a'){
-				hitted();
-			}
-		});//
-
-		var intervalHIT = setInterval(function(){
-			if(hit_state > 0) hit_state--;
-		},hit_speed); // for hit state change
-
-		//var intervalMAIN=setInterval(update_all, interval_speed);
-		break;
-		case 2:
-		break;
-		case 3:
-		break;
-	}
+	
 	var intervalMain = setInterval(update_all, interval_speed);
 	/*
 	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
@@ -370,11 +353,36 @@ $(document).ready(function(){
 });
 
 function update_all() {
-	flying();
-	update_bg();
-	update_position();
-	//updateGame();
-	test();	// FOR TESTING PURPOSE
+	switch(GAME_STATE){
+		case 0:
+			ready_canvas();
+			ready_indicate();
+			console.log(indicate_time);
+			if(indicate_time==0) GAME_STATE=1;
+		break;
+		case 1:
+			$(document).on("keydown", function(e){
+				if(e.key == 'a'){
+					hitted();
+				}
+			});//
+
+			var intervalHIT = setInterval(function(){
+				if(hit_state > 0) hit_state--;
+			},hit_speed); // for hit state change
+
+			//var intervalMAIN=setInterval(update_all, interval_speed);
+			flying();
+			update_bg();
+			update_position();
+			test();	// FOR TESTING PURPOSE
+		break;
+		case 2:
+		break;
+		case 3:
+		break;
+	}
+	
 }
 
 // FOR TESTING PURPOSE
