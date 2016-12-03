@@ -1,8 +1,6 @@
 <link rel="stylesheet" type="text/css" href="play.css">
-<script src="lib/jquery-3.1.1.min.js"></script>
-<script src="play.js"></script>
 <div id="PLAY-TOP">
-	<canvas width="1500" height="100" style="border:1px solid #000000;">
+	<canvas id="PLAY-CTX-TOP" width="1500" height="100" style="border:1px solid #000000;">
 	Your browser does not support the HTML5 canvas tag.
 	</canvas>
 </div>
@@ -11,3 +9,5 @@
 	Your browser does not support the HTML5 canvas tag.
 	</canvas>
 </div>
+<script src="lib/jquery-3.1.1.min.js"></script>
+<script src="play.js"></script>
