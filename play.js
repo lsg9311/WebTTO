@@ -64,47 +64,7 @@ function update_bg(){
     change_bg();
     draw_bg();
 }
-//buffering canvas
-function draw_bg(){
-	var cnvsBuffer = document.getElementById("canvas");
-	var ctxBuffer = cnvsBuffer.getContext('2d');
 
-	ctxBuffer.save();
-	ctxBuffer.canvas.width=canvasWidth;
-	ctxBuffer.canvas.height=canvasHeight;
-	
-
-	//draw bg
-    ctxBuffer.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
-    ctxBuffer.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
-    draw_wall(scrollVal);
-
-    //draw character
-    ctxBuffer.drawImage(bird1, 300, 300, 50, 50);
-
-    //main canvas
-    mainCanvas = document.getElementById("MAIN-CANVAS");
-	mainCtx = mainCanvas.getContext("2d");    
-
-	//draw on main canvas
-    mainCtx.clearRect(0,0, canvasWidth, canvasHeight);
-    mainCtx.drawImage(cnvsBuffer, 0, 0);
-    ctxBuffer.clearRect(0, 0, canvasWidth, canvasHeight);
-    ctxBuffer.restore();
-}
-
-function change_bg(){
-		scrollVal+=speed;    
-		if(scrollVal >= 2000){
-        scrollVal = 0;
-    }
-}		
-function flying(){
-	bird1.src ="image/bird/PNG/frame-"+frame1.toString()+".png";
-		frame1++;
-		if (frame1>4)
-			{frame1=1;}
-}
 
 //render wall img
 function draw_wall(scroll){
@@ -203,6 +163,51 @@ function update_map_cursor(TIME_RELATED, DEATH_TIME) {
 	topCTX.restore();
 };
 
+function draw_bg(){
+	var cnvsBuffer = document.getElementById("canvas");
+	var ctxBuffer = cnvsBuffer.getContext('2d');
+
+	ctxBuffer.save();
+	ctxBuffer.canvas.width=canvasWidth;
+	ctxBuffer.canvas.height=canvasHeight;
+	
+
+	//draw bg
+    ctxBuffer.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
+    ctxBuffer.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
+    draw_wall(scrollVal);
+
+    //draw character
+    ctxBuffer.drawImage(bird1, 300, 300, 50, 50);
+
+    //main canvas
+    mainCanvas = document.getElementById("MAIN-CANVAS");
+	mainCtx = mainCanvas.getContext("2d");    
+
+	//draw on main canvas
+    mainCtx.clearRect(0,0, canvasWidth, canvasHeight);
+    mainCtx.drawImage(cnvsBuffer, 0, 0);
+    ctxBuffer.clearRect(0, 0, canvasWidth, canvasHeight);
+    ctxBuffer.restore();
+}
+
+function update_bg(){
+	change_bg();
+	draw_bg();
+}
+function change_bg(){
+		scrollVal+=speed;    
+		if(scrollVal >= 2000){
+        scrollVal = 0;
+    }
+}		
+function flying(){
+	bird1.src ="image/bird/PNG/frame-"+frame1.toString()+".png";
+		frame1++;
+		if (frame1>4)
+			{frame1=1;}
+}
+
 var CLIENT_SLOT;
 var CLIENT_NAME;
 var CLIENT_SIZE;
@@ -214,6 +219,9 @@ var death_time;
 $(document).ready(function(){
 	initIMG();
 	initCanvas();
+
+	setInterval(function(){flying();}, 250);
+	setInterval(function(){update_bg();}, 30);
 
 	CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
 	CLIENT_NAME = ["123","123","123","123","122"];

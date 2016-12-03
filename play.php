@@ -1,4 +1,5 @@
-<link rel="stylesheet" type="text/css" href="play.css">
+<!doctype html>
+<link rel="stylesheet" type="text/css" href="play.css"/>
 <script src="lib/jquery-3.1.1.min.js"></script>
 <script src="lib/jcanvas.min.js"></script>
 <script src="./play.js"></script>
@@ -16,6 +17,3 @@
 	<canvas id="canvas" width="1500" display="none" height="600">
 	</canvas>
 </div>
-<img src="TOP_CLIENTNAME.png" id="NAME_IMG" width="32" height="64">
-<img src="TOP_ClIENTSLOT.png" id="SLOT_IMG" width="32" height="64">
-<img src="TOP_MAP.png" id="MAP_IMG" width="32" height="64">
