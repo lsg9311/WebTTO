@@ -12,13 +12,10 @@ var TOP_SLOT_IMG1 = new Image();
 var TOP_SLOT_IMG2 = new Image();
 var TOP_SLOT_EMPTY_IMG = new Image();
 var TOP_MAP_IMG = new Image();
-var wallIMG = new Image();
 var TOP_HP_IMG = new Image();
 var TOP_HP_EMPTY_IMG = new Image();
 var TOP_LIVE_CURSOR_IMG = new Image();
 var TOP_DEATH_CURSOR_IMG = new Image();
-var wallIMG = new Image();
-
 var wallIMG = new Image();
 var bird1 = new Image();
 var bird2 = new Image();
@@ -68,7 +65,6 @@ function initIMG(){
 	TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
 	TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
 	TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
-	wallIMG.src = "image/wall.png";
 	bird1.src = "image/bird/PNG/frame-1.png";
 	bird2.src = "image/bird/PNG/frame-2.png";
 	bird3.src = "image/bird/PNG/frame-3.png";
