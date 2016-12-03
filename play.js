@@ -78,6 +78,7 @@ function draw_wall(scroll,scrollWall){
 	mainCtx.translate(scrollCoef,0);
     // draw
     mainCtx.fillRect(-scrollCoef, 0, 1500, 100);
+/*
     
     mainCtx.moveTo(-scrollCoef,100);
     mainCtx.lineTo(-scrollCoef,150-scrollWall);
@@ -87,9 +88,8 @@ function draw_wall(scroll,scrollWall){
 
     mainCtx.fill();
     mainCtx.fillStyle=wall;
-/*
-    mainCtx.fillRect(-scrollCoef, 500, 1500, 100);
-    mainCtx.moveTo(-scrollCoef,500);
+*/    mainCtx.fillRect(-scrollCoef, 500, 1500, 100);
+/*    mainCtx.moveTo(-scrollCoef,500);
     mainCtx.lineTo(-scrollCoef,500-scrollWall)
     mainCtx.bezierCurveTo(1000-(scrollCoef),400+scrollWall,1000-(scrollCoef),400+scrollWall,1500-(scrollCoef),400+scrollWall);
     mainCtx.lineTo(1500-(scrollCoef),500);
