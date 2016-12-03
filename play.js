@@ -5,7 +5,7 @@ GAME_STATE
 2 : die
 3 : all die
 */
-var GAME_STATE
+var GAME_STATE=0;
 //img Option
 var backgroundIMG = new Image();
 var TOP_SLOT_IMG1 = new Image();
