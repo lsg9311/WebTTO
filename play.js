@@ -46,7 +46,7 @@ function update_bg(){
     }
 };
 
-function update_top() {
+function update_top(HPLEFT, HPMAX) {
 	topCTX.save();
 	topCTX.fillStyle = "#ff6666";
 	topCTX.fillRect(0,0,1500,100);
@@ -64,16 +64,15 @@ function update_top() {
 	var t5 = "123";
 	topCTX.font = "20px Arial";
 	topCTX.fillStyle = "black";
-	topCTX.fillText(t1,55-(t1.length*5),20);
-	topCTX.fillText(t2,135-(t2.length*5),20);
-	topCTX.fillText(t3,215-(t3.length*5),20);
-	topCTX.fillText(t4,295-(t4.length*5),20);
-	topCTX.fillText(t5,375-(t5.length*5),20);
+	topCTX.fillText(t1,55-(t1.length*5),25);
+	topCTX.fillText(t2,135-(t2.length*5),25);
+	topCTX.fillText(t3,215-(t3.length*5),25);
+	topCTX.fillText(t4,295-(t4.length*5),25);
+	topCTX.fillText(t5,375-(t5.length*5),25);
 
 	// update HP
 	var HPLOC = 600;
-	var HPLEFT = 3;
-	update_HP(HPLOC, HPLEFT, 8);
+	update_HP(HPLOC, HPLEFT, HPMAX);
 	// update map
 	topCTX.drawImage(TOP_MAP_IMG, 1070, 25);
 	// update live & death cursors
@@ -105,7 +104,9 @@ function update_map_cursor() {
 window.onload=function(){
 	topCanvas = document.getElementById("TOP-CANVAS");
 	topCTX = topCanvas.getContext("2d");
-	update_top();	// FOR TESTING PURPOSE
+	var HPMAX = 8;
+	var HPLEFT = 6;
+	update_top(HPLEFT, HPMAX);	// FOR TESTING PURPOSE
 };
 
 
