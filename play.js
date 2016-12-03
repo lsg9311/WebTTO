@@ -5,7 +5,7 @@ GAME_STATE
 2 : die
 3 : all die
 */
-var GAME_STATE;
+var GAME_STATE=0;
 //img Option
 var backgroundIMG = new Image();
 var TOP_SLOT_IMG1 = new Image();
@@ -243,38 +243,48 @@ var death_time;
 $(document).ready(function(){
 	initIMG();
 	initCanvas();
-	Itsme = new character(50,50,100,300,1,"red");
-	CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
-	CLIENT_NAME = ["123","123","123","123","122"];
-	CLIENT_SIZE = 5;
-	HPMAX = 8;
-	HPLEFT = 6;
-	time_related = 300;
-	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
-	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
-	$(document).on("mousedown", "#MAIN-CANVAS", function(e){
-		console.log("click");
-		charUP();
-	});
-	$(document).on("mouseup", "#MAIN-CANVAS", function(e){
-		charSTOP();
-		console.log("bye");
-	});
-	window.addEventListener("keydown",function(e){
-		if(e.keyCode === 32){
-			console.log("SPACE");
-			accel = true;
-		}
-	});
-	window.addEventListener("keyup", function(e){
-		if(e.keyCode === 32){
-			console.log("NOOOOO");
-			accel = false;
-		}
-	});
-	var intervalID=setInterval(update_bg,interval_speed);
-	var intervalChar = setInterval(updateGame,20);
-	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
+	switch(GAME_STATE){
+		case 0:
+		break;
+		case 1:
+			Itsme = new character(50,50,100,300,1,"red");
+			CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
+			CLIENT_NAME = ["123","123","123","123","122"];
+			CLIENT_SIZE = 5;
+			HPMAX = 8;
+			HPLEFT = 6;
+			time_related = 300;
+			death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
+			update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
+			$(document).on("mousedown", "#MAIN-CANVAS", function(e){
+				console.log("click");
+				charUP();
+			});
+			$(document).on("mouseup", "#MAIN-CANVAS", function(e){
+				charSTOP();
+				console.log("bye");
+			});
+			window.addEventListener("keydown",function(e){
+				if(e.keyCode === 32){
+					console.log("SPACE");
+					accel = true;
+				}
+			});
+			window.addEventListener("keyup", function(e){
+				if(e.keyCode === 32){
+					console.log("NOOOOO");
+					accel = false;
+				}
+			});
+			var intervalID=setInterval(update_bg,interval_speed);
+			var intervalChar = setInterval(updateGame,20);
+			var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
+		break;
+		case 2:
+		break;
+		case 3:
+		break;
+	}	
 });
 
 // FOR TESTING PURPOSE
