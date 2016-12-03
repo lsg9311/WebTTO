@@ -19,6 +19,7 @@ var mainCanvas,mainCtx;
 //scroll Option
 var scrollVal=0;
 var scrollWall=0;
+var Walldir=1;
 var speed=50;
 var interval_speed=100;
 
@@ -50,47 +51,54 @@ function initCanvas(){
 }
 
 function update_bg(){
+	mainCtx.save();
 	mainCtx.clearRect(0,0,1500,600);              
     if(scrollVal >= 2000) scrollVal = 0;
-    if(scrollWall >=1500) scrollWall = 0;
+    if(Math.abs(scrollWall) >=50) Walldir*=-1;
 
+    console.log(Math.abs(scrollWall));
     mainCtx.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
     mainCtx.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
     draw_wall(scrollVal,scrollWall);
     scrollVal+=speed;
-    scrollWall+=speed*2;
+    scrollWall+=Walldir*speed;
+    mainCtx.restore();
 };
 
 //render wall img
 function draw_wall(scroll,scrollWall){
+	mainCtx.save();
 	var wall = mainCtx.createPattern(wallIMG,"repeat");
 	mainCtx.fillStyle=wall;
 	
-	var scrollCoef=scroll*3;
+	var scrollCoef=scroll*2;
 
 	mainCtx.translate(scrollCoef,0);
     // draw
     mainCtx.fillRect(-scrollCoef, 0, 1500, 100);
     
-    mainCtx.moveTo(0,100);
-    mainCtx.lineTo(0,200);
-    mainCtx.bezierCurveTo(1000,100,1000,100,1500,100);
-    mainCtx.lineTo(0,100);
+    mainCtx.moveTo(-scrollCoef,100);
+    mainCtx.lineTo(-scrollCoef,150-scrollWall);
+    mainCtx.bezierCurveTo(1000-(scrollCoef),150,1000-(scrollCoef),150,1500-(scrollCoef),150+scrollWall);
+    mainCtx.lineTo(1500-scrollCoef,100)
+    mainCtx.lineTo(-scrollCoef,100);
 
     mainCtx.fill();
     mainCtx.fillStyle=wall;
-
+/*
     mainCtx.fillRect(-scrollCoef, 500, 1500, 100);
-    mainCtx.moveTo(0,500);
-    mainCtx.bezierCurveTo(1000,400,1000,400,1500,400);
-    mainCtx.lineTo(1500,500);
-    mainCtx.lineTo(0,500);
+    mainCtx.moveTo(-scrollCoef,500);
+    mainCtx.lineTo(-scrollCoef,500-scrollWall)
+    mainCtx.bezierCurveTo(1000-(scrollCoef),400+scrollWall,1000-(scrollCoef),400+scrollWall,1500-(scrollCoef),400+scrollWall);
+    mainCtx.lineTo(1500-(scrollCoef),500);
+    mainCtx.lineTo(-scrollCoef,500);
 
     mainCtx.fill();
     mainCtx.fillStyle=wall;
-
+*/
     // undo offset
     mainCtx.translate(-scrollCoef, 0);
+    mainCtx.restore();
 };
 
 // update top canvas
