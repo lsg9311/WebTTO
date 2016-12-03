@@ -1,8 +1,10 @@
 //img Option
 var backgroundIMG = new Image();
 backgroundIMG.src="image/back_cave.png";
-var TOP_SLOT_IMG = new Image();
-TOP_SLOT_IMG.src = "image/TOP_ClIENTSLOT.png";
+var TOP_SLOT_IMG1 = new Image();
+TOP_SLOT_IMG1.src = "image/TOP_ClIENTSLOT1.png";
+var TOP_SLOT_IMG2 = new Image();
+TOP_SLOT_IMG2.src = "image/TOP_ClIENTSLOT2.png";
 var TOP_SLOT_EMPTY_IMG = new Image();
 TOP_SLOT_EMPTY_IMG.src = "image/TOP_CLIENTSLOT_EMPTY.png";
 var TOP_MAP_IMG = new Image();
@@ -39,6 +41,11 @@ function initCanvas(){
 	mainCanvas = document.getElementById("MAIN-CANVAS");
 	mainCtx = mainCanvas.getContext("2d");
 }
+
+
+//scroll background image
+var topCanvas;
+var topCTX;
 
 function update_bg(){
 
@@ -151,7 +158,9 @@ function update_map_cursor(TIME_RELATED, DEATH_TIME) {
 window.onload=function(){
 	topCanvas = document.getElementById("TOP-CANVAS");
 	topCTX = topCanvas.getContext("2d");
-	var CLIENT_SLOT = [TOP_SLOT_IMG, TOP_SLOT_IMG, TOP_SLOT_IMG, TOP_SLOT_IMG, TOP_SLOT_IMG];
+
+
+	var CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
 	var CLIENT_NAME = ["123","123","123","123","122"];
 	var CLIENT_SIZE = 5;
 	var HPMAX = 8;
