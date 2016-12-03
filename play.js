@@ -240,11 +240,29 @@ var HPLEFT;
 var time_related;
 var death_time;
 
+//ready state show
+function ready_canvas(){
+	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
+	update_bg();
+	updateGame();
+	test();
+}
+
 $(document).ready(function(){
 	initIMG();
 	initCanvas();
+	Itsme = new character(50,50,100,300,1,"red");
+	CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
+	CLIENT_NAME = ["123","123","123","123","122"];
+	CLIENT_SIZE = 5;
+	HPMAX = 8;
+	HPLEFT = 6;
+	time_related = 300;
+	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
+	
 	switch(GAME_STATE){
 		case 0:
+			ready_canvas();
 		break;
 		case 1:
 			Itsme = new character(50,50,100,300,1,"red");
