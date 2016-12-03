@@ -1,3 +1,11 @@
+/*
+GAME_STATE
+0 : ready
+1 : play
+2 : die
+3 : all die
+*/
+var GAME_STATE;
 //img Option
 var backgroundIMG = new Image();
 var TOP_SLOT_IMG1 = new Image();
