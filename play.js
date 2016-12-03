@@ -3,6 +3,8 @@ var backgroundIMG = new Image();
 backgroundIMG.src="image/back_cave.png";
 var TOP_SLOT_IMG = new Image();
 TOP_SLOT_IMG.src = "image/TOP_ClIENTSLOT.png";
+var TOP_SLOT_EMPTY_IMG = new Image();
+TOP_SLOT_EMPTY_IMG.src = "image/TOP_CLIENTSLOT_EMPTY.png";
 var TOP_MAP_IMG = new Image();
 TOP_MAP_IMG.src = "image/TOP_MAP.png";
 var TOP_HP_IMG = new Image();
@@ -46,39 +48,40 @@ function update_bg(){
     }
 };
 
-function update_top(HPLEFT, HPMAX) {
+// update top canvas
+function update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, TIME_RELATED, DEATH_TIME) {
 	topCTX.save();
 	topCTX.fillStyle = "#ff6666";
 	topCTX.fillRect(0,0,1500,100);
 	// update slot background
-	topCTX.drawImage(TOP_SLOT_IMG, 30, 40);
-	topCTX.drawImage(TOP_SLOT_IMG, 110, 40);
-	topCTX.drawImage(TOP_SLOT_IMG, 190, 40);
-	topCTX.drawImage(TOP_SLOT_IMG, 270, 40);
-	topCTX.drawImage(TOP_SLOT_IMG, 350, 40);
+	var i=0;
+	var CLIENT_MAX = 6;
+	while(i < CLIENT_SIZE) {
+		topCTX.drawImage(CLIENT_SLOT[i], 30 + i*80, 40);
+		i++;
+	}
+	while(i < CLIENT_MAX) {
+		topCTX.drawImage(TOP_SLOT_EMPTY_IMG, 30 + i*80, 40);
+		i++;
+	}
 	// update name by user
-	var t1 = "123";
-	var t2 = "123";
-	var t3 = "123";
-	var t4 = "123";
-	var t5 = "123";
 	topCTX.font = "20px Arial";
 	topCTX.fillStyle = "black";
-	topCTX.fillText(t1,55-(t1.length*5),25);
-	topCTX.fillText(t2,135-(t2.length*5),25);
-	topCTX.fillText(t3,215-(t3.length*5),25);
-	topCTX.fillText(t4,295-(t4.length*5),25);
-	topCTX.fillText(t5,375-(t5.length*5),25);
-
+	var i=0;
+	while(i < CLIENT_SIZE) {
+		topCTX.fillText(CLIENT_NAME[i],55-(CLIENT_NAME[i].length*5) + i*80,25);
+		i++;
+	}
 	// update HP
 	var HPLOC = 600;
 	update_HP(HPLOC, HPLEFT, HPMAX);
 	// update map
 	topCTX.drawImage(TOP_MAP_IMG, 1070, 25);
 	// update live & death cursors
-	update_map_cursor();
+	update_map_cursor(TIME_RELATED, DEATH_TIME);
 	topCTX.restore();
 };
+// update HP UI
 function update_HP(HPLOC, HPLEFT, HPLIMIT) {
 	if(HPLEFT > HPLIMIT)
 		return;
@@ -97,16 +100,22 @@ function update_HP(HPLOC, HPLEFT, HPLIMIT) {
 	}
 	topCTX.restore();
 };
-function update_map_cursor() {
+// update CURSORS in MAP UI
+function update_map_cursor(TIME_RELATED, DEATH_TIME) {
 
 };
 
 window.onload=function(){
 	topCanvas = document.getElementById("TOP-CANVAS");
 	topCTX = topCanvas.getContext("2d");
+	var CLIENT_SLOT = [TOP_SLOT_IMG, TOP_SLOT_IMG, TOP_SLOT_IMG, TOP_SLOT_IMG, TOP_SLOT_IMG];
+	var CLIENT_NAME = ["123","123","123","123","123"];
+	var CLIENT_SIZE = 5;
 	var HPMAX = 8;
 	var HPLEFT = 6;
-	update_top(HPLEFT, HPMAX);	// FOR TESTING PURPOSE
+	var time_related = 100;
+	var death_time = [{CLIENT_ID : 2, TIME : 10}, {CLIENT_ID : 2, TIME : 25}]
+	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
 };
 
 
