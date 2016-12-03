@@ -13,7 +13,9 @@
 	Your browser does not support the HTML5 canvas tag.
 	</canvas>
 </div>
+
 <div>
 	<canvas id="canvas" width="1500" display="none" height="600">
 	</canvas>
 </div>
+

@@ -14,7 +14,7 @@ var bird1 = new Image();
 var bird2 = new Image();
 var bird3 = new Image();
 var bird4 = new Image();
-var frame1 =1;
+var frame1 = 1;
 
 //canvas Option
 var canvasHeight=600;
@@ -29,6 +29,15 @@ var interval_speed=100;
 //top canvas
 var topCanvas;
 var topCTX;
+
+//char  x, y
+var cx=100;
+var cy=300;
+var speedY = 0;
+var gravity = 0.3;
+var gravitySpeed = 0;
+//character parameters
+var accel = false;
 
 //allocate IMG
 function initIMG(){
@@ -48,7 +57,6 @@ function initIMG(){
 	bird2.src = "image/bird/PNG/frame-2.png";
 	bird3.src = "image/bird/PNG/frame-3.png";
 	bird4.src = "image/bird/PNG/frame-4.png";
-
 }
 //allocate canvas
 function initCanvas(){
@@ -57,15 +65,52 @@ function initCanvas(){
 	topCanvas = document.getElementById("TOP-CANVAS");
 	topCTX = topCanvas.getContext("2d");
 }
-
-// update bg
+//upadate bg
 function update_bg(){
-
-    change_bg();
-    draw_bg();
+	scroll_bg();
+	draw_bg();
 }
 
+function scroll_bg(){
+		scrollVal+=speed;    
+		if(scrollVal >= 2000){
+        scrollVal = 0;
+    }
+}	
+//buffering canvas
+function draw_bg(){
+	var cnvsBuffer = document.getElementById("canvas");
+	var ctxBuffer = cnvsBuffer.getContext('2d');
 
+	ctxBuffer.save();
+	ctxBuffer.canvas.width=canvasWidth;
+	ctxBuffer.canvas.height=canvasHeight;
+	
+	//draw bg
+    ctxBuffer.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
+    ctxBuffer.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
+    draw_wall(scrollVal);
+
+    //draw character
+    ctxBuffer.drawImage(bird1, cx, cy, 50, 50);
+
+    //main canvas
+    mainCanvas = document.getElementById("MAIN-CANVAS");
+	mainCtx = mainCanvas.getContext("2d");    
+
+	//draw on main canvas
+    mainCtx.clearRect(0,0, canvasWidth, canvasHeight);
+    mainCtx.drawImage(cnvsBuffer, 0, 0);
+    ctxBuffer.clearRect(0, 0, canvasWidth, canvasHeight);
+    ctxBuffer.restore();
+}
+
+function flying(){
+	bird1.src ="image/bird/PNG/frame-"+frame1.toString()+".png";
+		frame1++;
+		if (frame1>4)
+			{frame1=1;}
+}
 //render wall img
 function draw_wall(scroll){
 	var wall = mainCtx.createPattern(wallIMG,"repeat");
@@ -163,49 +208,58 @@ function update_map_cursor(TIME_RELATED, DEATH_TIME) {
 	topCTX.restore();
 };
 
-function draw_bg(){
-	var cnvsBuffer = document.getElementById("canvas");
-	var ctxBuffer = cnvsBuffer.getContext('2d');
-
-	ctxBuffer.save();
-	ctxBuffer.canvas.width=canvasWidth;
-	ctxBuffer.canvas.height=canvasHeight;
-	
-
-	//draw bg
-    ctxBuffer.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
-    ctxBuffer.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
-    draw_wall(scrollVal);
-
-    //draw character
-    ctxBuffer.drawImage(bird1, 300, 300, 50, 50);
-
-    //main canvas
-    mainCanvas = document.getElementById("MAIN-CANVAS");
-	mainCtx = mainCanvas.getContext("2d");    
-
-	//draw on main canvas
-    mainCtx.clearRect(0,0, canvasWidth, canvasHeight);
-    mainCtx.drawImage(cnvsBuffer, 0, 0);
-    ctxBuffer.clearRect(0, 0, canvasWidth, canvasHeight);
-    ctxBuffer.restore();
+function update_position(){
+	$(document).on("mousedown", "#MAIN-CANVAS", function(e){	
+		charUP();
+	});
+	$(document).on("mouseup", "#MAIN-CANVAS", function(e){
+		charSTOP();
+	});
+	window.addEventListener("keydown",function(e){
+		if(e.keyCode === 32){
+			accel = true;
+		}
+	});
+	window.addEventListener("keyup", function(e){
+		if(e.keyCode === 32){
+			accel = false;
+		}
+	});
+	newPos();
 }
 
-function update_bg(){
-	change_bg();
-	draw_bg();
+//Update Character Status
+function newPos(){ //Goes up and down
+		gravitySpeed += this.gravity;
+		cy += speedY+gravitySpeed;
+		hitRock();
+	}
+function hitRock(){
+		var rockBottom = canvasHeight-100 - 50;
+		var rockTop = 100;
+		if(cy > rockBottom){
+			cy = rockBottom;
+			gravitySpeed = 0;
+		}
+		if(cy < rockTop){
+			cy = rockTop;
+			gravitySpeed = 0;
+		}
+	}
+function accelerate(n){
+	gravity = n;
 }
-function change_bg(){
-		scrollVal+=speed;    
-		if(scrollVal >= 2000){
-        scrollVal = 0;
-    }
-}		
-function flying(){
-	bird1.src ="image/bird/PNG/frame-"+frame1.toString()+".png";
-		frame1++;
-		if (frame1>4)
-			{frame1=1;}
+function charUP(){
+	if(accel)
+		accelerate(-0.15);
+	else
+		accelerate(-0.3);
+}
+function charSTOP(){
+	if(accel)
+		accelerate(0.3);
+	else
+		accelerate(0.15);
 }
 
 var CLIENT_SLOT;
@@ -220,9 +274,6 @@ $(document).ready(function(){
 	initIMG();
 	initCanvas();
 
-	setInterval(function(){flying();}, 250);
-	setInterval(function(){update_bg();}, 30);
-
 	CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
 	CLIENT_NAME = ["123","123","123","123","122"];
 	CLIENT_SIZE = 5;
@@ -231,11 +282,15 @@ $(document).ready(function(){
 	time_related = 300;
 	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
 	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
+	
 
-	/*setInterval(function(){flying();}, 250);
-	setInterval(function(){update_bg();}, 30);*/
 	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
+	setInterval(function(){flying();}, 250);
+	setInterval(function(){update_bg();}, 30);
+	setInterval(function(){update_position();}, 30);
+
 });
+
 
 // FOR TESTING PURPOSE
 function test() {
