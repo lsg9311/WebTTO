@@ -29,7 +29,7 @@ var scrollVal=0;
 var scrollWall=0;
 var Walldir=1;
 var speed=50;
-var interval_speed=100;
+var interval_speed=30;
 
 //top canvas
 var topCanvas;
@@ -276,9 +276,7 @@ $(document).ready(function(){
 					accel = false;
 				}
 			});
-			var intervalID=setInterval(update_bg,interval_speed);
-			var intervalChar = setInterval(updateGame,20);
-			var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
+			var intervalMAIN=setInterval(update_all, interval_speed);
 		break;
 		case 2:
 		break;
@@ -286,6 +284,12 @@ $(document).ready(function(){
 		break;
 	}	
 });
+
+function update_all() {
+	update_bg();
+	updateGame();
+	test();	// FOR TESTING PURPOSE
+}
 
 // FOR TESTING PURPOSE
 function test() {
