@@ -1,3 +1,12 @@
+
+/*
+GAME_STATE
+0 : ready
+1 : play
+2 : die
+3 : all die
+*/
+var GAME_STATE=0;
 //img Option
 var backgroundIMG = new Image();
 var TOP_SLOT_IMG1 = new Image();
@@ -23,8 +32,10 @@ var mainCanvas,mainCtx;
 
 //scroll Option
 var scrollVal=0;
+var scrollWall=0;
+var Walldir=1;
 var speed=10;
-var interval_speed=100;
+var interval_speed=30;
 
 //top canvas
 var topCanvas;
@@ -57,6 +68,7 @@ function initIMG(){
 	bird2.src = "image/bird/PNG/frame-2.png";
 	bird3.src = "image/bird/PNG/frame-3.png";
 	bird4.src = "image/bird/PNG/frame-4.png";
+
 }
 //allocate canvas
 function initCanvas(){
@@ -65,6 +77,7 @@ function initCanvas(){
 	topCanvas = document.getElementById("TOP-CANVAS");
 	topCTX = topCanvas.getContext("2d");
 }
+
 //upadate bg
 function update_bg(){
 	scroll_bg();
@@ -72,9 +85,12 @@ function update_bg(){
 }
 
 function scroll_bg(){
-		scrollVal+=speed;    
-		if(scrollVal >= 2000){
-        scrollVal = 0;
+	scrollVal+=speed;
+	if(scrollVal >= 2000) scrollVal = 0;
+    if(Math.abs(scrollWall) >=50) Walldir*=-1;
+    scrollWall+=Walldir*speed;   
+	if(scrollVal >= 2000){
+    scrollVal = 0;
     }
 }	
 //buffering canvas
@@ -89,7 +105,7 @@ function draw_bg(){
 	//draw bg
     ctxBuffer.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
     ctxBuffer.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
-    draw_wall(scrollVal);
+    draw_wall(scrollVal,scrollWall);
 
     //draw character
     if(frame1==1){ctxBuffer.drawImage(bird1, cx, cy, 50, 50);}
@@ -113,34 +129,42 @@ function flying(){
 		if (frame1>4)
 			{frame1=1;}
 }
+
+
 //render wall img
-function draw_wall(scroll){
+function draw_wall(scroll,scrollWall){
+	mainCtx.save();
 	var wall = mainCtx.createPattern(wallIMG,"repeat");
 	mainCtx.fillStyle=wall;
 	
-	mainCtx.translate(scroll*3,0);
+	var scrollCoef=scroll*2;
+
+	mainCtx.translate(scrollCoef,0);
     // draw
-    mainCtx.fillRect(-scroll*3, 0, 1500, 100);
+    mainCtx.fillRect(-scrollCoef, 0, 1500, 100);
+/*
     
-    mainCtx.moveTo(-scroll*3,100);
-    mainCtx.lineTo(-scroll*3,200);
-    mainCtx.bezierCurveTo(1000-(scroll*3),100,1000-(scroll*3),100,1500-(scroll*3),100);
-    mainCtx.lineTo(-scroll*3,100);
+    mainCtx.moveTo(-scrollCoef,100);
+    mainCtx.lineTo(-scrollCoef,150-scrollWall);
+    mainCtx.bezierCurveTo(1000-(scrollCoef),150,1000-(scrollCoef),150,1500-(scrollCoef),150+scrollWall);
+    mainCtx.lineTo(1500-scrollCoef,100)
+    mainCtx.lineTo(-scrollCoef,100);
 
     mainCtx.fill();
     mainCtx.fillStyle=wall;
-
-    mainCtx.fillRect(-scroll*3, 500, 1500, 100);
-    mainCtx.moveTo(-scroll*3,500);
-    mainCtx.bezierCurveTo(1000-(scroll*3),400,1000-(scroll*3),400,1500-(scroll*3),400);
-    mainCtx.lineTo(1500-(scroll*3),500);
-    mainCtx.lineTo(-scroll*3,500);
+*/    mainCtx.fillRect(-scrollCoef, 500, 1500, 100);
+/*    mainCtx.moveTo(-scrollCoef,500);
+    mainCtx.lineTo(-scrollCoef,500-scrollWall)
+    mainCtx.bezierCurveTo(1000-(scrollCoef),400+scrollWall,1000-(scrollCoef),400+scrollWall,1500-(scrollCoef),400+scrollWall);
+    mainCtx.lineTo(1500-(scrollCoef),500);
+    mainCtx.lineTo(-scrollCoef,500);
 
     mainCtx.fill();
     mainCtx.fillStyle=wall;
-
+*/
     // undo offset
-    mainCtx.translate(-scroll*3, 0);
+    mainCtx.translate(-scrollCoef, 0);
+    mainCtx.restore();
 };
 
 // update top canvas
@@ -272,10 +296,18 @@ var HPLEFT;
 var time_related;
 var death_time;
 
+//ready state show
+function ready_canvas(){
+	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
+	update_bg();
+	
+	test();
+}
+
 $(document).ready(function(){
 	initIMG();
 	initCanvas();
-
+	
 	CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
 	CLIENT_NAME = ["123","123","123","123","122"];
 	CLIENT_SIZE = 5;
@@ -283,16 +315,40 @@ $(document).ready(function(){
 	HPLEFT = 6;
 	time_related = 300;
 	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
-	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
 	
-
+	switch(GAME_STATE){
+		case 0:
+			ready_canvas();
+		break;
+		case 1:
+			
+			CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
+			CLIENT_NAME = ["123","123","123","123","122"];
+			CLIENT_SIZE = 5;
+			HPMAX = 8;
+			HPLEFT = 6;
+			time_related = 300;
+			death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
+			update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
+	
+		break;
+		case 2:
+		break;
+		case 3:
+		break;
+	}
 	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
 	setInterval(function(){flying();}, 100);
 	setInterval(function(){update_bg();}, 30);
 	setInterval(function(){update_position();}, 30);
 
 });
-
+/*
+function update_all() {
+	update_bg();
+	updateGame();
+	test();	// FOR TESTING PURPOSE
+}*/
 
 // FOR TESTING PURPOSE
 function test() {
