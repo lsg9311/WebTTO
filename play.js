@@ -1,26 +1,15 @@
 //img Option
 var backgroundIMG = new Image();
-backgroundIMG.src="image/back_cave.png";
 var TOP_SLOT_IMG1 = new Image();
-TOP_SLOT_IMG1.src = "image/TOP_ClIENTSLOT1.png";
 var TOP_SLOT_IMG2 = new Image();
-TOP_SLOT_IMG2.src = "image/TOP_ClIENTSLOT2.png";
 var TOP_SLOT_EMPTY_IMG = new Image();
-TOP_SLOT_EMPTY_IMG.src = "image/TOP_CLIENTSLOT_EMPTY.png";
 var TOP_MAP_IMG = new Image();
-TOP_MAP_IMG.src = "image/TOP_MAP.png";
 var wallIMG = new Image();
-wallIMG.src = "image/wall.png";
 var TOP_HP_IMG = new Image();
-TOP_HP_IMG.src = "image/TOP_HP.png";
 var TOP_HP_EMPTY_IMG = new Image();
-TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
 var TOP_LIVE_CURSOR_IMG = new Image();
-TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
 var TOP_DEATH_CURSOR_IMG = new Image();
-TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
 var wallIMG = new Image();
-wallIMG.src = "image/wall.png";
 
 //canvas Option
 var canvasHeight=600;
@@ -36,10 +25,27 @@ var interval_speed=100;
 var topCanvas;
 var topCTX;
 
+//allocate IMG
+function initIMG(){
+	//img Option
+	backgroundIMG.src="image/back_cave.png";
+	TOP_SLOT_IMG1.src = "image/TOP_ClIENTSLOT1.png";
+	TOP_SLOT_IMG2.src = "image/TOP_ClIENTSLOT2.png";
+	TOP_SLOT_EMPTY_IMG.src = "image/TOP_CLIENTSLOT_EMPTY.png";
+	TOP_MAP_IMG.src = "image/TOP_MAP.png";
+	wallIMG.src = "image/wall.png";
+	TOP_HP_IMG.src = "image/TOP_HP.png";
+	TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
+	TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
+	TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
+	wallIMG.src = "image/wall.png";
+}
 //allocate canvas
 function initCanvas(){
 	mainCanvas = document.getElementById("MAIN-CANVAS");
 	mainCtx = mainCanvas.getContext("2d");
+	topCanvas = document.getElementById("TOP-CANVAS");
+	topCTX = topCanvas.getContext("2d");
 }
 
 function update_bg(){
@@ -150,23 +156,36 @@ function update_map_cursor(TIME_RELATED, DEATH_TIME) {
 	topCTX.restore();
 };
 
-window.onload=function(){
-	topCanvas = document.getElementById("TOP-CANVAS");
-	topCTX = topCanvas.getContext("2d");
-
-
-	var CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
-	var CLIENT_NAME = ["123","123","123","123","122"];
-	var CLIENT_SIZE = 5;
-	var HPMAX = 8;
-	var HPLEFT = 6;
-	var time_related = 300;
-	var death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}]
-	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
-};
-
+var CLIENT_SLOT;
+var CLIENT_NAME;
+var CLIENT_SIZE;
+var HPMAX;
+var HPLEFT;
+var time_related;
+var death_time;
 
 $(document).ready(function(){
+	initIMG();
 	initCanvas();
+
+	CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
+	CLIENT_NAME = ["123","123","123","123","122"];
+	CLIENT_SIZE = 5;
+	HPMAX = 8;
+	HPLEFT = 6;
+	time_related = 300;
+	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
+	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
+
 	var intervalID=setInterval(update_bg,interval_speed);
+
+	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
 });
+
+// FOR TESTING PURPOSE
+function test() {
+	if(time_related > 300)
+		time_related = 0;
+	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
+	time_related++;
+}
