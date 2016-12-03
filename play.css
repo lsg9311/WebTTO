@@ -1,0 +1,11 @@
+div#PLAY-TOP {
+	width:1501px;
+	height:101px;
+	background-color:#ff6666;
+}
+
+div#PLAY-MAIN {
+	width:1501px;
+	height:601px;
+	background-image:url('./no-dap.png');
+}
