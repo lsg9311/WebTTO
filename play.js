@@ -97,7 +97,10 @@ function scroll_bg(){
 	if(scrollVal >= 2000){
 		scrollVal = 0;
 	}
-}	
+}
+
+var RPM = 8;
+
 //buffering canvas
 function draw_bg(){
 	var cnvsBuffer = document.getElementById("canvas");
@@ -113,9 +116,9 @@ function draw_bg(){
     draw_wall(scrollVal,scrollWall);
 
     //draw character
-    if(frame1==1){ctxBuffer.drawImage(bird1, cx, cy, 50, 50);}
-    else if (frame1==2){ctxBuffer.drawImage(bird2, cx, cy, 50, 50);}
-    else if (frame1==3){ctxBuffer.drawImage(bird3, cx, cy, 50, 50);}
+    if(frame1<RPM+1){ctxBuffer.drawImage(bird1, cx, cy, 50, 50);}
+    else if (frame1<2*RPM+1){ctxBuffer.drawImage(bird2, cx, cy, 50, 50);}
+    else if (frame1<3*RPM+1){ctxBuffer.drawImage(bird3, cx, cy, 50, 50);}
     else {ctxBuffer.drawImage(bird4, cx, cy, 50, 50);}
 
     //main canvas
@@ -131,8 +134,9 @@ function draw_bg(){
 
 function flying(){
 	frame1++;
-	if (frame1>4)
-		{frame1=1;}
+	if (frame1>RPM*4) {
+		frame1=1;
+	}
 }
 
 
@@ -356,18 +360,22 @@ $(document).ready(function(){
 		break;
 		case 3:
 		break;
-	}	
+	}
+	var intervalMain = setInterval(update_all, interval_speed);
+	/*
+	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
 	setInterval(function(){flying();}, 100);
 	setInterval(function(){update_bg();}, 30);
-	setInterval(function(){update_position();}, 30);
-	setInterval(test,30);
+	setInterval(function(){update_position();}, 30);*/
 });
-/*
+
 function update_all() {
+	flying();
 	update_bg();
-	updateGame();
+	update_position();
+	//updateGame();
 	test();	// FOR TESTING PURPOSE
-} */
+}
 
 // FOR TESTING PURPOSE
 function test() {
