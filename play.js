@@ -10,6 +10,11 @@ var TOP_HP_EMPTY_IMG = new Image();
 var TOP_LIVE_CURSOR_IMG = new Image();
 var TOP_DEATH_CURSOR_IMG = new Image();
 var wallIMG = new Image();
+var bird1 = new Image();
+var bird2 = new Image();
+var bird3 = new Image();
+var bird4 = new Image();
+var frame1 =1;
 
 //canvas Option
 var canvasHeight=600;
@@ -18,7 +23,7 @@ var mainCanvas,mainCtx;
 
 //scroll Option
 var scrollVal=0;
-var speed=50;
+var speed=10;
 var interval_speed=100;
 
 //top canvas
@@ -39,6 +44,11 @@ function initIMG(){
 	TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
 	TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
 	wallIMG.src = "image/wall.png";
+	bird1.src = "image/bird/PNG/frame-1.png";
+	bird2.src = "image/bird/PNG/frame-2.png";
+	bird3.src = "image/bird/PNG/frame-3.png";
+	bird4.src = "image/bird/PNG/frame-4.png";
+
 }
 //allocate canvas
 function initCanvas(){
@@ -48,16 +58,53 @@ function initCanvas(){
 	topCTX = topCanvas.getContext("2d");
 }
 
+// update bg
 function update_bg(){
 
-    scrollVal+=speed;                   
-    mainCtx.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
-    mainCtx.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
+    change_bg();
+    draw_bg();
+}
+//buffering canvas
+function draw_bg(){
+	var cnvsBuffer = document.getElementById("canvas");
+	var ctxBuffer = cnvsBuffer.getContext('2d');
+
+	ctxBuffer.save();
+	ctxBuffer.canvas.width=canvasWidth;
+	ctxBuffer.canvas.height=canvasHeight;
+	
+
+	//draw bg
+    ctxBuffer.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
+    ctxBuffer.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
     draw_wall(scrollVal);
-    if(scrollVal >= 2000){
+
+    //draw character
+    ctxBuffer.drawImage(bird1, 300, 300, 50, 50);
+
+    //main canvas
+    mainCanvas = document.getElementById("MAIN-CANVAS");
+	mainCtx = mainCanvas.getContext("2d");    
+
+	//draw on main canvas
+    mainCtx.clearRect(0,0, canvasWidth, canvasHeight);
+    mainCtx.drawImage(cnvsBuffer, 0, 0);
+    ctxBuffer.clearRect(0, 0, canvasWidth, canvasHeight);
+    ctxBuffer.restore();
+}
+
+function change_bg(){
+		scrollVal+=speed;    
+		if(scrollVal >= 2000){
         scrollVal = 0;
     }
-};
+}		
+function flying(){
+	bird1.src ="image/bird/PNG/frame-"+frame1.toString()+".png";
+		frame1++;
+		if (frame1>4)
+			{frame1=1;}
+}
 
 //render wall img
 function draw_wall(scroll){
@@ -177,8 +224,8 @@ $(document).ready(function(){
 	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
 	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
 
-	var intervalID=setInterval(update_bg,interval_speed);
-
+	/*setInterval(function(){flying();}, 250);
+	setInterval(function(){update_bg();}, 30);*/
 	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
 });
 
