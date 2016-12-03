@@ -1,6 +1,21 @@
 //img Option
 var backgroundIMG = new Image();
 backgroundIMG.src="image/back_cave.png";
+var TOP_SLOT_IMG = new Image();
+TOP_SLOT_IMG.src = "image/TOP_ClIENTSLOT.png";
+var TOP_MAP_IMG = new Image();
+TOP_MAP_IMG.src = "image/TOP_MAP.png";
+var TOP_HP_IMG = new Image();
+TOP_HP_IMG.src = "image/TOP_HP.png";
+var TOP_HP_EMPTY_IMG = new Image();
+TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
+/*
+var TOP_LIVE_CURSOR_IMG = new Image();
+TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
+var TOP_DEATH_CURSOR_IMG = new Image();
+TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
+*/
+
 
 //canvas Option
 var canvasHeight=600;
@@ -17,25 +32,6 @@ function initCanvas(){
 	mainCtx = mainCanvas.getContext("2d");
 }
 
-
-var TOP_SLOT_IMG = new Image();
-TOP_SLOT_IMG.src = "image/TOP_ClIENTSLOT.png";
-/*
-var TOP_NAME_IMG = new Image();
-TOP_NAME_IMG.src = "image/TOP_CLIENTNAME.png";
-*/
-var TOP_MAP_IMG = new Image();
-TOP_MAP_IMG.src = "image/TOP_MAP.png";
-var TOP_HP_IMG = new Image();
-TOP_HP_IMG.src = "image/TOP_HP.png";
-var TOP_HP_EMPTY_IMG = new Image();
-TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
-/*
-var TOP_LIVE_CURSOR_IMG = new Image();
-TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
-var TOP_DEATH_CURSOR_IMG = new Image();
-TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
-*/
 var topCanvas;
 var topCTX;
 
