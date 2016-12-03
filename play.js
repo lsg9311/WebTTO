@@ -378,11 +378,21 @@ function update_all() {
 		// on dead status
 		case 2:
 		break;
-		// all player dead status. the game is goning to be halt
+		// all player dead status, or the time is over. the game is goning to be halt
+		// required : need to check whether game is over by time/all people dead in "STATUS 1 or 2"!!!
 		case 3:
+			game_halt();
 		break;
 	}
 	
+}
+
+/* TODO
+1. clear all interval of drawing
+2. after some time, go to result status/page with some data used for ranking (ex)dead time, live time, health point ...)
+*/
+function game_halt() {
+	return;
 }
 
 // FOR TESTING PURPOSE
