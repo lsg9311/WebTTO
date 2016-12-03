@@ -13,10 +13,8 @@ var TOP_HP_IMG = new Image();
 TOP_HP_IMG.src = "image/TOP_HP.png";
 var TOP_HP_EMPTY_IMG = new Image();
 TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
-var TOP_LIVE_CURSOR_IMG = new Image();
-TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
-var TOP_DEATH_CURSOR_IMG = new Image();
-TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
+var wallIMG = new Image();
+wallIMG.src = "image/wall.png";
 
 //canvas Option
 var canvasHeight=600;
@@ -28,32 +26,38 @@ var scrollVal=0;
 var speed=50;
 var interval_speed=100;
 
+//top canvas
+var topCanvas;
+var topCTX;
+
 //allocate canvas
 function initCanvas(){
 	mainCanvas = document.getElementById("MAIN-CANVAS");
 	mainCtx = mainCanvas.getContext("2d");
 }
 
-
-//scroll background image
-var topCanvas;
-var topCTX;
-
 function update_bg(){
-	mainCtx.clearRect(0,0,canvasWidth,canvasHeight);
 
     scrollVal+=speed;                   
     mainCtx.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
     mainCtx.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
+    draw_wall(scrollVal);
     if(scrollVal >= 2000){
         scrollVal = 0;
     }
 };
 
 //render wall img
-function draw_wall(){
-	mainCtx.createPattern(wallIMG,"repeat");
-	mainCtx.rect(0,0,1500,100);
+function draw_wall(scroll){
+	var wall = mainCtx.createPattern(wallIMG,"repeat");
+	mainCtx.fillStyle=wall;
+	
+	mainCtx.translate(scroll*3,0);
+    // draw
+    mainCtx.fillRect(-scroll*3, 0, 1500, 100);
+    mainCtx.fillRect(-scroll*3, 500, 1500, 100);
+    // undo offset
+    mainCtx.translate(-scroll*3, 0);
 };
 
 // update top canvas
