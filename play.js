@@ -89,10 +89,12 @@ function update_bg(){
 };
 
 function scroll_bg(){
-	scrollVal+=speed;
 	if(scrollVal >= 2000) scrollVal = 0;
-	if(Math.abs(scrollWall) >=50) Walldir*=-1;
-	scrollWall+=Walldir*speed;   
+	//if(Math.abs(scrollWall) >=50) Walldir*=-1;
+	if(GAME_STATE!=0){
+		scrollVal+=speed;
+		scrollWall+=Walldir*speed;   
+	}
 	if(scrollVal >= 2000){
 		scrollVal = 0;
 	}
@@ -112,7 +114,7 @@ function draw_bg(){
 	//draw bg
     ctxBuffer.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
     ctxBuffer.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
-    draw_wall(scrollVal,scrollWall);
+    draw_wall(ctxBuffer,scrollVal,scrollWall);
 
     //draw character
     if(frame1<RPM+1){ctxBuffer.drawImage(bird1, cx, cy, 50, 50);}
@@ -140,16 +142,16 @@ function flying(){
 
 
 //render wall img
-function draw_wall(scroll,scrollWall){
-	mainCtx.save();
-	var wall = mainCtx.createPattern(wallIMG,"repeat");
-	mainCtx.fillStyle=wall;
+function draw_wall(ctx,scroll,scrollWall){
+	ctx.save();
+	var wall = ctx.createPattern(wallIMG,"repeat");
+	ctx.fillStyle=wall;
 	
-	var scrollCoef=scroll*2;
+	var scrollCoef=scroll*5;
 
-	mainCtx.translate(scrollCoef,0);
+	ctx.translate(scrollCoef,0);
     // draw
-    mainCtx.fillRect(-scrollCoef, 0, 1500, 100);
+    ctx.fillRect(-scrollCoef, 0, 1500, 100);
 /*
     
     mainCtx.moveTo(-scrollCoef,100);
@@ -160,7 +162,7 @@ function draw_wall(scroll,scrollWall){
 
     mainCtx.fill();
     mainCtx.fillStyle=wall;
-*/    mainCtx.fillRect(-scrollCoef, 500, 1500, 100);
+*/   ctx.fillRect(-scrollCoef, 500, 1500, 100);
 /*    mainCtx.moveTo(-scrollCoef,500);
     mainCtx.lineTo(-scrollCoef,500-scrollWall)
     mainCtx.bezierCurveTo(1000-(scrollCoef),400+scrollWall,1000-(scrollCoef),400+scrollWall,1500-(scrollCoef),400+scrollWall);
@@ -171,8 +173,8 @@ function draw_wall(scroll,scrollWall){
     mainCtx.fillStyle=wall;
 */
     // undo offset
-    mainCtx.translate(-scrollCoef, 0);
-    mainCtx.restore();
+    ctx.translate(-scrollCoef, 0);
+    ctx.restore();
 };
 
 // update top canvas
