@@ -6,7 +6,7 @@ GAME_STATE
 2 : die
 3 : all die
 */
-var GAME_STATE=0;
+var GAME_STATE=1;
 //img Option
 var backgroundIMG = new Image();
 var TOP_SLOT_IMG1 = new Image();
@@ -36,7 +36,7 @@ var mainCanvas,mainCtx;
 var scrollVal=0;
 var scrollWall=0;
 var Walldir=1;
-var speed=50;
+var speed=10;
 var interval_speed=30;
 
 //top canvas
@@ -130,9 +130,9 @@ function draw_bg(){
 }
 
 function flying(){
-		frame1++;
-		if (frame1>4)
-			{frame1=1;}
+	frame1++;
+	if (frame1>4)
+		{frame1=1;}
 }
 
 
@@ -341,15 +341,16 @@ $(document).ready(function(){
 
 
 		$(document).on("keydown", function(e){
-				if(e.key)
+			if(e.key == 'a'){
 				hitted();
-			});//
+			}
+		});//
 
 		var intervalHIT = setInterval(function(){
-				if(hit_state > 0) hit_state--;
-			},hit_speed); // for hit state change
+			if(hit_state > 0) hit_state--;
+		},hit_speed); // for hit state change
 
-		var intervalMAIN=setInterval(update_all, interval_speed);
+		//var intervalMAIN=setInterval(update_all, interval_speed);
 		break;
 		case 2:
 		break;
@@ -359,6 +360,7 @@ $(document).ready(function(){
 	setInterval(function(){flying();}, 100);
 	setInterval(function(){update_bg();}, 30);
 	setInterval(function(){update_position();}, 30);
+	setInterval(test,30);
 });
 /*
 function update_all() {
@@ -378,5 +380,7 @@ function test() {
 
 //WHEN HITTED
 function hitted() {
+	
 	if(hit_state == 0) HPLEFT--, hit_state=3;
 }
+
