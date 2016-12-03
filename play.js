@@ -7,7 +7,8 @@ var TOP_SLOT_IMG = new Image();
 TOP_SLOT_IMG = "image/TOP_ClIENTSLOT.png";
 var TOP_MAP_IMG = new Image();
 TOP_MAP_IMG = "image/TOP_MAP.png";
-
+var wallIMG = new Image();
+wallIMG = "image/wall.png";
 
 //canvas Option
 var canvasHeight=600;
@@ -19,11 +20,13 @@ var scrollVal=0;
 var speed=50;
 var interval_speed=100;
 
+//allocate canvas
 function initCanvas(){
 	mainCanvas = document.getElementById("MAIN-CANVAS");
 	mainCtx = mainCanvas.getContext("2d");
 }
 
+//scroll background image
 function update_bg(){
 	mainCtx.clearRect(0,0,canvasWidth,canvasHeight);
 
@@ -35,6 +38,12 @@ function update_bg(){
     if(scrollVal >= 2000){
         scrollVal = 0;
     }
+};
+
+//render wall img
+function draw_wall(){
+	mainCtx.createPattern(wallIMG,"repeat");
+	mainCtx.rect(0,0,1500,100);
 };
 
 $(document).ready(function(){
