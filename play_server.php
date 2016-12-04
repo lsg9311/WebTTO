@@ -63,8 +63,14 @@ while (true) {
 				$ready++;
 				$response = mask(json_encode(array('start'=>$ready))); //prepare json data
 				send_message($response); //notify all users about new connection
-			} else if($data->type=="") {
-
+			} else if($data->type=="play") {
+				$user_id = $data->id;
+				$user_x = $data->posX;
+				$user_y = $data->posY;
+				$user_hp = $data->HP;
+				$response_data = mask(json_encode(array('id'=>$user_id,'posX'=>$user_x,'posY'=>$user_y,'HP'=>$user_HP)));
+					
+				send_message($response_data);
 			}
 
 			//prepare data to be sent to client	 
@@ -77,13 +83,7 @@ while (true) {
 			3. global
 			4. etc...
 			*/
-			$user_id = $data->id;
-			$user_x = $data->posX;
-			$user_y = $data->posY;
-			$user_hp = $data->HP;
-			$response_data = mask(json_encode(array('id'=>$user_id,'posX'=>$user_x,'posY'=>$user_y,'HP'=>$user_HP)));
-				
-			send_message($response_data);
+			/*
 			switch($msg_target) {
 				case 1:
 					send_message_client($response_data, $changed_socket);
@@ -95,7 +95,7 @@ while (true) {
 				case 4:
 					break;
 			}
-
+*/
 			break 2; //exist this loop
 		}
 		
