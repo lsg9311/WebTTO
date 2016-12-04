@@ -47,6 +47,7 @@ var monster2 = new Image();
 var monster3 = new Image();
 var monster4 = new Image();
 var ghost = new Image();
+var obstacle = new Image();
 
 var frame1 = 1;
 
