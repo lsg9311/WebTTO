@@ -17,10 +17,10 @@ var TOP_HP_EMPTY_IMG = new Image();
 var TOP_LIVE_CURSOR_IMG = new Image();
 var TOP_DEATH_CURSOR_IMG = new Image();
 var wallIMG = new Image();
-var bird1 = new Image();
-var bird2 = new Image();
-var bird3 = new Image();
-var bird4 = new Image();
+var pink1 = new Image();
+var pink2 = new Image();
+var pink3 = new Image();
+var pink4 = new Image();
 var frame1 = 1;
 
 //canvas Option
@@ -70,10 +70,10 @@ function initIMG(){
 	TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
 	TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
 	TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
-	bird1.src = "image/bird/pink/frame-1.png";
-	bird2.src = "image/bird/pink/frame-2.png";
-	bird3.src = "image/bird/pink/frame-3.png";
-	bird4.src = "image/bird/pink/frame-4.png";
+	pink1.src = "image/bird/pink/frame-1.png";
+	pink2.src = "image/bird/pink/frame-2.png";
+	pink3.src = "image/bird/pink/frame-3.png";
+	pink4.src = "image/bird/pink/frame-4.png";
 
 }
 //allocate canvas
@@ -118,10 +118,10 @@ function draw_bg(){
     draw_wall(ctxBuffer,scrollVal,scrollWall);
 
     //draw character
-    if(frame1<RPM+1){ctxBuffer.drawImage(bird1, cx, cy, 50, 50);}
-    else if (frame1<2*RPM+1){ctxBuffer.drawImage(bird2, cx, cy, 50, 50);}
-    else if (frame1<3*RPM+1){ctxBuffer.drawImage(bird3, cx, cy, 50, 50);}
-    else {ctxBuffer.drawImage(bird4, cx, cy, 50, 50);}
+    if(frame1<RPM+1){ctxBuffer.drawImage(pink1, cx, cy, 50, 50);}
+    else if (frame1<2*RPM+1){ctxBuffer.drawImage(pink2, cx, cy, 50, 50);}
+    else if (frame1<3*RPM+1){ctxBuffer.drawImage(pink3, cx, cy, 50, 50);}
+    else {ctxBuffer.drawImage(pink4, cx, cy, 50, 50);}
 
     //main canvas
     mainCanvas = document.getElementById("MAIN-CANVAS");
