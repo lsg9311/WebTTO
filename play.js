@@ -554,7 +554,8 @@ function game_halt() {
 	var str = "GAME OVER"
 	mainCtx.fillText(str,750-str.length*17,300);
 	setTimeout(function(){
-		$('body').load("result.php");
+		STATE=4;
+		state_change();
 	},3000);
 	mainCtx.restore();
 	/* TODO
