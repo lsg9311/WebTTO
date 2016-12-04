@@ -192,22 +192,22 @@ $(document).ready(function(){
 function ready_pic(cnt){
 	if(STATE==2){
 		if(cnt>=1){
-			document.getElementById('user5').src="image/bird/blue/pick.gif";
+			document.getElementById('user5').src="image/bird/blue/ready.gif";
 		}
 		if(cnt>=2){
-			document.getElementById('user1').src="image/bird/chicken/pick.gif";
+			document.getElementById('user1').src="image/bird/chicken/ready.gif";
 		}
 		if(cnt>=3){
-			document.getElementById('user3').src="image/bird/monster/pick.gif";
+			document.getElementById('user3').src="image/bird/monster/ready.gif";
 		}
 		if(cnt>=4){
-			document.getElementById('user4').src="image/bird/duck/pick.gif";
+			document.getElementById('user4').src="image/bird/duck/ready.gif";
 		}
 		if(cnt>=5){
-			document.getElementById('user6').src="image/bird/dragon/pick.gif";
+			document.getElementById('user6').src="image/bird/dragon/ready.gif";
 		}
 		if(cnt>=6){
-			document.getElementById('user2').src="image/bird/pink/pick.gif";
+			document.getElementById('user2').src="image/bird/pink/ready.gif";
 	}
 	}
 }
