@@ -74,6 +74,17 @@ var gravity = 0.3;
 var gravitySpeed = 0;
 var RPM = 8;
 var accel = false;
+var ox=new Array();
+var oy=new Array();
+var mul=new Array();
+var size = new Array();
+
+for(i=0;i<16;i++) {
+	ox[i] = (Math.floor(Math.random()*251)) + 250*(i+1);
+	oy[i] = Math.floor(Math.random()*76) + 100 + (Math.floor(i%3))*125;
+	mul[i] = Math.floor(Math.random()*5)*0.5 + 2;
+	size[i] = Math.floor(Math.random()*1.5)*25 + 75;
+}
 
 
 
@@ -128,6 +139,7 @@ function initIMG(){
 	monster2.src="image/bird/monster/flying/frame-2.png";
 	monster3.src="image/bird/monster/flying/frame-3.png";
 	monster4.src="image/bird/monster/flying/frame-4.png";
+	obstacle.src = "image/spr_boulder_0.png";
 
 }
 //allocate canvas
@@ -210,6 +222,7 @@ function draw_bg(){
     	ctxBuffer.drawImage(monster4, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck4, cx+50, cy, 50, 50);}
     	}
+    for(i=2;i<16;i++) ctxBuffer.drawImage(obstacle,ox[i]-mul[i]*scrollVal,oy[i],size[i],size[i]);
     //main canvas
     mainCanvas = document.getElementById("MAIN-CANVAS");
 	mainCtx = mainCanvas.getContext("2d");    
