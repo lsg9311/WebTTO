@@ -26,7 +26,8 @@ function lobby_ready(){
 
 function room_ready(){
 	$("#ready_btn").on("click",function(){
-		
+		STATE=3;
+		state_change();
 	});
 	$("#select_btn").on("click",function(){
 		STATE=5;
