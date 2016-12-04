@@ -37,6 +37,16 @@ function room_ready(){
 	websocket=new WebSocket(wsUri);
 	websocket.onopen = function() { // connection is open 
 		console.log("Connected");
+
+		// to introduce user that is now assigned to specific room
+		var msg = {
+			// send user him/herself's data
+			type : "introduce"
+			room_no : 1,		//for example
+			user_id : "aa"		//for example
+		};
+		websocket.send(JSON.stringify(msg));
+
 		$("#ready_btn").on("click",function(){
 			var data = {"type":"user_ready"};
 			websocket.send(JSON.stringify(data));
