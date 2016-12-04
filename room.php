@@ -144,6 +144,7 @@
 		<div>
 			<button class="btn btn-primary opt_btn" id="ready_btn">준비</button>
 			<button class="btn btn-primary opt_btn" id="select_btn">캐릭터 선택</button>
+			<button class="btn btn-primary opt_btn" id="start_btn">START</button>
 		</div>
 	</div>
 	</div>

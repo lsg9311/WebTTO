@@ -37,10 +37,19 @@ function lobby_ready(){
 function room_ready(){
 	websocket=new WebSocket(wsUri);
 	var cnt=0;
+	var gostart=0;
 	$("#select_btn").on("click",function(){
 			STATE=5;
 			state_change();
 		});
+	//start the game
+	$("#start_btn").on("click",function(){
+		//	if(cnt==6){gostart=1;}
+		if(cnt==6){
+		cnt=0;
+		STATE=3;
+		state_change();
+		}});
 	websocket.onopen = function() { // connection is open 
 		console.log("Connected");
 		
@@ -55,17 +64,38 @@ function room_ready(){
 		websocket.send(JSON.stringify(msg));
 
 		$("#ready_btn").on("click",function(){
-			cnt++;
+			if(cnt<6){cnt++;}
 			var data = {type:"user_ready", user_id : name};
 			websocket.send(JSON.stringify(data));
-			
 		});
+
 	}
-	websocket.onmessage=function(msg){
+		websocket.onmessage=function(msg){
 		var data=JSON.parse(msg.data);
 		var type=data.type;
+		console.log("count="+cnt);
+		if(cnt==1){
+			document.getElementById('user5').src="image/bird/blue/pick.gif";
+		}
+		else if(cnt==2){
+			document.getElementById('user1').src="image/bird/chicken/pick.gif";
+		}
+		else if(cnt==3){
+			document.getElementById('user3').src="image/bird/monster/pick.gif";
+		}
+		else if(cnt==4){
+			document.getElementById('user4').src="image/bird/duck/pick.gif";
+		}
+		else if(cnt==5){
+			document.getElementById('user6').src="image/bird/dragon/pick.gif";
+		}
+		else if(cnt==6){
+			document.getElementById('user2').src="image/bird/pink/pick.gif";
+		}
+		
+		/*
 		if(type == "update_room_info") {
-			/*
+			
 			// do update room information with parsing data
 			var ready_cnt=0;
 			for(var aaa=0; aaa<data.users.length; aaa++) { 
@@ -76,17 +106,12 @@ function room_ready(){
 			if(data.users.length == ready_cnt) {
 				STATE=3;
 				state_change();			
-			}*/
-			console.log(cnt);
-			if(cnt==6){
-				STATE=3;
-				state_change();
-				cnt=0;
 			}
 		} 
+
 		else if(type == "system") {
 			console.log(data);
-		}
+		}*/
 	}
 	websocket.onclose=function(){
 		console.log("Disconnected");
