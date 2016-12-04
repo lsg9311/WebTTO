@@ -6,13 +6,9 @@
 4 : result.php
 5 : select.php
 */
-<<<<<<< HEAD
-var STATE = 2;
-=======
 var STATE = 0;
 
 var name = "none";
->>>>>>> ac227910fe737e45efbb5b884edb61b88db4270c
 var result_score;
 var wsUri="ws://localhost:9000/WEBTTO/play_server.php";
 var	websocket=new WebSocket(wsUri);
