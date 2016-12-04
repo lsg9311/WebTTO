@@ -52,6 +52,11 @@ var accel = false;
 var hit_state = 0;
 var hit_speed = 700;
 
+//minimap Option
+var MIN_MAP_POINTER = 1070;
+var MAX_MAP_POINTER = 1449;
+var MAX_TIME = 1000;
+
 //allocate IMG
 function initIMG(){
 	//img Option
@@ -238,7 +243,8 @@ function update_map_cursor(TIME_RELATED, DEATH_TIME) {
 		topCTX.fillText(DEATH_TIME[i].CLIENT_ID, 1070 + DEATH_TIME[i].TIME + 10 - (DEATH_TIME[i].CLIENT_ID.length) * 4, 74);
 		i++;
 	}
-	topCTX.drawImage(TOP_LIVE_CURSOR_IMG, 1070 + TIME_RELATED, 40);
+	var time_diff = (MAX_MAP_POINTER - MIN_MAP_POINTER)/MAX_TIME;
+	topCTX.drawImage(TOP_LIVE_CURSOR_IMG, 1070 + Math.floor(time_diff*TIME_RELATED), 40);
 	topCTX.restore();
 };
 
@@ -427,7 +433,7 @@ function game_halt() {
 
 // FOR TESTING PURPOSE
 function test() {
-	if(global_time_tick > 500/*379*/) {
+	if(global_time_tick > MAX_TIME) {
 		GAME_STATE = 3;
 	}
 	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, global_time_tick, death_time);	// FOR TESTING PURPOSE
