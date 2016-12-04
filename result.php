@@ -2,11 +2,9 @@
 <html>
 <head>
 	<style>
-		#gage_container{
-			width: 850px;
-			height: 70px;
-			margin: 0 auto;
-			margin-top: 100px;
+		#result{
+			margin-top :50px;
+			margin-left: 450px;
 		}
 		#gage_bnum{
 			padding-top:6px;
@@ -18,44 +16,12 @@
 			height:64px;
 		}
 
-		#outer_bar{
-			background-color: LightGray;
-			float: left;
-			margin-top: 15px;
-			margin-left: 29.5px;
-			width: 650px;
-			height: 40px;
-		}
-		#inner_bar{
-			height: 100%;
-			width: 37%;
-			background-color: LimeGreen;
-		}
-
-		#gage_anum{
-			padding-top: 6px;
-			background-color: LightGray;
-			font-size: 40px;
-			text-align: center;
-			float: right;
-			width:70px;
-			height:64px;
-		}
-
+		
+		
 		#rank_container{
 			margin-top: 85px;
 		}
 
-		.sunwi{
-			margin-left: 150px;
-			padding-top: 6px;
-			text-align: center;
-			float: left;
-			font-size: 40px;
-			background-color: red;
-			width: 70px;
-			height: 64px;
-		}
 		#user1{
 			clear: both;
 		}
@@ -82,6 +48,7 @@
 			float: left;
 			width:150px;
 			height:40px;
+			border-radius: 30px;
 		}
 		#name2, #name3{
 			margin-left: 70px;
@@ -89,44 +56,45 @@
 		#exit{
 			background-color: RoyalBlue;
 			margin-top: 25px;
-			width:100%;
+			width:70%;
 			height:50px;
 			color:white;
+			border-radius: 30px;
 			font-size: 34px;
 		}
 		#gage_container h1{
 			text-align:center;
 		}
+		#rank1{
+			width:80px;
+			height:80px;
+			margin-left: 140px;
+		}
+		#rank2{
+			width:70px;
+			height:70px;
+			margin-left: 150px;
+		}	
 	</style>
 </head>
 <?PHP
 $my_id = "1";
 $user_size = 2;
 $user = array(
-	array("id"=>"aaa", "src"=>"image/TOP_CLIENTSLOT2.png", "score"=>"33", "rank"=>"2"),
-	array("id"=>"bbb", "src"=>"", "score"=>"34", "rank"=>"1")
+	array("id"=>"Teemo", "src"=>"image/teemo2.png", "score"=>"33", "rank"=>"2"),
+	array("id"=>"IsCute", "src"=>"image/teemo.png", "score"=>"36", "rank"=>"1")
 );
 //use bubble sort
 ?>
+
 <body bgcolor = "#A9D0F5">
-	<div id="gage_container">
-		<!--
-		<div id="gage_bnum">37</div>
-		<div id="outer_bar">
-			<div id="inner_bar"></div>
-		</div>
-
-		<div id="gage_anum">38</div>
-		-->
+	<div> 
+		<img src= "image/result/result.png" id="result"></img>
 	</div>
-
 	<div id="rank_container">
-		<div>
-			<?PHP
-			for($i=0; $i<$user_size; $i++) {
-				echo '<div class="sunwi">'.$user[$i]["rank"].'</div>';
-			}
-			?>
+		<div id="rank_num">
+				<img src ="image/result/rank1.png" id="rank1"></img>
+				<img src ="image/result/rank2.png" id="rank2"></img>
 		</div>
 		<div id="user_profile">
 			<?PHP
