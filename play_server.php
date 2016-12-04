@@ -49,11 +49,7 @@ while (true) {
 		{
 			$received_data = unmask($buf); //unmask data
 			$data = json_decode($received_data); //json decode 
-			switch($data->type){
-				case "charsel":
-					send_message($data);
-				break;
-			}
+
 			//prepare data to be sent to client	
 			$res = prepare_data($data);		// $res need to be array style.
 			$response_data = mask(json_encode($res));	
@@ -84,6 +80,10 @@ while (true) {
 			$found_socket = array_search($changed_socket, $clients);
 			socket_getpeername($changed_socket, $ip);
 			unset($clients[$found_socket]);
+			
+			//notify all users about disconnected connection
+			$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' disconnected')));
+			send_message($response);
 		}
 	}
 }
@@ -144,10 +144,6 @@ function mask($text)
 	return $header.$text;
 }
 
-function prepare_data(){
-
-}
-
 //handshake new client.
 function perform_handshaking($receved_header,$client_conn, $host, $port)
 {
@@ -169,7 +165,7 @@ function perform_handshaking($receved_header,$client_conn, $host, $port)
 	"Upgrade: websocket\r\n" .
 	"Connection: Upgrade\r\n" .
 	"WebSocket-Origin: $host\r\n" .
-	"WebSocket-Location: ws://$host:$port/WEBTTO/play_server.php\r\n".
+	"WebSocket-Location: ws://$host:$port/draw/server.php\r\n".
 	"Sec-WebSocket-Accept:$secAccept\r\n\r\n";
 	socket_write($client_conn,$upgrade,strlen($upgrade));
 }
