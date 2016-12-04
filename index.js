@@ -9,6 +9,7 @@
 var STATE = 0;
 
 var name = "none";
+var slot_IMG = "";
 var result_score;
 var wsUri="ws://localhost:9000/WEBTTO/play_server.php";
 var	websocket
@@ -37,13 +38,14 @@ function room_ready(){
 	websocket=new WebSocket(wsUri);
 	websocket.onopen = function() { // connection is open 
 		console.log("Connected");
-
+		
 		// to introduce user that is now assigned to specific room
+		slot_IMG = "image/TOP_CLIENTSLOT2.png";
 		var msg = {
 			// send user him/herself's data
-			type : "introduce"
-			room_no : 1,		//for example
-			user_id : "aa"		//for example
+			type : "introduce",
+			user_id : name,
+			user_slot_IMG : slot_IMG
 		};
 		websocket.send(JSON.stringify(msg));
 
@@ -58,11 +60,18 @@ function room_ready(){
 	}
 	websocket.onmessage=function(msg){
 		var data=JSON.parse(msg.data);
-		console.log(data["start"]);
-		if(data.start>=6){
-			STATE=3;
-			state_change();
+		var type=data.type;
+
+		if(type == "update_room_info") {
+			// do update room information with parsing data
 		}
+		if(type == "start") {
+			if(data.start>=6){
+				STATE=3;
+				state_change();
+			}
+		}
+		
 	}
 	websocket.onclose=function(){
 		console.log("Disconnected");

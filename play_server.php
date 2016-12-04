@@ -57,10 +57,14 @@ while (true) {
 			$received_data = unmask($buf); //unmask data
 			$data = json_decode($received_data); //json decode
 			
-			if($data->type=="user_ready"){
+			if($data->type=="introduce") {
+
+			} else if($data->type=="user_ready"){
 				$ready++;
 				$response = mask(json_encode(array('start'=>$ready))); //prepare json data
 				send_message($response); //notify all users about new connection
+			} else if($data->type=="") {
+
 			}
 
 			//prepare data to be sent to client	 
