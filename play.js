@@ -446,8 +446,9 @@ function update_all() {
 			if(hit_state > 0) hit_state--;
 			//var intervalMAIN=setInterval(update_all, interval_speed);
 			flying();
-			update_bg();
 			update_position();
+			update_bg();
+			
 			test();	// FOR TESTING PURPOSE
 			global_time_tick++;		// time goes when playing game
 			if(HPLEFT == 0)
