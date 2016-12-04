@@ -79,12 +79,12 @@
 				</div>
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 	                <ul class="nav navbar-nav">
-						<li class="foot_name">Hakjoo Oh</li>
+						<li class="foot_name"><?= $_POST['nick']?></li>
 	                </ul>
 	                <ul class="nav navbar-nav navbar-right">
 	                	<li class="foot_name">경험치 표시 예정</li>
 	                	<li>
-	                		<button class="btn btn-primary btn-block foot_exit">나가기</button>
+	                		<button id="exit_btn" class="btn btn-primary btn-block foot_exit">나가기</button>
 	                	</li>
 	                </ul>
                 </div>
@@ -105,6 +105,10 @@ $(function() {
     if(slide_count > 1)
         $(".btn").css("display", "inline");
     change_text(idx);
+
+    $("#exit_btn").click(function() {
+    	$('body').load("index.php");
+    });
  
     $("#prev_btn").click(function() {
         if(slide_count > 1) {
