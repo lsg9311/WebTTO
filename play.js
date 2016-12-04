@@ -505,12 +505,13 @@ window.addEventListener("keydown",function(e){
 	return;
 });
 
-/* TODO
-1. clear all interval of drawing (COMPLETE)
-2. after some time, go to result status/page with some data used for ranking (ex)dead time, live time, health point ...)
-*/
+// game halt phase
 function game_halt() {
 	clearInterval(intervalMain);
+	/* TODO
+		1. receive required data from server (ex) user id, user name, user img, score(or just live times and health point..) etc...)
+		2. after get data, pass the data to result.php
+	*/
 	return;
 }
 
