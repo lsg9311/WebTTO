@@ -159,7 +159,7 @@
 	</div>
 	<script>
 	var wsUri;
-	var character;
+	var character=new Array();
 
 	function select(character){
 		var imglink = "image/bird/"+character+"/"+character+".gif";
@@ -168,26 +168,17 @@
 	// get the picture
 	$(document).ready(function(){
 
-		wsUri = "ws://localhost:9000/kweb/mc/server.php"; 	
+		wsUri = "ws://localhost:9000/WebTTO/play_server.php";; 	
 		websocket = new WebSocket(wsUri); 
 
 		websocket.onmessage = function(ev) {
 			var msg = JSON.parse(ev.data);
 			var type = msg.type;
 			if(type == 'charsel'){
-				character1 = msg.charater1;
-				character2 = msg.charater1;
-				character3 = msg.charater1;
-				character4 = msg.charater1;
-				character5 = msg.charater1;
-				character6 = msg.charater1;
+				for(var i=0;i<6;i++){
+					$("#user"+i).src=msg.name[i];
+				}
 			}
-			$("#user1").src = select(character1);
-			$("#user2").src = select(character2);
-			$("#user3").src = select(character3);
-			$("#user4").src = select(character4);
-			$("#user5").src = select(character5);
-			$("#user6").src = select(character6);
 		}
 	});
 

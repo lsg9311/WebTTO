@@ -6,7 +6,7 @@
 4 : result.php
 5 : select.php
 */
-var STATE = 3;
+var STATE = 5;
 
 function login_ready(){
 	$("#input_enter").on("click",function(){
