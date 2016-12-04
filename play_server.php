@@ -50,9 +50,27 @@ while (true) {
 			$received_data = unmask($buf); //unmask data
 			$data = json_decode($received_data); //json decode 
 
-			//prepare data to be sent to client
-			$response_data = mask(json_encode(array('preX'=>$data->preX, 'preY'=>$data->preY, 'X'=>$data->X, 'Y'=>$data->Y)));
-			send_message($response_data); //send data
+			//prepare data to be sent to client	
+			$res = prepare_data($data);		// $res need to be array style.
+			$response_data = mask(json_encode($res));	
+			/* send_message_to
+			1. client him/herself
+			2. all client in same room
+			3. global
+			4. etc...
+			*/
+			switch($msg_target) {
+				case 1:
+					send_message_client($response_data, $changed_socket);
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+			}
+
 			break 2; //exist this loop
 		}
 		
@@ -79,6 +97,12 @@ function send_message($msg)
 	{
 		@socket_write($changed_socket,$msg,strlen($msg));
 	}
+	return true;
+}
+
+function send_message_client($msg, $client)
+{
+	@socket_write($client,$msg,strlen($msg));
 	return true;
 }
 
