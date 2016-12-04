@@ -21,6 +21,26 @@ var pink1 = new Image();
 var pink2 = new Image();
 var pink3 = new Image();
 var pink4 = new Image();
+var blue1 = new Image();
+var blue1 = new Image();
+var blue1 = new Image();
+var blue1 = new Image();
+var chicken1 = new Image();
+var chicken2 = new Image();
+var chicken3 = new Image();
+var chicken4 = new Image();
+var dragon1 = new Image();
+var dragon2 = new Image();
+var dragon3 = new Image();
+var dragon4 = new Image();
+var duck1 = new Image();
+var duck2 = new Image();
+var duck3 = new Image();
+var duck4 = new Image();
+var monster1 = new Image();
+var monster2 = new Image();
+var monster3 = new Image();
+var monster4 = new Image();
 var frame1 = 1;
 
 //canvas Option
@@ -74,6 +94,27 @@ function initIMG(){
 	pink2.src = "image/bird/pink/frame-2.png";
 	pink3.src = "image/bird/pink/frame-3.png";
 	pink4.src = "image/bird/pink/frame-4.png";
+	blue1.src = "image/bird/blue/frame-1.png";
+	blue2.src = "image/bird/blue/frame-2.png";
+	blue3.src = "image/bird/blue/frame-3.png";
+	blue4.src = "image/bird/blue/frame-4.png";
+	dargon1.src = "image/bird/dragon/frame-1.png";
+	dargon2.src = "image/bird/dragon/frame-2.png";
+	dargon3.src = "image/bird/dragon/frame-3.png";
+	dargon4.src = "image/bird/dragon/frame-4.png";
+	duck1.src = "image/bird/duck/flying/frame-1.png";
+	duck2.src = "image/bird/duck/flying/frame-2.png";
+	duck3.src = "image/bird/duck/flying/frame-3.png";
+	duck4.src = "image/bird/duck/flying/frame-4.png";
+	chicken1.src="image/bird/chicken/flying/frame-1.png";
+	chicken2.src="image/bird/chicken/flying/frame-2.png";
+	chicken3.src="image/bird/chicken/flying/frame-3.png";
+	chicken4.src="image/bird/chicken/flying/frame-4.png";
+	monster1.src="image/bird/monster/flying/frame-1.png";
+	monster2.src="image/bird/monster/flying/frame-2.png";
+	monster3.src="image/bird/monster/flying/frame-3.png";
+	monster4.src="image/bird/monster/flying/frame-4.png";
+
 
 }
 //allocate canvas
