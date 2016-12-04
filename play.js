@@ -249,9 +249,9 @@ function draw_wall(ctx,scroll,scrollWall){
     mainCtx.lineTo(-scrollCoef,100);
 
     mainCtx.fill();
-    mainCtx.fillStyle=wall;
-*/  ctx.fillRect(-scrollCoef, 500, 1500, 100);
-/*    mainCtx.moveTo(-scrollCoef,500);
+    mainCtx.fillStyle=wall;*/  
+    ctx.fillRect(-scrollCoef, 500, 1500, 100);
+  /*mainCtx.moveTo(-scrollCoef,500);
     mainCtx.lineTo(-scrollCoef,500-scrollWall)
     mainCtx.bezierCurveTo(1000-(scrollCoef),400+scrollWall,1000-(scrollCoef),400+scrollWall,1500-(scrollCoef),400+scrollWall);
     mainCtx.lineTo(1500-(scrollCoef),500);
@@ -335,7 +335,6 @@ function update_score(ctx){
 	ctx.restore();
 }
 
-
 // update CURSORS in MAP UI
 function update_map_cursor(TIME_RELATED, DEATH_TIME) {
 	topCTX.save();
@@ -375,8 +374,8 @@ function update_position(){
 
 	//Update Character Status
 function newPos(){ //Goes up and down
-	gravitySpeed += this.gravity;
-	cy += speedC+gravitySpeed;
+	gravitySpeed += gravity;
+	cy += gravitySpeed;
 	hitRock();
 }
 function hitRock(){
@@ -487,7 +486,6 @@ function update_all() {
 			if(HPLEFT == 0)
 				GAME_STATE = 2;
 		break;
-
 		// on dead status
 		case 2:
 			/* TODO
@@ -555,9 +553,9 @@ function game_halt() {
 	mainCtx.fillText(str,750-str.length*17,300);
 	setTimeout(function(){
 		STATE=4;
-		state_change();
-	},3000);
-	mainCtx.restore();
+		state_change();},3000);
+
+	mainCtx.restore();	
 	/* TODO
 		1. receive required data from server (ex) user id, user name, user img, score(or just live times and health point..) etc...)
 		2. after get data, pass the data to result.php
