@@ -75,6 +75,8 @@ var gravity = 0.3;
 var gravitySpeed = 0;
 var RPM = 8;
 var accel = false;
+var myID = 1;
+var myHP = 100; //temp HP.
 var ox=new Array();
 var oy=new Array();
 var mul=new Array();
@@ -182,6 +184,8 @@ function draw_bg(){
     draw_wall(ctxBuffer,scrollVal,scrollWall);
     update_score(ctxBuffer);
 
+    //Character Info sending
+    send_player();
     //draw character
     //frame1
     if(GAME_STATE > 1){
@@ -456,7 +460,34 @@ function ready_indicate(){
 	}
 	indicate_time-=1;
 }
+//Player Area
+//All value is temporary
+var Player = function(newId){
+	var X = 100;
+	var Y = 100;
+	var ID = newId;
+	var PH = 100;
+	var getX = function(){
+		return X;
+	}
+};
+function send_player(){
+	var msg = {
+		posX : cx,
+		posY : cy,
+		id : myID,
+		HP : myHP
+	};
+	websocket.send(JSON.stringify(msg));
+}
 
+var players = new Array();
+players.push(new Player(1));
+players.push(new Player(2));
+players.push(new Player(3));
+players.push(new Player(4));
+players.push(new Player(5));
+players.push(new Player(6));
 var intervalMain;
 $(document).ready(function(){
 	initIMG();
@@ -469,8 +500,20 @@ $(document).ready(function(){
 	HPLEFT = 6;
 	global_time_tick = 0;
 	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
-	
-	
+	//Websockek
+	var wsUri = "ws://localhost:9000/demo/server.php"; 	
+	websocket = new WebSocket(wsUri); 
+
+	websocket.onopen = function(ev){
+		console.log("connected");
+	}
+	websocket.onmessage = function(ev){
+		var msg = JSON.parse(ev.data);
+		var user_id = msg.id;
+		players[user_id].X = msg.posX;
+		players[user_id].Y = msg.posY;
+		players[user_id].HP = msg.HP;
+	}
 	intervalMain = setInterval(update_all, interval_speed);
 	/*
 	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE

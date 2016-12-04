@@ -54,15 +54,22 @@ while (true) {
 			$received_data = unmask($buf); //unmask data
 			$data = json_decode($received_data); //json decode
 			//prepare data to be sent to client	 
-			$res = array();
-			$msg_target = prepare_data($data, $res);		// $res need to be array style.
-			$response_data = mask(json_encode($res));	
+			//$res = array();
+			//$msg_target = prepare_data($data, $res);		// $res need to be array style.
+			//$response_data = mask(json_encode($res));	
 			/* send_message_to
 			1. client him/herself
 			2. all client in same room
 			3. global
 			4. etc...
 			*/
+			$user_id = $data->id;
+			$user_x = $data->posX;
+			$user_y = $data->posY;
+			$user_hp = $data->HP;
+			$response_data = mask(json_encode(array('id'=>$user_id,'posX'=>$user_x,'posY'=$user_y,'HP'=>$user_HP)));
+				
+			send_message($response_data);
 			switch($msg_target) {
 				case 1:
 					send_message_client($response_data, $changed_socket);
