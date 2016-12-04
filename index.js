@@ -6,7 +6,8 @@
 4 : result.php
 5 : select.php
 */
-var STATE = 0;
+var STATE = 3;
+var result_score;
 
 function login_ready(){
 	$("#input_enter").on("click",function(){
@@ -39,6 +40,7 @@ function room_ready(){
 }
 
 function result_ready(){
+	$("#gage_container").append("<h1> 최종 점수 : "+result_score+"</h1>");
 	$("#exit").on("click",function(){
 		STATE=1;
 		state_change();

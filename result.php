@@ -94,7 +94,9 @@
 			color:white;
 			font-size: 34px;
 		}
-
+		#gage_container h1{
+			text-align:center;
+		}
 	</style>
 </head>
 <?PHP
@@ -108,12 +110,14 @@ $user = array(
 ?>
 <body bgcolor = "#A9D0F5">
 	<div id="gage_container">
+		<!--
 		<div id="gage_bnum">37</div>
 		<div id="outer_bar">
 			<div id="inner_bar"></div>
 		</div>
 
 		<div id="gage_anum">38</div>
+		-->
 	</div>
 
 	<div id="rank_container">
