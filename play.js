@@ -1,4 +1,3 @@
-
 /*
 GAME_STATE
 0 : ready
@@ -6,20 +5,17 @@ GAME_STATE
 2 : die
 3 : all die
 */
-var GAME_STATE=1;
+var GAME_STATE=0;
 //img Option
 var backgroundIMG = new Image();
 var TOP_SLOT_IMG1 = new Image();
 var TOP_SLOT_IMG2 = new Image();
 var TOP_SLOT_EMPTY_IMG = new Image();
 var TOP_MAP_IMG = new Image();
-var wallIMG = new Image();
 var TOP_HP_IMG = new Image();
 var TOP_HP_EMPTY_IMG = new Image();
 var TOP_LIVE_CURSOR_IMG = new Image();
 var TOP_DEATH_CURSOR_IMG = new Image();
-var wallIMG = new Image();
-
 var wallIMG = new Image();
 var bird1 = new Image();
 var bird2 = new Image();
@@ -69,7 +65,6 @@ function initIMG(){
 	TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
 	TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
 	TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
-	wallIMG.src = "image/wall.png";
 	bird1.src = "image/bird/PNG/frame-1.png";
 	bird2.src = "image/bird/PNG/frame-2.png";
 	bird3.src = "image/bird/PNG/frame-3.png";
@@ -305,18 +300,34 @@ var CLIENT_NAME;
 var CLIENT_SIZE;
 var HPMAX;
 var HPLEFT;
-var time_related;
+var global_time_tick;
 var death_time;
 
 
 //ready state show
 function ready_canvas(){
-	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
+	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, global_time_tick, death_time);	// FOR TESTING PURPOSE
 	update_bg();
 
 	test();
 }
 
+var indicate_time=3000/interval_speed;
+
+function ready_indicate(){
+	var count=Math.floor(indicate_time/interval_speed);
+	mainCtx.font="50px Arial";
+	mainCtx.fillStyle="#000000";	
+	if(count>0){
+		mainCtx.fillText(count,690,300);
+	}
+	else{
+		mainCtx.fillText("START!",650,300);
+	}
+	indicate_time-=1;
+}
+
+var intervalMain;
 $(document).ready(function(){
 	initIMG();
 	initCanvas();
@@ -326,42 +337,11 @@ $(document).ready(function(){
 	CLIENT_SIZE = 5;
 	HPMAX = 8;
 	HPLEFT = 6;
-	time_related = 300;
+	global_time_tick = 0;
 	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
 	
-	switch(GAME_STATE){
-		case 0:
-			ready_canvas();
-		break;
-		case 1:
-		CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
-		CLIENT_NAME = ["123","123","123","123","122"];
-		CLIENT_SIZE = 5;
-		HPMAX = 8;
-		HPLEFT = 6;
-		time_related = 300;
-		death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
-		update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
-
-
-		$(document).on("keydown", function(e){
-			if(e.key == 'a'){
-				hitted();
-			}
-		});//
-
-		var intervalHIT = setInterval(function(){
-			if(hit_state > 0) hit_state--;
-		},hit_speed); // for hit state change
-
-		//var intervalMAIN=setInterval(update_all, interval_speed);
-		break;
-		case 2:
-		break;
-		case 3:
-		break;
-	}
-	var intervalMain = setInterval(update_all, interval_speed);
+	
+	intervalMain = setInterval(update_all, interval_speed);
 	/*
 	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE
 	setInterval(function(){flying();}, 100);
@@ -370,25 +350,86 @@ $(document).ready(function(){
 });
 
 function update_all() {
-	flying();
-	update_bg();
-	update_position();
-	//updateGame();
-	test();	// FOR TESTING PURPOSE
+	switch(GAME_STATE){
+		// ready status
+		case 0:
+			ready_canvas();
+			ready_indicate();
+			console.log(indicate_time);
+			if(indicate_time==0) GAME_STATE=1;
+		break;
+		// on running status
+		case 1:
+			if(hit_state > 0) hit_state--;
+			//var intervalMAIN=setInterval(update_all, interval_speed);
+			flying();
+			update_bg();
+			update_position();
+			test();	// FOR TESTING PURPOSE
+			global_time_tick++;		// time goes when playing game
+			if(HPLEFT == 0)
+				GAME_STATE = 2;
+		break;
+		// on dead status
+		case 2:
+			global_time_tick++;		// time goes when playing game
+		break;
+		// all player dead status, or the time is over. the game is goning to be halt
+		// required : need to check whether game is over by time/all people dead in "STATUS 1 or 2"!!!
+		case 3:
+			game_halt();
+		break;
+	}
+}
+// command for debug
+$(document).on("keydown", function(e){
+	switch(GAME_STATE) {
+	case 0:
+		break;
+	case 1:
+		if(e.key == 'a'){
+			hitted();
+		} else if(e.key == 's'){
+			//FOR TESTING PURPOSE
+			GAME_STATE = 2;
+		} else if(e.key == 'd'){
+			//FOR TESTING PURPOSE
+			GAME_STATE = 3;
+		} else if(e.key == 'f'){
+			//FOR TESTING PURPOSE
+		}
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	}
+});
+
+/* TODO
+1. clear all interval of drawing
+2. after some time, go to result status/page with some data used for ranking (ex)dead time, live time, health point ...)
+*/
+function game_halt() {
+	clearInterval(intervalMain);
+	GAME_STATE = 1;
+	return;
 }
 
 // FOR TESTING PURPOSE
 function test() {
-	if(time_related > 300)
-		time_related = 0;
-	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
-	time_related++;
+	if(global_time_tick > 379) {
+		GAME_STATE = 3;
+	}
+	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, global_time_tick, death_time);	// FOR TESTING PURPOSE
 }
 
 
 //WHEN HITTED
 function hitted() {
-	
-	if(hit_state == 0) HPLEFT--, hit_state=3;
+	if(hit_state == 0) HPLEFT--, hit_state=30;
+	if(HPLEFT < 1) {
+		HPLEFT = 0;
+	}
+	return;
 }
-
