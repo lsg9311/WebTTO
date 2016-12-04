@@ -97,6 +97,15 @@
 
 	</style>
 </head>
+<?PHP
+$my_id = "1";
+$user_size = 2;
+$user = array(
+	array("id"=>"aaa", "src"=>"image/TOP_CLIENTSLOT2.png", "score"=>"33", "rank"=>"2"),
+	array("id"=>"bbb", "src"=>"", "score"=>"34", "rank"=>"1")
+);
+//use bubble sort
+?>
 <body bgcolor = "#A9D0F5">
 	<div id="gage_container">
 		<div id="gage_bnum">37</div>
@@ -109,19 +118,25 @@
 
 	<div id="rank_container">
 		<div>
-			<div class="sunwi">1</div>
-			<div class="sunwi">2</div>
-			<div class="sunwi">3</div>
+			<?PHP
+			for($i=0; $i<$user_size; $i++) {
+				echo '<div class="sunwi">'.$user[$i]["rank"].'</div>';
+			}
+			?>
 		</div>
 		<div id="user_profile">
-			<img src="" id="user1"></div>
-			<img src="" id="user2"></div>
-			<img src="" id="user3"></div>
+			<?PHP
+			for($i=0; $i<$user_size; $i++) {
+				echo '<img src="'.$user[$i]["src"].'" id="user'.($i+1).'"></div>';
+			}
+			?>
 		</div>
 		<div id="name">
-			<div id="name1">이름1</div>
-			<div id="name2">이름2</div>
-			<div id="name3">이름3</div>
+			<?PHP
+			for($i=0; $i<$user_size; $i++) {
+				echo '<div id="name'.($i+1).'">'.$user[$i]["id"].'</div>';
+			}
+			?>
 		</div>
 	</div>
 	<div style="clear:both; margin:auto; width:350px; height:75px;">

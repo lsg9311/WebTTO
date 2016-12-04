@@ -17,6 +17,7 @@ var TOP_HP_EMPTY_IMG = new Image();
 var TOP_LIVE_CURSOR_IMG = new Image();
 var TOP_DEATH_CURSOR_IMG = new Image();
 var wallIMG = new Image();
+
 var pink1 = new Image();
 var pink2 = new Image();
 var pink3 = new Image();
@@ -45,6 +46,8 @@ var monster1 = new Image();
 var monster2 = new Image();
 var monster3 = new Image();
 var monster4 = new Image();
+var ghost = new Image();
+
 var frame1 = 1;
 
 //canvas Option
@@ -63,18 +66,22 @@ var interval_speed=30;
 var topCanvas;
 var topCTX;
 
-//char  x, y
+//character parameters
 var cx=100;
 var cy=300;
 var speedY = 0;
 var gravity = 0.3;
 var gravitySpeed = 0;
-//character parameters
+var RPM = 8;
+
 var accel = false;
 
 //hit state
 var hit_state = 0;
-var hit_speed = 700;
+
+//score state
+var score = 0;
+var score_parameter = 32;
 
 //minimap Option
 var MIN_MAP_POINTER = 1070;
@@ -94,6 +101,8 @@ function initIMG(){
 	TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
 	TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
 	TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
+
+	ghost.src = "image/bird/ghost/ghost.png";
 	pink1.src = "image/bird/pink/frame-1.png";
 	pink2.src = "image/bird/pink/frame-2.png";
 	pink3.src = "image/bird/pink/frame-3.png";
@@ -145,8 +154,6 @@ function scroll_bg(){
 	}
 }
 
-var RPM = 8;
-
 //buffering canvas
 function draw_bg(){
 	var cnvsBuffer = document.getElementById("canvas");
@@ -160,43 +167,45 @@ function draw_bg(){
     ctxBuffer.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
     ctxBuffer.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
     draw_wall(ctxBuffer,scrollVal,scrollWall);
+    update_score(ctxBuffer);
 
-    //draw character pink
+    //draw character
     //frame1
-    if(frame1<RPM+1){
+    if(GAME_STATE > 1){
+    	if(frame1%RPM < 2)
+    	 	ctxBuffer.drawImage(ghost, cx-10, cy-10, 70, 70);
+    }
+    else if(frame1<RPM+1){
     	ctxBuffer.drawImage(pink1, cx, cy, 50, 50);
-    	ctxBuffer.drawImage(blue1, cx+10, cy, 50, 50);
-    	ctxBuffer.drawImage(chicken1, cx+20, cy, 50, 50);
-    	ctxBuffer.drawImage(dragon1, cx+30, cy, 50, 50);
+    	ctxBuffer.drawImage(blue1, cx+20, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken1, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon1, cx+60, cy, 50, 50);
     	ctxBuffer.drawImage(monster1, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck1, cx+50, cy, 50, 50);}
-
-//frame1
+	//frame2
     else if (frame1<2*RPM+1){
     	ctxBuffer.drawImage(pink2, cx, cy, 50, 50);
-    	ctxBuffer.drawImage(blue2, cx+10, cy, 50, 50);
-    	ctxBuffer.drawImage(chicken2, cx+20, cy, 50, 50);
-    	ctxBuffer.drawImage(dragon2, cx+30, cy, 50, 50);
+    	ctxBuffer.drawImage(blue2, cx+20, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken2, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon2, cx+60, cy, 50, 50);
     	ctxBuffer.drawImage(monster2, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck2, cx+50, cy, 50, 50);}
-    	//frame1
+    //frame3
     else if (frame1<3*RPM+1){
     	ctxBuffer.drawImage(pink3, cx, cy, 50, 50);
-    	ctxBuffer.drawImage(blue3, cx+10, cy, 50, 50);
-    	ctxBuffer.drawImage(chicken3, cx+20, cy, 50, 50);
-    	ctxBuffer.drawImage(dragon3, cx+30, cy, 50, 50);
+    	ctxBuffer.drawImage(blue3, cx+20, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken3, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon3, cx+60, cy, 50, 50);
     	ctxBuffer.drawImage(monster3, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck3, cx+50, cy, 50, 50);}
-    	//frame1
+    //frame4
     else {
     	ctxBuffer.drawImage(pink4, cx, cy, 50, 50);
-    	ctxBuffer.drawImage(blue4, cx+10, cy, 50, 50);
-    	ctxBuffer.drawImage(chicken4, cx+20, cy, 50, 50);
-    	ctxBuffer.drawImage(dragon4, cx+30, cy, 50, 50);
+    	ctxBuffer.drawImage(blue4, cx+20, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken4, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon4, cx+60, cy, 50, 50);
     	ctxBuffer.drawImage(monster4, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck4, cx+50, cy, 50, 50);}
-
-
 
     //main canvas
     mainCanvas = document.getElementById("MAIN-CANVAS");
@@ -306,6 +315,23 @@ function update_HP(HPLOC, HPLEFT, HPLIMIT) {
 	topCTX.restore();
 };
 
+function update_score(ctx){
+	ctx.save();
+	if(GAME_STATE==1) score+=score_parameter;
+
+	var sco = score.toString();
+	ctx.font = "40px Arial";
+	ctx.fillStyle = "white";
+	ctx.strokeStyle ="white";
+
+	if(GAME_STATE>1)
+		ctx.strokeText(sco,750-sco.length*10,70);
+	else
+		ctx.fillText(sco,750-sco.length*10,70);
+
+	ctx.restore();
+}
+
 
 // update CURSORS in MAP UI
 function update_map_cursor(TIME_RELATED, DEATH_TIME) {
@@ -401,12 +427,16 @@ var indicate_time=3000/interval_speed;
 function ready_indicate(){
 	var count=Math.floor(indicate_time/interval_speed);
 	mainCtx.font="50px Arial";
-	mainCtx.fillStyle="#000000";	
+	mainCtx.fillStyle="#000000";
+
+	var str;	
 	if(count>0){
-		mainCtx.fillText(count,690,300);
+		str = count.toString();
+		mainCtx.fillText(count,750-str.length*12.5,300);
 	}
 	else{
-		mainCtx.fillText("START!",650,300);
+		str = "START";
+		mainCtx.fillText(str,750-str.length*15,300);
 	}
 	indicate_time-=1;
 }
@@ -446,13 +476,15 @@ function update_all() {
 			if(hit_state > 0) hit_state--;
 			//var intervalMAIN=setInterval(update_all, interval_speed);
 			flying();
-			update_bg();
 			update_position();
+			update_bg();
+			
 			test();	// FOR TESTING PURPOSE
 			global_time_tick++;		// time goes when playing game
 			if(HPLEFT == 0)
 				GAME_STATE = 2;
 		break;
+
 		// on dead status
 		case 2:
 			/* TODO
@@ -462,6 +494,10 @@ function update_all() {
 				4. draw top
 				5. if all player died, go to GAME_STATE 3
 			*/
+			flying();
+			update_bg();
+			update_position();
+
 			global_time_tick++;		// time goes when playing game
 		break;
 		// all player dead status, or the time is over. the game is goning to be halt
@@ -491,6 +527,13 @@ window.addEventListener("keydown",function(e){
 		}
 		break;
 	case 2:
+		if(e.key == '1'){
+			//FOR TESTING PURPOSE
+			GAME_STATE = 1;
+		} else if(e.key == '3'){
+			//FOR TESTING PURPOSE
+			GAME_STATE = 3;
+		} 
 		break;
 	case 3:
 		break;
@@ -498,13 +541,13 @@ window.addEventListener("keydown",function(e){
 	return;
 });
 
-/* TODO
-1. clear all interval of drawing (COMPLETE)
-2. after some time, go to result status/page with some data used for ranking (ex)dead time, live time, health point ...)
-*/
+// game halt phase
 function game_halt() {
 	clearInterval(intervalMain);
-	GAME_STATE = 1;
+	/* TODO
+		1. receive required data from server (ex) user id, user name, user img, score(or just live times and health point..) etc...)
+		2. after get data, pass the data to result.php
+	*/
 	return;
 }
 
@@ -521,10 +564,14 @@ function test() {
 function hitted() {
 	if(hit_state == 0) HPLEFT--, hit_state=30;
 	if(HPLEFT < 1) {
+		hit_state = -1;
+		GAME_STATE = 2;
+
 		HPLEFT = 0;
 		/* TODO
 			1. set dying motion time (ex) 2 second)
 		*/
 	}
+
 	return;
 }
