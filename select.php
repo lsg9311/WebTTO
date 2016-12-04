@@ -91,7 +91,7 @@
 		if( (nblue%2)==1){
 			document.getElementById('blue').src="image/bird/blue/pick.gif";}
 		else{
-			document.getElementById('blue').src="image/bird/blue/dragon.gif";}
+			document.getElementById('blue').src="image/bird/blue/blue.gif";}
 	}
 	function changepic2(){
 		nchicken++;
