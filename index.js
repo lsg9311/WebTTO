@@ -11,7 +11,7 @@ var STATE = 0;
 var name = "none";
 var result_score;
 var wsUri="ws://localhost:9000/WEBTTO/play_server.php";
-var	websocket=new WebSocket(wsUri);
+var	websocket
 
 function login_ready(){
 	$("#input_enter").on("click",function(){
@@ -34,6 +34,7 @@ function lobby_ready(){
 }
 
 function room_ready(){
+	websocket=new WebSocket(wsUri);
 	websocket.onopen = function() { // connection is open 
 		console.log("Connected");
 		$("#ready_btn").on("click",function(){
