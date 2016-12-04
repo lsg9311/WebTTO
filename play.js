@@ -66,12 +66,13 @@ var topCTX;
 //character parameters
 var cx=100;
 var cy=300;
-var speedY = 0;
+var speedC = 10;
 var gravity = 0.3;
 var gravitySpeed = 0;
 var RPM = 8;
-
 var accel = false;
+
+
 
 //hit state
 var hit_state = 0;
@@ -136,7 +137,7 @@ function update_bg(){
 
 function scroll_bg(){
 	if(scrollVal >= 2000) scrollVal = 0;
-	if(Math.abs(scrollWall) >=50) Walldir*=-1;
+	if(Math.abs(scrollWall) >=50) Walldir*=-2;
 	if(GAME_STATE!=0){
 		scrollVal+=speed;
 		scrollWall+=Walldir*speed;
@@ -145,7 +146,6 @@ function scroll_bg(){
 		scrollVal = 0;
 	}
 }
-
 //buffering canvas
 function draw_bg(){
 	var cnvsBuffer = document.getElementById("canvas");
@@ -345,7 +345,7 @@ function update_position(){
 	//Update Character Status
 function newPos(){ //Goes up and down
 	gravitySpeed += this.gravity;
-	cy += speedY+gravitySpeed;
+	cy += speedC+gravitySpeed;
 	hitRock();
 }
 function hitRock(){
