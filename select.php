@@ -5,8 +5,10 @@
 		
 		img{
 			margin : 50px;
+			border-color: black;
+			border-width : 3px;
 		}
-		#exit{
+		#select{
 			background-color: RoyalBlue;
 			margin-top: 25px;
 			width:80%;
@@ -16,17 +18,16 @@
 		}
 		
 		#blue{
-			width : 180px;
-			height : 150px;
+			width : 250px;
+			height : 200px;
 		}
-		#chicken
-		{
-			width : 300px;
+		#chicken{
+			width : 250px;
 			height : 200px;
 		}
 		#dragon{
-			width : 300px;
-			height : 200px;
+			width : 350px;
+			height : 250px;
 		}
 		#monster{
 			width : 300px;
@@ -39,6 +40,7 @@
 		#pink{
 			width : 250px;
 			height : 200px;
+			margin-left: 20px;
 		}
 
 	</style>
@@ -63,7 +65,7 @@
 
 
 	<div style="clear:both; margin:auto; width:350px; height:75px;">
-		<input id="exit" type="button" value="나가기"/>
+		<input id="select" type="button" value="SELECT"/>
 	</div>
 </body>
 </html>
