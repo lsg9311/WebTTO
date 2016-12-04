@@ -1,4 +1,8 @@
 <?php
+// used array for all around site
+$user = array();
+$room = array();
+
 $host = 'localhost'; //host
 $port = '9000'; //port
 $null = NULL; //null var
@@ -48,10 +52,10 @@ while (true) {
 		while(socket_recv($changed_socket, $buf, 1024, 0) >= 1)
 		{
 			$received_data = unmask($buf); //unmask data
-			$data = json_decode($received_data); //json decode 
-
-			//prepare data to be sent to client	
-			$res = prepare_data($data);		// $res need to be array style.
+			$data = json_decode($received_data); //json decode
+			//prepare data to be sent to client	 
+			$res = array();
+			$msg_target = prepare_data($data, $res);		// $res need to be array style.
 			$response_data = mask(json_encode($res));	
 			/* send_message_to
 			1. client him/herself

@@ -20,6 +20,7 @@
 		#blue{
 			width : 250px;
 			height : 200px;
+			margin-left : 350px;
 		}
 		#chicken{
 			width : 250px;
@@ -36,6 +37,7 @@
 		#duck{
 			width : 300px;
 			height : 200px;
+			margin-left : 350px;
 		}
 		#pink{
 			width : 250px;

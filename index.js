@@ -6,10 +6,15 @@
 4 : result.php
 5 : select.php
 */
-var STATE = 3;
+var STATE = 0;
 
 function login_ready(){
 	$("#input_enter").on("click",function(){
+		if($('#nickname').val().length == 0){
+			alert("이름을 제대로 적으시오!");
+			return;
+		}
+
 		STATE=1;
 		state_change();
 	});	
@@ -50,7 +55,7 @@ function state_change(){
 			$("body").load("login.php",function(){login_ready();});
 		break;
 		case 1:
-			$("body").load("lobby.php",function(){lobby_ready();});
+			$("body").load("lobby.php",{nick:$('#nickname').val()},function(){lobby_ready();});
 		break;
 		case 2:
 			$("body").load("room.php",function(){room_ready();});
