@@ -124,13 +124,13 @@
 	<div id ="user_container" style="background-color:'#2E64FE';">
 		<div>
 			<img id="user1" width="120px" height="120px">
-			<img src="image/bird/chicken/chicken.gif" id="user2" width="120px" height="120px">
-			<img src="image/bird/dragon/dragon.gif" id="user3" width="120px" height="120px">
+			<img id="user2" width="120px" height="120px">
+			<img id="user3" width="120px" height="120px">
 		</div>
 		<div>
-			<img src="image/bird/duck/duck.gif" id="user4" width="120px" height="120px">
-			<img src="image/bird/monster/monster.gif" id="user5" width="120px" height="120px">
-			<img src="image/bird/pink/pink.gif" id="user6" width="120px" height="120px">
+			<img id="user4" width="120px" height="120px">
+			<img id="user5" width="120px" height="120px">
+			<img id="user6" width="120px" height="120px">
 		</div>
 	</div>
 	
@@ -150,9 +150,7 @@
 
 	<div id="user_info">
 		<img src="" id="user_my">
-
 		<div id="user_name">닉네임</div>
-
 		<div id ="outer_bar">
 			<div id="inner_bar">
 
@@ -177,10 +175,19 @@
 			var msg = JSON.parse(ev.data);
 			var type = msg.type;
 			if(type == 'charsel'){
-				character = msg.charater;
-				
+				character1 = msg.charater1;
+				character2 = msg.charater1;
+				character3 = msg.charater1;
+				character4 = msg.charater1;
+				character5 = msg.charater1;
+				character6 = msg.charater1;
 			}
-			$("#user1").src = select(character);
+			$("#user1").src = select(character1);
+			$("#user2").src = select(character2);
+			$("#user3").src = select(character3);
+			$("#user4").src = select(character4);
+			$("#user5").src = select(character5);
+			$("#user6").src = select(character6);
 		}
 	});
 
