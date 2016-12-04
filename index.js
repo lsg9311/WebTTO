@@ -71,6 +71,9 @@ function room_ready(){
 			}
 			if(data.users.length == ready_cnt) {
 				STATE=3;
+				var data_tran = {type:"transition",user_id:name};
+				console.log("Transition"+data_tran.user_id);
+				websocket.send(JSON.stringify(data_tran));
 				state_change();
 			}
 		} else if(type == "system") {
