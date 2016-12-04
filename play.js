@@ -78,9 +78,10 @@ var gravity = 0.3;
 var gravitySpeed = 0;
 var RPM = 8;
 var accel = false;
-var myID = 0;//Should be different from other players
+var myID = document.getElementById('mychar').height;
+//Should be different from other players
 var myHP = 100; //temp HP.
-var ox=new Array();
+var ox=new Array();	
 var oy=new Array();
 var mul=new Array();
 var size = new Array();
@@ -91,8 +92,6 @@ for(i=0;i<16;i++) {
 	mul[i] = Math.floor(Math.random()*5)*0.5 + 2;
 	size[i] = Math.floor(Math.random()*1.5)*25 + 75;
 }
-
-
 
 //hit state
 var hit_state = 0;
@@ -235,9 +234,9 @@ function draw_bg(){
     //frame1
     if(GAME_STATE > 1){
     	if(frame1 < 15)
-    	 	ctxBuffer.drawImage(ghost1, players[0].X-10, players[0].Y-10, 70, 70);
+    	 	ctxBuffer.drawImage(ghost1, cx, cy, 70, 70);
     	 else {
-    	 	ctxBuffer.drawImage(ghost2, players[0].X-10, players[0].Y-10, 70, 70);
+    	 	ctxBuffer.drawImage(ghost2, cx, cy, 70, 70);
     	 }
     }
     else if(frame1<RPM+1){
@@ -592,6 +591,8 @@ $(document).ready(function(){
 		players[user_id].Y = msg.posY;
 		players[user_id].HP = msg.HP;
 		console.log("posX " + msg.posX + ", posY " + msg.posY);
+		console.log(document.getElementById('mychar').height.toString());
+		console.log(myID.toString());
 		}
 		else
 			;

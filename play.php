@@ -17,5 +17,7 @@
 <div>
 	<canvas id="canvas" width="1500" display="none" height="600">
 	</canvas>
+	<div id ="mychar" height="0" display="none"> 
+	</div>
 </div>
 

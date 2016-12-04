@@ -15,6 +15,7 @@ var wsUri="ws://localhost:9000/WEBTTO/play_server.php";
 var	websocket;
 var character=null;
 var cnt=0;
+var myID=0;
 
 function login_ready(){
 	$("#input_enter").on("click",function(){
@@ -75,6 +76,8 @@ function room_ready(){
 		var data=JSON.parse(msg.data);
 		var type=data.type;
 		console.log("count="+cnt);
+		console.log(character);
+		console.log(myID);
 		ready_pic(cnt);
 		
 		/*
@@ -101,14 +104,54 @@ function room_ready(){
 		console.log("Disconnected");
 	}
 }
+//select and show the character
+function select_char(){
+	$("#blue").on("click", function(){
+		selected("blue");
+		console.log(character);
+	});
+	$("#pink").on("click", function(){
+		selected("pink");
+		console.log(character);
+	});
+	$("#monster").on("click", function(){
+		selected("monster");
+		console.log(character);
+	});
+	$("#chicken").on("click", function(){
+		selected("chicken");
+		console.log(character);
+	});
+	$("#duck").on("click", function(){
+		selected("duck");
+		console.log(character);
+	});
+	$("#dragon").on("click", function(){
+		selected("dragon");
+		console.log(character);
+	});
+
+	if (character!=null){
+	document.getElementById(character).src="image/bird/"+character+"/pick.gif";}
+}
+//select the character
+function selected(color){
+	if(color==character){
+		character=null;
+		document.getElementById(character).src="image/bird/"+character+"/"+character+".gif"
+	}
+	else if(character==null){
+		character=color;		
+	}
+	else{
+		document.getElementById(character).src="image/bird/"+character+"/"+character+".gif";
+		character=color;
+	}
+
+}
 
 function finish_select(){
 	websocket=new WebSocket(wsUri);
-	$("#blue").on("click", function(){
-		character ="blue";
-	});
-
-
 	$("#select_end_btn").on("click",function(){
 			STATE=2;
 			state_change();
@@ -140,13 +183,13 @@ function state_change(){
 			$("body").load("room.php",function(){room_ready();});
 		break;
 		case 3:
-			$("body").load("play.php");
+			$("body").load("play.php",function(){my_character();});
 		break;
 		case 4:
 			$("body").load("result.php",function(){result_ready();});
 		break;
 		case 5:
-			$("body").load("select.php",function(){finish_select();});
+			$("body").load("select.php",function(){select_char();finish_select();});
 		break;
 	}
 }
@@ -154,28 +197,47 @@ function state_change(){
 function ready_pic(cnt){
 	if(STATE==2){
 		if(cnt>=1){
-			console.log("1");
 			document.getElementById('user5').src="image/bird/blue/pick.gif";
 		}
 		if(cnt>=2){
-			console.log("2");
 			document.getElementById('user1').src="image/bird/chicken/pick.gif";
 		}
 		if(cnt>=3){
-			console.log("3");
 			document.getElementById('user3').src="image/bird/monster/pick.gif";
 		}
 		if(cnt>=4){
-			console.log("4");
 			document.getElementById('user4').src="image/bird/duck/pick.gif";
 		}
 		if(cnt>=5){
-			console.log("5");
 			document.getElementById('user6').src="image/bird/dragon/pick.gif";
 		}
 		if(cnt>=6){
-			console.log("6");
 			document.getElementById('user2').src="image/bird/pink/pick.gif";
 	}
 	}
+}
+
+function get_id(){
+	
+	if(character=="pink"){
+		myID=0;
+	}else if(character=="blue"){
+		myID=1;
+	}else if(character=="chicken"){
+		myID=2;
+	}else if(character=="dragon"){
+		myID=3;
+	}else if(character=="monster"){
+		myID=4;
+	}else if(character=="duck"){
+		myID=5;
+	}
+}
+function my_character(){
+	$(document).ready(function(){
+	get_id();
+	document.getElementById('mychar').height=myID
+	console.log(document.getElementById('mychar').height);
+
+});
 }
