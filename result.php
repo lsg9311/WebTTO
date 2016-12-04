@@ -48,6 +48,7 @@
 			float: left;
 			width:150px;
 			height:40px;
+			border-radius: 30px;
 		}
 		#name2, #name3{
 			margin-left: 70px;
@@ -55,9 +56,10 @@
 		#exit{
 			background-color: RoyalBlue;
 			margin-top: 25px;
-			width:100%;
+			width:70%;
 			height:50px;
 			color:white;
+			border-radius: 30px;
 			font-size: 34px;
 		}
 		#gage_container h1{
@@ -71,7 +73,7 @@
 		#rank2{
 			width:70px;
 			height:70px;
-			margin-left: 145px;
+			margin-left: 150px;
 		}	
 	</style>
 </head>
@@ -79,8 +81,8 @@
 $my_id = "1";
 $user_size = 2;
 $user = array(
-	array("id"=>"teemo", "src"=>"image/TOP_CLIENTSLOT2.png", "score"=>"33", "rank"=>"2"),
-	array("id"=>"iscute", "src"=>"", "score"=>"36", "rank"=>"1")
+	array("id"=>"Teemo", "src"=>"image/teemo2.png", "score"=>"33", "rank"=>"2"),
+	array("id"=>"IsCute", "src"=>"image/teemo.png", "score"=>"36", "rank"=>"1")
 );
 //use bubble sort
 ?>
