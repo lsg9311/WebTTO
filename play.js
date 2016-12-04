@@ -420,6 +420,6 @@ function hitted() {
 	if(hit_state == 0) HPLEFT--, hit_state=30;
 	if(HPLEFT < 1) {
 		HPLEFT = 0;
-		GAME_STATUS = 2;
+		GAME_STATE = 2;
 	}
 }
