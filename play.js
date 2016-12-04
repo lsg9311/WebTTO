@@ -241,9 +241,13 @@ function update_score(ctx){
 
 	var sco = score.toString();
 	ctx.font = "40px Arial";
-	ctx.fillStyle = "white";
+	ctx.strokeStyle ="white";
 
-	ctx.fillText(sco,750-sco.length*10,70);
+	if(GAME_STATE>1)
+		ctx.strokeText(sco,750-sco.length*10,70);
+	else
+		ctx.fillText(sco,750-sco.length*10,70);
+
 	ctx.restore();
 }
 

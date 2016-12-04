@@ -3,8 +3,12 @@
 <head>
 	<style>
 		
-		
-		#exit{
+		img{
+			margin : 50px;
+			border-color: black;
+			border-width : 3px;
+		}
+		#select{
 			background-color: RoyalBlue;
 			margin-top: 25px;
 			width:80%;
@@ -13,9 +17,30 @@
 			font-size: 23px;
 		}
 		
-		img{
-			width : 180px;
-			height : 150px;
+		#blue{
+			width : 250px;
+			height : 200px;
+		}
+		#chicken{
+			width : 250px;
+			height : 200px;
+		}
+		#dragon{
+			width : 350px;
+			height : 250px;
+		}
+		#monster{
+			width : 300px;
+			height : 200px;
+		}
+		#duck{
+			width : 300px;
+			height : 200px;
+		}
+		#pink{
+			width : 250px;
+			height : 200px;
+			margin-left: 20px;
 		}
 
 	</style>
@@ -24,21 +49,23 @@
 	
 	<div> 
 		<img src="image/bird/blue/blue.gif" id="blue">
+		<img src="image/bird/chicken/chicken.gif" id="chicken">
+		<img src="image/bird/dragon/dragon.gif" id="dragon">
 	</div>
 	<div>
-		<img src="image/bird/blue/blue.gif" id="blue">
-	</div>
+		
+	</div>	
 	<div>
-		<img src="image/bird/blue/blue.gif" id="blue">
-		<img src="image/bird/blue/blue.gif" id="blue">
-		<img src="image/bird/blue/blue.gif" id="blue">
-		<img src="image/bird/blue/blue.gif" id="blue">
+		
+		<img src="image/bird/duck/duck.gif" id="duck">
+		<img src="image/bird/monster/monster.gif" id="monster">
+		<img src="image/bird/pink/pink.gif" id="pink">
 
 	</div>
 
 
 	<div style="clear:both; margin:auto; width:350px; height:75px;">
-		<input id="exit" type="button" value="나가기"/>
+		<input id="select" type="button" value="SELECT"/>
 	</div>
 </body>
 </html>
