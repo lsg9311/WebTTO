@@ -43,15 +43,25 @@
 	</div>
 	</div>
 
-	<div id="user_info">
-		<img src="image/teemo.png" id="user_my">
-		<div id="user_name"> </div>
-		<div value="2"> </div>
-		<div id ="outer_bar">
-			<div id="inner_bar">
+	<footer>
+		<nav class="navbar navbar_foot navbar-fixed-bottom" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<img src="./image/teemo3.png" width="60px" height="70px">
+				</div>
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+	                <ul class="nav navbar-nav">
+	                </ul>
+	                <ul class="nav navbar-nav navbar-right">
+	                	<li class="foot_name">Happy</li>
+	                	<li>
+	                		<button id="exit_btn" class="btn btn-primary btn-block foot_exit">나가기</button>
+	                	</li>
+	                </ul>
+                </div>
 			</div>
-		</div>
-	</div>
+		</nav>
+	</footer>
 	<script>
 	var wsUri;
 	var character;

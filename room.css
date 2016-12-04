@@ -43,7 +43,7 @@ body{background-color:#A9D0F5;}
 			height: 35px;
 			clear: both;
 		}#entire{
-			height: 600px;
+			height: 770px;
 			background-color:#A9D0F5;
 		}#user_info{
 			text-align: center;
@@ -91,3 +91,29 @@ body{background-color:#A9D0F5;}
 	    	width: 100px;
 	    	text-align: center;
 		}
+		.navbar {
+        padding: 10px 0;
+        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out,padding .5s ease-in-out;
+    }
+    .navbar_foot {
+        background-color: #2E9AFE;
+        min-height: 75px;
+    }
+    .foot_name {
+    	padding: 14px;
+    	font-size: 14pt;
+    	font-weight: bold;
+    	border-color: white;
+    	text-shadow: -1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6;
+		-moz-text-shadow: -1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6;
+		-webkit-text-shadow: -1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6;
+    }
+    .foot_exit {
+    	font-size: 12pt;
+    	padding: 10px;
+    	padding-left: 20px;
+    	padding-right: 20px;
+    	margin: 5px;
+    }

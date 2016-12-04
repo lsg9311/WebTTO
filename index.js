@@ -43,7 +43,10 @@ function room_ready(){
 	$(document).ready(function(){
 		document.getElementById('user_name').value=name;
 	});
-
+	$("#exit_btn").on("click",function(){
+		STATE=1;
+		state_change();
+	});
 	$("#select_btn").on("click",function(){
 			STATE=5;
 			state_change();

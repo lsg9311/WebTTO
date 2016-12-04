@@ -85,7 +85,7 @@
 						<li class="foot_name"><?= $_POST['nick']?></li>
 	                </ul>
 	                <ul class="nav navbar-nav navbar-right">
-	                	<li class="foot_name">경험치 표시 예정</li>
+	                	<li class="foot_name">Happy</li>
 	                	<li>
 	                		<button id="exit_btn" class="btn btn-primary btn-block foot_exit">나가기</button>
 	                	</li>
