@@ -500,6 +500,7 @@ function update_all() {
 			flying();
 			update_bg();
 			update_position();
+			test();
 
 			global_time_tick++;		// time goes when playing game
 		break;
