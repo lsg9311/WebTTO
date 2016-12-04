@@ -17,11 +17,37 @@ var TOP_HP_EMPTY_IMG = new Image();
 var TOP_LIVE_CURSOR_IMG = new Image();
 var TOP_DEATH_CURSOR_IMG = new Image();
 var wallIMG = new Image();
-var bird1 = new Image();
-var bird2 = new Image();
-var bird3 = new Image();
-var bird4 = new Image();
+
+var pink1 = new Image();
+var pink2 = new Image();
+var pink3 = new Image();
+var pink4 = new Image();
+var pink1 = new Image();
+var pink2 = new Image();
+var pink3 = new Image();
+var pink4 = new Image();
+var blue1 = new Image();
+var blue2 = new Image();
+var blue3 = new Image();
+var blue4 = new Image();
+var chicken1 = new Image();
+var chicken2 = new Image();
+var chicken3 = new Image();
+var chicken4 = new Image();
+var dragon1 = new Image();
+var dragon2 = new Image();
+var dragon3 = new Image();
+var dragon4 = new Image();
+var duck1 = new Image();
+var duck2 = new Image();
+var duck3 = new Image();
+var duck4 = new Image();
+var monster1 = new Image();
+var monster2 = new Image();
+var monster3 = new Image();
+var monster4 = new Image();
 var ghost = new Image();
+
 var frame1 = 1;
 
 //canvas Option
@@ -40,13 +66,14 @@ var interval_speed=30;
 var topCanvas;
 var topCTX;
 
-//char  x, y
+//character parameters
 var cx=100;
 var cy=300;
 var speedY = 0;
 var gravity = 0.3;
 var gravitySpeed = 0;
-//character parameters
+var RPM = 8;
+
 var accel = false;
 
 //hit state
@@ -55,6 +82,11 @@ var hit_state = 0;
 //score state
 var score = 0;
 var score_parameter = 32;
+
+//minimap Option
+var MIN_MAP_POINTER = 1070;
+var MAX_MAP_POINTER = 1449;
+var MAX_TIME = 1000;
 
 //allocate IMG
 function initIMG(){
@@ -69,11 +101,33 @@ function initIMG(){
 	TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
 	TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
 	TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
-	bird1.src = "image/bird/pink/frame-1.png";
-	bird2.src = "image/bird/pink/frame-2.png";
-	bird3.src = "image/bird/pink/frame-3.png";
-	bird4.src = "image/bird/pink/frame-4.png";
+
 	ghost.src = "image/bird/ghost/ghost.png";
+	pink1.src = "image/bird/pink/frame-1.png";
+	pink2.src = "image/bird/pink/frame-2.png";
+	pink3.src = "image/bird/pink/frame-3.png";
+	pink4.src = "image/bird/pink/frame-4.png";
+	blue1.src = "image/bird/blue/frame-1.png";
+	blue2.src = "image/bird/blue/frame-2.png";
+	blue3.src = "image/bird/blue/frame-3.png";
+	blue4.src = "image/bird/blue/frame-4.png";
+	dragon1.src = "image/bird/dragon/frame-1.png";
+	dragon2.src = "image/bird/dragon/frame-2.png";
+	dragon3.src = "image/bird/dragon/frame-3.png";
+	dragon4.src = "image/bird/dragon/frame-4.png";
+	duck1.src = "image/bird/duck/flying/frame-1.png";
+	duck2.src = "image/bird/duck/flying/frame-2.png";
+	duck3.src = "image/bird/duck/flying/frame-3.png";
+	duck4.src = "image/bird/duck/flying/frame-4.png";
+	chicken1.src="image/bird/chicken/flying/frame-1.png";
+	chicken2.src="image/bird/chicken/flying/frame-2.png";
+	chicken3.src="image/bird/chicken/flying/frame-3.png";
+	chicken4.src="image/bird/chicken/flying/frame-4.png";
+	monster1.src="image/bird/monster/flying/frame-1.png";
+	monster2.src="image/bird/monster/flying/frame-2.png";
+	monster3.src="image/bird/monster/flying/frame-3.png";
+	monster4.src="image/bird/monster/flying/frame-4.png";
+
 }
 //allocate canvas
 function initCanvas(){
@@ -100,8 +154,6 @@ function scroll_bg(){
 	}
 }
 
-var RPM = 8;
-
 //buffering canvas
 function draw_bg(){
 	var cnvsBuffer = document.getElementById("canvas");
@@ -118,14 +170,42 @@ function draw_bg(){
     update_score(ctxBuffer);
 
     //draw character
+    //frame1
     if(GAME_STATE > 1){
     	if(frame1%RPM < 2)
     	 	ctxBuffer.drawImage(ghost, cx-10, cy-10, 70, 70);
     }
-    else if(frame1<RPM+1){ctxBuffer.drawImage(bird1, cx, cy, 50, 50);}
-    else if (frame1<2*RPM+1){ctxBuffer.drawImage(bird2, cx, cy, 50, 50);}
-    else if (frame1<3*RPM+1){ctxBuffer.drawImage(bird3, cx, cy, 50, 50);}
-    else {ctxBuffer.drawImage(bird4, cx, cy, 50, 50);}
+    else if(frame1<RPM+1){
+    	ctxBuffer.drawImage(pink1, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(blue1, cx+20, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken1, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon1, cx+60, cy, 50, 50);
+    	ctxBuffer.drawImage(monster1, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(duck1, cx+50, cy, 50, 50);}
+	//frame2
+    else if (frame1<2*RPM+1){
+    	ctxBuffer.drawImage(pink2, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(blue2, cx+20, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken2, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon2, cx+60, cy, 50, 50);
+    	ctxBuffer.drawImage(monster2, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(duck2, cx+50, cy, 50, 50);}
+    //frame3
+    else if (frame1<3*RPM+1){
+    	ctxBuffer.drawImage(pink3, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(blue3, cx+20, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken3, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon3, cx+60, cy, 50, 50);
+    	ctxBuffer.drawImage(monster3, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(duck3, cx+50, cy, 50, 50);}
+    //frame4
+    else {
+    	ctxBuffer.drawImage(pink4, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(blue4, cx+20, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken4, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon4, cx+60, cy, 50, 50);
+    	ctxBuffer.drawImage(monster4, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(duck4, cx+50, cy, 50, 50);}
 
     //main canvas
     mainCanvas = document.getElementById("MAIN-CANVAS");
@@ -263,7 +343,8 @@ function update_map_cursor(TIME_RELATED, DEATH_TIME) {
 		topCTX.fillText(DEATH_TIME[i].CLIENT_ID, 1070 + DEATH_TIME[i].TIME + 10 - (DEATH_TIME[i].CLIENT_ID.length) * 4, 74);
 		i++;
 	}
-	topCTX.drawImage(TOP_LIVE_CURSOR_IMG, 1070 + TIME_RELATED, 40);
+	var time_diff = (MAX_MAP_POINTER - MIN_MAP_POINTER)/MAX_TIME;
+	topCTX.drawImage(TOP_LIVE_CURSOR_IMG, 1070 + Math.floor(time_diff*TIME_RELATED), 40);
 	topCTX.restore();
 };
 
@@ -394,8 +475,9 @@ function update_all() {
 			if(hit_state > 0) hit_state--;
 			//var intervalMAIN=setInterval(update_all, interval_speed);
 			flying();
-			update_bg();
 			update_position();
+			update_bg();
+			
 			test();	// FOR TESTING PURPOSE
 			global_time_tick++;		// time goes when playing game
 			if(HPLEFT == 0)
@@ -424,8 +506,9 @@ function update_all() {
 		break;
 	}
 }
+
 // command for debug
-$(document).on("keydown", function(e){
+window.addEventListener("keydown",function(e){
 	switch(GAME_STATE) {
 	case 0:
 		break;
@@ -443,25 +526,33 @@ $(document).on("keydown", function(e){
 		}
 		break;
 	case 2:
+		if(e.key == '1'){
+			//FOR TESTING PURPOSE
+			GAME_STATE = 1;
+		} else if(e.key == '3'){
+			//FOR TESTING PURPOSE
+			GAME_STATE = 3;
+		} 
 		break;
 	case 3:
 		break;
 	}
+	return;
 });
 
-/* TODO
-1. clear all interval of drawing (COMPLETE)
-2. after some time, go to result status/page with some data used for ranking (ex)dead time, live time, health point ...)
-*/
+// game halt phase
 function game_halt() {
 	clearInterval(intervalMain);
-	GAME_STATE = 1;
+	/* TODO
+		1. receive required data from server (ex) user id, user name, user img, score(or just live times and health point..) etc...)
+		2. after get data, pass the data to result.php
+	*/
 	return;
 }
 
 // FOR TESTING PURPOSE
 function test() {
-	if(global_time_tick > 500/*379*/) {
+	if(global_time_tick > MAX_TIME) {
 		GAME_STATE = 3;
 	}
 	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, global_time_tick, death_time);	// FOR TESTING PURPOSE
