@@ -243,7 +243,8 @@ function draw_bg(){
     else if(frame1<RPM+1){
     	ctxBuffer.drawImage(pink1, players[0].X, players[0].Y, 50, 50);
     	ctxBuffer.drawImage(blue1, players[1].X+20, players[1].Y, 50, 50);
-    	ctxBuffer.drawImage(chicken1, players[2].X+40, players[2].Y, 50, 50);
+    	//ctxBuffer.drawImage(chicken1, players[2].X+40, players[2].Y, 50, 50);
+    	ctxBuffer.drawImage(chicken1, ex,  ey, 50, 50);
     	ctxBuffer.drawImage(dragon1, players[3].X+60, players[3].Y, 50, 50);
     	ctxBuffer.drawImage(monster1, players[4].X+40, players[4].Y, 50, 50);
     	ctxBuffer.drawImage(duck1, players[5].X+50, players[5].Y, 50, 50);
@@ -253,7 +254,8 @@ function draw_bg(){
     	if(hit_state==0){
     	ctxBuffer.drawImage(pink2, players[0].X, players[0].Y, 50, 50);
     	ctxBuffer.drawImage(blue2, players[1].X+20, players[1].Y, 50, 50);
-    	ctxBuffer.drawImage(chicken2, players[2].X+40,  players[2].Y, 50, 50);
+    	//ctxBuffer.drawImage(chicken2, players[2].X+40,  players[2].Y, 50, 50);
+    	ctxBuffer.drawImage(chicken2, ex,  ey, 50, 50);
     	ctxBuffer.drawImage(dragon2, players[3].X+60,  players[3].Y, 50, 50);
     	ctxBuffer.drawImage(monster2, players[4].X+40,  players[4].Y, 50, 50);
     	ctxBuffer.drawImage(duck2, players[5].X+50,  players[5].Y, 50, 50);
@@ -265,7 +267,8 @@ function draw_bg(){
     else if (frame1<3*RPM+1){
     	ctxBuffer.drawImage(pink3, players[0].X, players[0].Y, 50, 50);
     	ctxBuffer.drawImage(blue3, players[1].X+20, players[1].Y, 50, 50);
-    	ctxBuffer.drawImage(chicken3, players[2].X+40, players[2].Y, 50, 50);
+    	//ctxBuffer.drawImage(chicken3, players[2].X+40, players[2].Y, 50, 50);
+    	ctxBuffer.drawImage(chicken3, ex,  ey, 50, 50);
     	ctxBuffer.drawImage(dragon3, players[3].X+60, players[3].Y, 50, 50);
     	ctxBuffer.drawImage(monster3, players[4].X+40, players[4].Y, 50, 50);
     	ctxBuffer.drawImage(duck3, players[5].X+50, players[5].Y, 50, 50);
@@ -275,7 +278,8 @@ function draw_bg(){
     	if(hit_state==0){
     	ctxBuffer.drawImage(pink4, players[0].X, players[0].Y, 50, 50);
     	ctxBuffer.drawImage(blue4, players[1].X+20, players[1].Y, 50, 50);
-    	ctxBuffer.drawImage(chicken4, players[2].X+40, players[2].Y, 50, 50);
+    	//ctxBuffer.drawImage(chicken4, players[2].X+40, players[2].Y, 50, 50);
+    	ctxBuffer.drawImage(chicken4, ex,  ey, 50, 50);
     	ctxBuffer.drawImage(dragon4, players[3].X+60, players[3].Y, 50, 50);
     	ctxBuffer.drawImage(monster4, players[4].X+40, players[4].Y, 50, 50);
     	ctxBuffer.drawImage(duck4, players[5].X+50, players[5].Y, 50, 50);
@@ -526,6 +530,12 @@ function ready_indicate(){
 	}
 	indicate_time-=1;
 }
+//showing chicken _ player coputer
+	var ex=100;
+	var ey=400;
+
+
+
 //Player Area
 //All value is temporary
 var Player = function(newId){

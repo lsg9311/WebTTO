@@ -67,11 +67,13 @@ function room_ready(){
 			var ready_cnt=0;
 			for(var aaa=0; aaa<data.users.length; aaa++) {
 				console.log(data.users[aaa]);
+				console.log(ready_cnt);
 				ready_cnt+=data.users[aaa].ready;
 			}
 			if(data.users.length == ready_cnt) {
+				ready_cnt=0;
 				STATE=3;
-				state_change();
+				state_change();				
 			}
 		} else if(type == "system") {
 			console.log(data);
@@ -80,6 +82,15 @@ function room_ready(){
 	websocket.onclose=function(){
 		console.log("Disconnected");
 	}
+}
+
+function finish_select(){
+	websocket=new WebSocket(wsUri);
+	$("#select_end_btn").on("click",function(){
+			STATE=2;
+			state_change();
+		});
+
 }
 
 function result_ready(){
@@ -112,7 +123,7 @@ function state_change(){
 			$("body").load("result.php",function(){result_ready();});
 		break;
 		case 5:
-			$("body").load("select.php");
+			$("body").load("select.php",function(){finish_select();});
 		break;
 	}
 }

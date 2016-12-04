@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script> 
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<style>
 		
 		img{
@@ -8,7 +11,7 @@
 			border-color: black;
 			border-width : 3px;
 		}
-		#select{
+		#select_end_btn{
 			background-color: RoyalBlue;
 			margin-top: 25px;
 			width:80%;
@@ -75,7 +78,7 @@
 	</div>
 
 	<div style="clear:both; margin-left:600px; width:350px; height:75px;">
-		<input id="select" type="button" value="SELECT"/>
+		<input id="select_end_btn" type="button" value="SELECT"/>
 	</div>
 
 	<script>
