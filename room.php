@@ -168,6 +168,7 @@
 	// get the picture
 	$(document).ready(function(){
 
+	/*
 		wsUri = "ws://localhost:9000/kweb/mc/server.php"; 	
 		websocket = new WebSocket(wsUri); 
 
@@ -189,6 +190,7 @@
 			$("#user5").src = select(character5);
 			$("#user6").src = select(character6);
 		}
+		*/
 	});
 
 	</script>

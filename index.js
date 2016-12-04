@@ -10,6 +10,8 @@ var STATE = 0;
 
 var name = "none";
 var result_score;
+var wsUri="ws://localhost:9000/WEBTTO/play_server.php";
+var	websocket=new WebSocket(wsUri);
 
 function login_ready(){
 	$("#input_enter").on("click",function(){
@@ -32,14 +34,28 @@ function lobby_ready(){
 }
 
 function room_ready(){
-	$("#ready_btn").on("click",function(){
-		STATE=3;
-		state_change();
-	});
-	$("#select_btn").on("click",function(){
-		STATE=5;
-		state_change();
-	});
+	websocket.onopen = function() { // connection is open 
+		console.log("Connected");
+		$("#ready_btn").on("click",function(){
+			var data = {"type":"user_ready"};
+			websocket.send(JSON.stringify(data));
+		});
+		$("#select_btn").on("click",function(){
+			STATE=5;
+			state_change();
+		});
+	}
+	websocket.onmessage=function(msg){
+		var data=JSON.parse(msg.data);
+		console.log(data["start"]);
+		if(data.start>6){
+			STATE=3;
+			state_change();
+		}
+	}
+	websocket.onclose=function(){
+		console.log("Disconnected");
+	}
 }
 
 function result_ready(){

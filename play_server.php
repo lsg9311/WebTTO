@@ -7,6 +7,8 @@ $host = 'localhost'; //host
 $port = '9000'; //port
 $null = NULL; //null var
 
+$ready=0;
+
 //Create TCP/IP sream socket
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 //reuseable port
@@ -40,6 +42,7 @@ while (true) {
 		$response = mask(json_encode(array('message'=>'connected'))); //prepare json data
 		send_message($response); //notify all users about new connection
 		
+		$ready=0;
 		//make room for new socket
 		$found_socket = array_search($socket, $changed);
 		unset($changed[$found_socket]);
@@ -53,6 +56,13 @@ while (true) {
 		{
 			$received_data = unmask($buf); //unmask data
 			$data = json_decode($received_data); //json decode
+			
+			if($data->type=="user_ready"){
+				$ready++;
+				$response = mask(json_encode(array('start'=>$ready))); //prepare json data
+				send_message($response); //notify all users about new connection
+			}
+
 			//prepare data to be sent to client	 
 			//$res = array();
 			//$msg_target = prepare_data($data, $res);		// $res need to be array style.
@@ -67,7 +77,7 @@ while (true) {
 			$user_x = $data->posX;
 			$user_y = $data->posY;
 			$user_hp = $data->HP;
-			$response_data = mask(json_encode(array('id'=>$user_id,'posX'=>$user_x,'posY'=$user_y,'HP'=>$user_HP)));
+			$response_data = mask(json_encode(array('id'=>$user_id,'posX'=>$user_x,'posY'=>$user_y,'HP'=>$user_HP)));
 				
 			send_message($response_data);
 			switch($msg_target) {
