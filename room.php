@@ -1,6 +1,10 @@
 <!doctype html>
 <html>
 <head>
+	
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
 	<style>
 		#user_container{
 			margin-left: 130px;
@@ -103,6 +107,13 @@
 			width: 37%;
 			height: 28px;
 		}
+		#ready_btn{
+			font-size: 12pt;
+	    	padding: 20px auto;
+	    	margin: 10px 75px;
+	    	width: 100px;
+	    	text-align: center;
+		}
 	</style>
 
 </head>
@@ -129,7 +140,7 @@
 		</select>
 		<img id="map_image" src="" width="170px" height="170px">
 		<div>
-			<input id="map_button" type="button" value="준비">
+			<button class="btn btn-primary" id="ready_btn">준비</button>
 		</div>
 	</div>
 	</div>
