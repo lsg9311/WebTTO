@@ -48,7 +48,8 @@ var monster1 = new Image();
 var monster2 = new Image();
 var monster3 = new Image();
 var monster4 = new Image();
-var ghost = new Image();
+var ghost1 = new Image();
+var ghost2 = new Image();
 var obstacle = new Image();
 
 var frame1 = 1;
@@ -77,7 +78,7 @@ var gravity = 0.3;
 var gravitySpeed = 0;
 var RPM = 8;
 var accel = false;
-var myID = 1;//Should be different from other players
+var myID = 0;//Should be different from other players
 var myHP = 100; //temp HP.
 var ox=new Array();
 var oy=new Array();
@@ -160,7 +161,8 @@ function initIMG(){
 	TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
 	TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
 
-	ghost.src = "image/bird/ghost/ghost.png";
+	ghost1.src = "image/bird/ghost/ghost1.png";
+	ghost2.src = "image/bird/ghost/ghost2.png";
 	pink1.src = "image/bird/pink/frame-1.png";
 	pink2.src = "image/bird/pink/frame-2.png";
 	pink3.src = "image/bird/pink/frame-3.png";
@@ -232,8 +234,11 @@ function draw_bg(){
     //draw character
     //frame1
     if(GAME_STATE > 1){
-    	//if(frame1%RPM < 2)
-    	 	ctxBuffer.drawImage(ghost, players[0].X-10, players[0].Y-10, 70, 70);
+    	if(frame1 < 15)
+    	 	ctxBuffer.drawImage(ghost1, players[0].X-10, players[0].Y-10, 70, 70);
+    	 else {
+    	 	ctxBuffer.drawImage(ghost2, players[0].X-10, players[0].Y-10, 70, 70);
+    	 }
     }
     else if(frame1<RPM+1){
     	ctxBuffer.drawImage(pink1, players[0].X, players[0].Y, 50, 50);
