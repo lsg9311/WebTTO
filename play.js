@@ -448,7 +448,7 @@ function hitRock(){
 	var rockTop = 100;
 	if(cy > rockBottom){
 		hitted();
-		cy = rockBottom+1;
+		cy = rockBottom;
 		gravitySpeed = 0;
 	}
 	if(cy < rockTop){
