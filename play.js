@@ -65,10 +65,10 @@ function initIMG(){
 	TOP_HP_EMPTY_IMG.src = "image/TOP_HP_EMPTY.png";
 	TOP_LIVE_CURSOR_IMG.src = "image/TOP_LIVE_CURSOR.png";
 	TOP_DEATH_CURSOR_IMG.src = "image/TOP_DEATH_CURSOR.png";
-	bird1.src = "image/bird/PNG/frame-1.png";
-	bird2.src = "image/bird/PNG/frame-2.png";
-	bird3.src = "image/bird/PNG/frame-3.png";
-	bird4.src = "image/bird/PNG/frame-4.png";
+	bird1.src = "image/bird/pink/frame-1.png";
+	bird2.src = "image/bird/pink/frame-2.png";
+	bird3.src = "image/bird/pink/frame-3.png";
+	bird4.src = "image/bird/pink/frame-4.png";
 
 }
 //allocate canvas
