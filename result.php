@@ -88,7 +88,7 @@ $user = array(
 ?>
 
 <body bgcolor = "#A9D0F5">
-	<div> 
+	<div id="result"> 
 		<img src= "image/result/result.png" id="result"></img>
 	</div>
 	<div id="rank_container">
