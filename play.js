@@ -548,6 +548,14 @@ window.addEventListener("keydown",function(e){
 // game halt phase
 function game_halt() {
 	clearInterval(intervalMain);
+	mainCtx.save();
+	mainCtx.font="50px Arial";
+	mainCtx.fillStyle="red";
+	var str = "GAME OVER"
+	mainCtx.fillText(str,750-str.length*15,300);
+
+
+	mainCtx.restore();
 	/* TODO
 		1. receive required data from server (ex) user id, user name, user img, score(or just live times and health point..) etc...)
 		2. after get data, pass the data to result.php
