@@ -321,6 +321,7 @@ function update_score(ctx){
 
 	var sco = score.toString();
 	ctx.font = "40px Arial";
+	ctx.fillStyle = "white";
 	ctx.strokeStyle ="white";
 
 	if(GAME_STATE>1)
