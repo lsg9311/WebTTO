@@ -6,9 +6,7 @@
 4 : result.php
 5 : select.php
 */
-var STATE = 0;
-
-
+var STATE = 4;
 
 function login_ready(){
 	$("#input_enter").on("click",function(){
@@ -32,6 +30,20 @@ function room_ready(){
 	$("#select_btn").on("click",function(){
 		STATE=5;
 		state_change();
+	});
+}
+
+function play_ready(){
+	 $.ajax({
+        "url" : "play.php",
+        "type" : "get",
+        "dataType": "json",
+        "success" : function(data){
+        	if(data.state==4){
+        		STATE=4;
+        		state_change();
+        	}
+        }  
 	});
 }
 
