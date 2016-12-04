@@ -1,4 +1,8 @@
 <?php
+// used array for all around site
+$user = array();
+$room = array();
+
 $host = 'localhost'; //host
 $port = '9000'; //port
 $null = NULL; //null var
@@ -48,11 +52,29 @@ while (true) {
 		while(socket_recv($changed_socket, $buf, 1024, 0) >= 1)
 		{
 			$received_data = unmask($buf); //unmask data
-			$data = json_decode($received_data); //json decode 
+			$data = json_decode($received_data); //json decode
+			//prepare data to be sent to client	 
+			$res = array();
+			$msg_target = prepare_data($data, $res);		// $res need to be array style.
+			$response_data = mask(json_encode($res));	
+			/* send_message_to
+			1. client him/herself
+			2. all client in same room
+			3. global
+			4. etc...
+			*/
+			switch($msg_target) {
+				case 1:
+					send_message_client($response_data, $changed_socket);
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+			}
 
-			//prepare data to be sent to client
-			$response_data = mask(json_encode(array('preX'=>$data->preX, 'preY'=>$data->preY, 'X'=>$data->X, 'Y'=>$data->Y)));
-			send_message($response_data); //send data
 			break 2; //exist this loop
 		}
 		
@@ -79,6 +101,12 @@ function send_message($msg)
 	{
 		@socket_write($changed_socket,$msg,strlen($msg));
 	}
+	return true;
+}
+
+function send_message_client($msg, $client)
+{
+	@socket_write($client,$msg,strlen($msg));
 	return true;
 }
 

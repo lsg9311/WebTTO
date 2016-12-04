@@ -26,11 +26,12 @@
 						      	</tr>
 						    </thead>
 						    <tbody>
-						      	<tr class="info">
+						      	<tr class="info" id="enter">
 									<td>1</td>
 									<td>첫번째 방</td>
-									<td>1/5</td>
+									<td>0/6</td>
 						      	</tr>
+						      	<!--
 						      	<tr class="info">
 									<td>2</td>
 									<td>두번째 방</td>
@@ -46,6 +47,7 @@
 									<td>네번째 방</td>
 									<td>4/4</td>
 						      	</tr>
+						      	-->
 						    </tbody>
 						</table>
 						<button class="btn btn-primary make_room">방 만들기</button>
