@@ -15,19 +15,18 @@
 	<div id="entire">
 	<div id ="user_container">
 		<div>
-			<img src="image/bird/chicken/chicken.gif" id="user1" width="120px" height="120px">
-			<img src="image/bird/pink/pink.gif" id="user2" width="120px" height="120px">
-			<img src="image/bird/monster/monster.gif" id="user3" width="120px" height="120px">
+			<img src="image/bird/chicken/chicken.gif" class="user_up" id="user1" width="120px" height="120px">
+			<img src="image/bird/pink/pink.gif" class="user_up" id="user2" width="120px" height="120px">
+			<img src="image/bird/monster/monster.gif" class="user_up" id="user3" width="120px" height="120px">
+			<img id="sel_char" width="120px" height="120px">
 		</div>
 		<div>
-			<img src="image/bird/duck/duck.gif" id="user4" width="120px" height="120px">
-			<img src="image/bird/blue/blue.gif" id="user5" width="120px" height="120px">
-			<img src="image/bird/dragon/dragon.gif" id="user6" width="120px" height="120px">
+			<img src="image/bird/duck/duck.gif" class="user_up" id="user4" width="120px" height="120px">
+			<img src="image/bird/blue/blue.gif" class="user_up" id="user5" width="120px" height="120px">
+			<img src="image/bird/dragon/dragon.gif" class="user_up" id="user6" width="120px" height="120px">
 		</div>
 	</div>
-	<div>
-		<img id="sel_char" width="120px" height="120px"></img>
-	</div>
+	
 
 	<div id ="ready_container">
 		<select id="map_select" name="Map Select">
@@ -46,26 +45,16 @@
 
 	<div id="user_info">
 		<img src="image/teemo.png" id="user_my">
-		<div id="user_name"></div>
+		<div id="user_name"> </div>
+		<div value="2"> </div>
 		<div id ="outer_bar">
 			<div id="inner_bar">
-
 			</div>
 		</div>
 	</div>
 	<script>
 	var wsUri;
 	var character;
-
-	function select(character){
-		var imglink = "image/bird/"+character+"/"+character+".gif";
-		return imglink;
-	}
-	// get the picture
-	$(document).ready(function(){
-
-	
-	});
 
 	</script>
 </body>

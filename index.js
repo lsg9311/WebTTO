@@ -141,8 +141,8 @@ function select_char(){
 //select the character
 function selected(color){
 	if(color==character){
-		character=null;
 		document.getElementById(character).src="image/bird/"+character+"/"+character+".gif"
+		character=null;
 	}
 	else if(character==null){
 		character=color;		
@@ -158,7 +158,7 @@ function room_show_my_char(){
 	if(character==null){
 		document.getElementById('sel_char').src="image/bird/ghost/ghost1.png";
 	}else{
-		document.getElementById('sel_char').src="image/bird/"+character+"/flying.gif";
+		document.getElementById('sel_char').src="image/bird/"+character+"/"+character+".gif";
 	}
 });
 }

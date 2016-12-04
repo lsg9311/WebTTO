@@ -1,34 +1,26 @@
 body{background-color:#A9D0F5;}
 
-#user_container{
-			margin-left: 130px;
+		#user_container{
+			margin-left: 90px;
 			margin-top: 40px;
 			float: left;
-			width: 595px;
+			width: 800px;
 			height:390px;
 			background-color: DodgerBlue;
 		}
 		#ready_container{
-			margin-top: 40px;
-			margin-right: 160px;
+			margin-top: 20px;
+			margin-right: 100px;
 			background-color: LightGray;
 			width: 250px;
 			height: 390px;
 			float: right;
+		}.user_up{
+			margin-left: 50px;
 		}
-
-
-		#user1,#user4{
-			margin-left: 40px;
-		}
-		#user1, #user2, #user3{
-			margin-top: 40px;
-		}
-		#user2, #user3, #user5, #user6{
+		#sel_char{
+			margin-top: 100px;
 			margin-left: 70px;
-		}
-		#user4, #user5, #user6{
-			margin-top: 65px;
 		}
 		#map_select{
 			margin-left: 40px;
@@ -50,19 +42,18 @@ body{background-color:#A9D0F5;}
 			width:100px;
 			height: 35px;
 			clear: both;
-		}
-		#user_info{
+		}#entire{
+			height: 600px;
+			background-color:#A9D0F5;
+		}#user_info{
 			text-align: center;
 			clear:both;
-			width: 100%;
-			margin-top: 100px;
+			width: 80%;
+			margin-top: 40px;
+			margin-left: 50px;
 			height: 90px;
 			background-color: DodgerBlue;
 		}
-		#entire{
-			height: 411.6px;
-		}
-
 		#user_my, #user_name{
 			float: left;
 		}
@@ -74,11 +65,11 @@ body{background-color:#A9D0F5;}
 		}
 		#user_name{
 			width: 300px;
-			float: left;
 			margin-left: 32px;
 			margin-top: 22px;
 			font-size: 36px;
 			text-align: left;
+			background-color:#A9D0F5;
 		}
 		#outer_bar{
 			margin-top: 31px;

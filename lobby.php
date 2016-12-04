@@ -32,13 +32,13 @@
 									<td>첫번째 방</td>
 									<td>0/6</td>
 						      	</tr>
-						      	<!--
+						      	
 						      	<tr class="info">
 									<td>2</td>
 									<td>두번째 방</td>
 									<td>2/3</td>
 						      	</tr>
-						      	<tr class="danger">
+						      	<!--<tr class="danger">
 									<td>3</td>
 									<td>세번째 방</td>
 									<td>3/3</td>
