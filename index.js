@@ -12,7 +12,9 @@ var name = "none";
 var slot_IMG = "";
 var result_score;
 var wsUri="ws://localhost:9000/WEBTTO/play_server.php";
-var	websocket
+var	websocket;
+var character;
+var cnt=0;
 
 function login_ready(){
 	$("#input_enter").on("click",function(){
@@ -36,7 +38,6 @@ function lobby_ready(){
 
 function room_ready(){
 	websocket=new WebSocket(wsUri);
-	var cnt=0;
 	var gostart=0;
 	$("#select_btn").on("click",function(){
 			STATE=5;
@@ -62,7 +63,7 @@ function room_ready(){
 			user_slot_IMG : slot_IMG
 		};
 		websocket.send(JSON.stringify(msg));
-
+		//check if everyone is ready
 		$("#ready_btn").on("click",function(){
 			if(cnt<6){cnt++;}
 			var data = {type:"user_ready", user_id : name};
@@ -74,24 +75,7 @@ function room_ready(){
 		var data=JSON.parse(msg.data);
 		var type=data.type;
 		console.log("count="+cnt);
-		if(cnt==1){
-			document.getElementById('user5').src="image/bird/blue/pick.gif";
-		}
-		else if(cnt==2){
-			document.getElementById('user1').src="image/bird/chicken/pick.gif";
-		}
-		else if(cnt==3){
-			document.getElementById('user3').src="image/bird/monster/pick.gif";
-		}
-		else if(cnt==4){
-			document.getElementById('user4').src="image/bird/duck/pick.gif";
-		}
-		else if(cnt==5){
-			document.getElementById('user6').src="image/bird/dragon/pick.gif";
-		}
-		else if(cnt==6){
-			document.getElementById('user2').src="image/bird/pink/pick.gif";
-		}
+		ready_pic(cnt);
 		
 		/*
 		if(type == "update_room_info") {
@@ -120,6 +104,11 @@ function room_ready(){
 
 function finish_select(){
 	websocket=new WebSocket(wsUri);
+	$("#blue").on("click", function(){
+		character ="blue";
+	});
+
+
 	$("#select_end_btn").on("click",function(){
 			STATE=2;
 			state_change();
@@ -159,5 +148,34 @@ function state_change(){
 		case 5:
 			$("body").load("select.php",function(){finish_select();});
 		break;
+	}
+}
+
+function ready_pic(cnt){
+	if(STATE==2){
+	if(cnt=>1){
+		console.log("1");
+		document.getElementById('user5').src="image/bird/blue/pick.gif";
+	}
+	if(cnt=>2){
+		console.log("2");
+		document.getElementById('user1').src="image/bird/chicken/pick.gif";
+	}
+	if(cnt=>3){
+		console.log("3");
+		document.getElementById('user3').src="image/bird/monster/pick.gif";
+	}
+	if(cnt=>4){
+		console.log("4");
+		document.getElementById('user4').src="image/bird/duck/pick.gif";
+	}
+	if(cnt=>5){
+		console.log("5");
+		document.getElementById('user6').src="image/bird/dragon/pick.gif";
+	}
+	if(cnt=>6){
+		console.log("6");
+		document.getElementById('user2').src="image/bird/pink/pick.gif";
+	}
 	}
 }
