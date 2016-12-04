@@ -54,7 +54,7 @@ function room_ready(){
 		websocket.send(JSON.stringify(msg));
 
 		$("#ready_btn").on("click",function(){
-			var data = {"type":"user_ready"};
+			var data = {type:"user_ready", user_id : name};
 			websocket.send(JSON.stringify(data));
 		});
 	}
@@ -63,16 +63,17 @@ function room_ready(){
 		var type=data.type;
 
 		if(type == "update_room_info") {
-			console.log(data.users[0]);
 			// do update room information with parsing data
-		}
-		if(type == "start") {
-			if(data.start>=6){
+			var ready_cnt=0;
+			for(var aaa=0; aaa<data.users.length; aaa++) {
+				console.log(data.users[aaa]);
+				ready_cnt+=data.users[aaa].ready;
+			}
+			if(data.users.length == ready_cnt) {
 				STATE=3;
 				state_change();
 			}
 		}
-		
 	}
 	websocket.onclose=function(){
 		console.log("Disconnected");

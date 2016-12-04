@@ -61,9 +61,23 @@ while (true) {
 				$response = mask(json_encode(array('type'=>"update_room_info", 'users'=>$user))); //prepare json data
 				send_message($response);
 			} else if($data->type=="user_ready"){
+				for($i=0; $i<count($user); $i++) {
+					if($user[$i]["user_id"] == $data->user_id) {
+						if($user[$i]["ready"]==0) {
+							$user[$i]["ready"]=1;
+						} else {
+							$user[$i]["ready"]=0;
+						}
+						break;
+					}
+				}
+				$response = mask(json_encode(array('type'=>"update_room_info", 'users'=>$user))); //prepare json data
+				send_message($response);
+				/*
 				$ready++;
 				$response = mask(json_encode(array('type'=> "start", 'start'=>$ready))); //prepare json data
 				send_message($response); //notify all users about new connection
+				*/
 			} else if($data->type=="play") {
 				$user_id = $data->id;
 				$user_x = $data->posX;
