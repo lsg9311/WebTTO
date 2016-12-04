@@ -5,7 +5,7 @@
 3 : play.php
 4 : result.php
 */
-var STATE = 3;
+var STATE = 0;
 
 
 
@@ -14,6 +14,13 @@ function login_ready(){
 		STATE=1;
 		state_change();
 	});	
+}
+
+function lobby_ready(){
+	$("#enter").on("click",function(){
+		STATE=2;
+		state_change();
+	});
 }
 
 $(document).ready(function(){
@@ -27,7 +34,7 @@ function state_change(){
 			$("body").load("login.php",function(){login_ready();});
 		break;
 		case 1:
-			$("body").load("lobby.php");
+			$("body").load("lobby.php",function(){lobby_ready();});
 		break;
 		case 2:
 			$("body").load("room.php");
