@@ -63,6 +63,7 @@ function room_ready(){
 		var type=data.type;
 
 		if(type == "update_room_info") {
+			console.log(data.users[0]);
 			// do update room information with parsing data
 		}
 		if(type == "start") {

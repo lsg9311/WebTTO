@@ -1,7 +1,6 @@
 <?php
 // used array for all around site
 $user = array();
-$room = array();
 
 $host = 'localhost'; //host
 $port = '9000'; //port
@@ -58,10 +57,12 @@ while (true) {
 			$data = json_decode($received_data); //json decode
 			
 			if($data->type=="introduce") {
-
+				$user[] = array("user_id"=>$data->user_id, "slot_IMG"=>$data->user_slot_IMG, "ready"=>0);
+				$response = mask(json_encode(array('type'=>"update_room_info", 'users'=>$user))); //prepare json data
+				send_message($response);
 			} else if($data->type=="user_ready"){
 				$ready++;
-				$response = mask(json_encode(array('start'=>$ready))); //prepare json data
+				$response = mask(json_encode(array('type'=> "start", 'start'=>$ready))); //prepare json data
 				send_message($response); //notify all users about new connection
 			} else if($data->type=="play") {
 				$user_id = $data->id;
