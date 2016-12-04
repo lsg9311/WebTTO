@@ -1,0 +1,78 @@
+.bodycolor {
+	background-color: #CEECF5;
+}
+
+ @media(min-width:0px) {
+	.topmargin{
+        margin-top: 75px;
+        text-align: center;
+    }	
+
+	.tutorial h2 {
+		font-weight: bold;	
+	}
+
+	.tutorial_text {
+		margin-bottom: 20px;
+		min-height: 80px;
+	}
+
+	.make_room {
+		font-size: 12pt;
+    	padding: 20px auto;
+    	margin: 5px;
+    	width: 100px;
+    	text-align: center;
+	}
+
+	.navbar {
+        padding: 10px 0;
+        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out,padding .5s ease-in-out;
+    }
+    .navbar_foot {
+        background-color: #2E9AFE;
+        min-height: 75px;
+    }
+    .foot_name {
+    	padding: 14px;
+    	font-size: 14pt;
+    	font-weight: bold;
+    	border-color: white;
+    	text-shadow: -1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6;
+		-moz-text-shadow: -1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6;
+		-webkit-text-shadow: -1px 0 #F2F1F6, 0 1px #F2F1F6, 1px 0 #F2F1F6, 0 -1px #F2F1F6;
+    }
+    .foot_exit {
+    	font-size: 12pt;
+    	padding: 10px;
+    	padding-left: 20px;
+    	padding-right: 20px;
+    	margin: 5px;
+    }
+
+    .btn_slide {border:0;background:#f5f6fa;}
+
+	#tu_slider {
+		position:relative;
+		margin:0 auto;
+		padding: 0 auto;
+		list-style:none;
+		width:100%;
+		height: 140px;
+		overflow-x:hidden
+	}
+    #tu_slider li {
+    	width:100%;
+    	display:none;
+    	position:absolute;
+    	left:0;
+    	top:0;
+    }
+    #tu_slider img {
+    	width: 90%;
+    	max-width: 270px;
+    	padding: 0 auto;
+    }
+ }
