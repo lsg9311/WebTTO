@@ -158,7 +158,7 @@ function draw_wall(ctx,scroll,scrollWall){
 
     mainCtx.fill();
     mainCtx.fillStyle=wall;
-*/    ctx.fillRect(-scrollCoef, 500, 1500, 100);
+*/  ctx.fillRect(-scrollCoef, 500, 1500, 100);
 /*    mainCtx.moveTo(-scrollCoef,500);
     mainCtx.lineTo(-scrollCoef,500-scrollWall)
     mainCtx.bezierCurveTo(1000-(scrollCoef),400+scrollWall,1000-(scrollCoef),400+scrollWall,1500-(scrollCoef),400+scrollWall);
@@ -427,7 +427,7 @@ function game_halt() {
 
 // FOR TESTING PURPOSE
 function test() {
-	if(global_time_tick > 379) {
+	if(global_time_tick > 500/*379*/) {
 		GAME_STATE = 3;
 	}
 	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, global_time_tick, death_time);	// FOR TESTING PURPOSE
