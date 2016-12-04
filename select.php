@@ -3,7 +3,9 @@
 <head>
 	<style>
 		
-		
+		img{
+			margin : 50px;
+		}
 		#exit{
 			background-color: RoyalBlue;
 			margin-top: 25px;
@@ -13,9 +15,30 @@
 			font-size: 23px;
 		}
 		
-		img{
+		#blue{
 			width : 180px;
 			height : 150px;
+		}
+		#chicken
+		{
+			width : 300px;
+			height : 200px;
+		}
+		#dragon{
+			width : 300px;
+			height : 200px;
+		}
+		#monster{
+			width : 300px;
+			height : 200px;
+		}
+		#duck{
+			width : 300px;
+			height : 200px;
+		}
+		#pink{
+			width : 250px;
+			height : 200px;
 		}
 
 	</style>
@@ -24,15 +47,17 @@
 	
 	<div> 
 		<img src="image/bird/blue/blue.gif" id="blue">
+		<img src="image/bird/chicken/chicken.gif" id="chicken">
+		<img src="image/bird/dragon/dragon.gif" id="dragon">
 	</div>
 	<div>
-		<img src="image/bird/blue/blue.gif" id="blue">
-	</div>
+		
+	</div>	
 	<div>
-		<img src="image/bird/blue/blue.gif" id="blue">
-		<img src="image/bird/blue/blue.gif" id="blue">
-		<img src="image/bird/blue/blue.gif" id="blue">
-		<img src="image/bird/blue/blue.gif" id="blue">
+		
+		<img src="image/bird/duck/duck.gif" id="duck">
+		<img src="image/bird/monster/monster.gif" id="monster">
+		<img src="image/bird/pink/pink.gif" id="pink">
 
 	</div>
 
