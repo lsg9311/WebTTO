@@ -123,14 +123,14 @@
 	<div id="entire">
 	<div id ="user_container" style="background-color:'#2E64FE';">
 		<div>
-			<img id="user1" width="120px" height="120px">
-			<img id="user2" width="120px" height="120px">
-			<img id="user3" width="120px" height="120px">
+			<img src="image/bird/chicken/chicken.gif" id="user1" width="120px" height="120px">
+			<img src="image/bird/pink/pink.gif" id="user2" width="120px" height="120px">
+			<img src="image/bird/monster/monster.gif" id="user3" width="120px" height="120px">
 		</div>
 		<div>
-			<img id="user4" width="120px" height="120px">
-			<img id="user5" width="120px" height="120px">
-			<img id="user6" width="120px" height="120px">
+			<img src="image/bird/duck/duck.gif" id="user4" width="120px" height="120px">
+			<img src="image/bird/blue/blue.gif" id="user5" width="120px" height="120px">
+			<img src="image/bird/dragon/dragon.gif" id="user6" width="120px" height="120px">
 		</div>
 	</div>
 	
@@ -149,8 +149,8 @@
 	</div>
 
 	<div id="user_info">
-		<img src="" id="user_my">
-		<div id="user_name">닉네임</div>
+		<img src="image/teemo.png" id="user_my">
+		<div id="user_name">NAME</div>
 		<div id ="outer_bar">
 			<div id="inner_bar">
 
