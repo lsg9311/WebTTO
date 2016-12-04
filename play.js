@@ -26,6 +26,8 @@ var pink1 = new Image();
 var pink2 = new Image();
 var pink3 = new Image();
 var pink4 = new Image();
+var pink2_hit = new Image();
+var pink4_hit = new Image();
 var blue1 = new Image();
 var blue2 = new Image();
 var blue3 = new Image();
@@ -75,7 +77,7 @@ var gravity = 0.3;
 var gravitySpeed = 0;
 var RPM = 8;
 var accel = false;
-var myID = 1;
+var myID = 1;//Should be different from other players
 var myHP = 100; //temp HP.
 var ox=new Array();
 var oy=new Array();
@@ -163,6 +165,8 @@ function initIMG(){
 	pink2.src = "image/bird/pink/frame-2.png";
 	pink3.src = "image/bird/pink/frame-3.png";
 	pink4.src = "image/bird/pink/frame-4.png";
+	pink2_hit.src = "image/bird/pink/frame-2-hit.png";
+	pink4_hit.src = "image/bird/pink/frame-4-hit.png";
 	blue1.src = "image/bird/blue/frame-1.png";
 	blue2.src = "image/bird/blue/frame-2.png";
 	blue3.src = "image/bird/blue/frame-3.png";
@@ -225,49 +229,55 @@ function draw_bg(){
     draw_wall(ctxBuffer,scrollVal,scrollWall);
     update_score(ctxBuffer);
 
-    //Character Info sending
-    send_player();
     //draw character
     //frame1
     if(GAME_STATE > 1){
-    	if(frame1%RPM < 2)
-    	 	ctxBuffer.drawImage(ghost, cx-10, cy-10, 70, 70);
+    	//if(frame1%RPM < 2)
+    	 	ctxBuffer.drawImage(ghost, players[0].X-10, players[0].Y-10, 70, 70);
     }
     else if(frame1<RPM+1){
-    	ctxBuffer.drawImage(pink1, cx, cy, 50, 50);
-    	ctxBuffer.drawImage(blue1, cx+20, cy, 50, 50);
-    	ctxBuffer.drawImage(chicken1, cx+40, cy, 50, 50);
-    	ctxBuffer.drawImage(dragon1, cx+60, cy, 50, 50);
-    	ctxBuffer.drawImage(monster1, cx+40, cy, 50, 50);
-    	ctxBuffer.drawImage(duck1, cx+50, cy, 50, 50);}
+    	ctxBuffer.drawImage(pink1, players[0].X, players[0].Y, 50, 50);
+    	ctxBuffer.drawImage(blue1, players[1].X+20, players[1].Y, 50, 50);
+    	ctxBuffer.drawImage(chicken1, players[2].X+40, players[2].Y, 50, 50);
+    	ctxBuffer.drawImage(dragon1, players[3].X+60, players[3].Y, 50, 50);
+    	ctxBuffer.drawImage(monster1, players[4].X+40, players[4].Y, 50, 50);
+    	ctxBuffer.drawImage(duck1, players[5].X+50, players[5].Y, 50, 50);
+    }
 	//frame2
     else if (frame1<2*RPM+1){
     	if(hit_state==0){
-    	ctxBuffer.drawImage(pink2, cx, cy, 50, 50);
-    	ctxBuffer.drawImage(blue2, cx+20, cy, 50, 50);
-    	ctxBuffer.drawImage(chicken2, cx+40, cy, 50, 50);
-    	ctxBuffer.drawImage(dragon2, cx+60, cy, 50, 50);
-    	ctxBuffer.drawImage(monster2, cx+40, cy, 50, 50);
-    	ctxBuffer.drawImage(duck2, cx+50, cy, 50, 50);}
+    	ctxBuffer.drawImage(pink2, players[0].X, players[0].Y, 50, 50);
+    	ctxBuffer.drawImage(blue2, players[1].X+20, players[1].Y, 50, 50);
+    	ctxBuffer.drawImage(chicken2, players[2].X+40,  players[2].Y, 50, 50);
+    	ctxBuffer.drawImage(dragon2, players[3].X+60,  players[3].Y, 50, 50);
+    	ctxBuffer.drawImage(monster2, players[4].X+40,  players[4].Y, 50, 50);
+    	ctxBuffer.drawImage(duck2, players[5].X+50,  players[5].Y, 50, 50);
     	}
+    	else
+    		ctxBuffer.drawImage(pink2_hit, players[0].X, players[0].Y, 50, 50);
+    }
     //frame3
     else if (frame1<3*RPM+1){
-    	ctxBuffer.drawImage(pink3, cx, cy, 50, 50);
-    	ctxBuffer.drawImage(blue3, cx+20, cy, 50, 50);
-    	ctxBuffer.drawImage(chicken3, cx+40, cy, 50, 50);
-    	ctxBuffer.drawImage(dragon3, cx+60, cy, 50, 50);
-    	ctxBuffer.drawImage(monster3, cx+40, cy, 50, 50);
-    	ctxBuffer.drawImage(duck3, cx+50, cy, 50, 50);}
+    	ctxBuffer.drawImage(pink3, players[0].X, players[0].Y, 50, 50);
+    	ctxBuffer.drawImage(blue3, players[1].X+20, players[1].Y, 50, 50);
+    	ctxBuffer.drawImage(chicken3, players[2].X+40, players[2].Y, 50, 50);
+    	ctxBuffer.drawImage(dragon3, players[3].X+60, players[3].Y, 50, 50);
+    	ctxBuffer.drawImage(monster3, players[4].X+40, players[4].Y, 50, 50);
+    	ctxBuffer.drawImage(duck3, players[5].X+50, players[5].Y, 50, 50);
+    }
     //frame4
     else {
     	if(hit_state==0){
-    	ctxBuffer.drawImage(pink4, cx, cy, 50, 50);
-    	ctxBuffer.drawImage(blue4, cx+20, cy, 50, 50);
-    	ctxBuffer.drawImage(chicken4, cx+40, cy, 50, 50);
-    	ctxBuffer.drawImage(dragon4, cx+60, cy, 50, 50);
-    	ctxBuffer.drawImage(monster4, cx+40, cy, 50, 50);
-    	ctxBuffer.drawImage(duck4, cx+50, cy, 50, 50);}
+    	ctxBuffer.drawImage(pink4, players[0].X, players[0].Y, 50, 50);
+    	ctxBuffer.drawImage(blue4, players[1].X+20, players[1].Y, 50, 50);
+    	ctxBuffer.drawImage(chicken4, players[2].X+40, players[2].Y, 50, 50);
+    	ctxBuffer.drawImage(dragon4, players[3].X+60, players[3].Y, 50, 50);
+    	ctxBuffer.drawImage(monster4, players[4].X+40, players[4].Y, 50, 50);
+    	ctxBuffer.drawImage(duck4, players[5].X+50, players[5].Y, 50, 50);
     	}
+    	else
+    		ctxBuffer.drawImage(pink4_hit, players[0].X, players[0].Y, 50, 50);
+    }
 
     for(i=2;i<16;i++){
     	ctxBuffer.drawImage(obstacle,ox[i]-mul[i]*scrollVal,oy[i],size[i],size[i]);
@@ -442,6 +452,8 @@ function newPos(){ //Goes up and down
 	gravitySpeed += gravity;
 	cy += gravitySpeed;
 	hitRock();
+    //Character Info sending
+    send_player();
 }
 function hitRock(){
 	var rockBottom = canvasHeight-100 - 50;
@@ -522,6 +534,7 @@ var Player = function(newId){
 };
 function send_player(){
 	var msg = {
+		type : "play",
 		posX : cx,
 		posY : cy,
 		id : myID,
@@ -550,18 +563,30 @@ $(document).ready(function(){
 	global_time_tick = 0;
 	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
 	//Websockek
-	var wsUri = "ws://localhost:9000/demo/server.php"; 	
-	websocket = new WebSocket(wsUri); 
+	//var wsUri = "ws://localhost:9000/demo/server.php"; 	
+	//websocket = new WebSocket(wsUri); 
 
 	websocket.onopen = function(ev){
 		console.log("connected");
 	}
 	websocket.onmessage = function(ev){
 		var msg = JSON.parse(ev.data);
+		if(msg.type=="play"){
 		var user_id = msg.id;
 		players[user_id].X = msg.posX;
 		players[user_id].Y = msg.posY;
 		players[user_id].HP = msg.HP;
+		console.log("posX " + msg.posX + ", posY " + msg.posY);
+		}
+		else
+			;
+
+	}
+	websocket.onclose = function(ev){
+		console.log('disconnected');
+	}
+	websocket.onerror = function(ev){
+		console.log('Error : '+ev.data);
 	}
 	intervalMain = setInterval(update_all, interval_speed);
 	/*
