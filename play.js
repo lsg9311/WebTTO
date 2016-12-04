@@ -21,6 +21,7 @@ var bird1 = new Image();
 var bird2 = new Image();
 var bird3 = new Image();
 var bird4 = new Image();
+var ghost = new Image();
 var frame1 = 1;
 
 //canvas Option
@@ -50,7 +51,10 @@ var accel = false;
 
 //hit state
 var hit_state = 0;
-var hit_speed = 700;
+
+//score state
+var score = 0;
+var score_parameter = 32;
 
 //allocate IMG
 function initIMG(){
@@ -69,7 +73,7 @@ function initIMG(){
 	bird2.src = "image/bird/pink/frame-2.png";
 	bird3.src = "image/bird/pink/frame-3.png";
 	bird4.src = "image/bird/pink/frame-4.png";
-
+	ghost.src = "image/bird/ghost/ghost.png";
 }
 //allocate canvas
 function initCanvas(){
@@ -111,9 +115,14 @@ function draw_bg(){
     ctxBuffer.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
     ctxBuffer.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
     draw_wall(ctxBuffer,scrollVal,scrollWall);
+    update_score(ctxBuffer);
 
     //draw character
-    if(frame1<RPM+1){ctxBuffer.drawImage(bird1, cx, cy, 50, 50);}
+    if(GAME_STATE > 1){
+    	if(frame1%RPM < 2)
+    	 	ctxBuffer.drawImage(ghost, cx-10, cy-10, 70, 70);
+    }
+    else if(frame1<RPM+1){ctxBuffer.drawImage(bird1, cx, cy, 50, 50);}
     else if (frame1<2*RPM+1){ctxBuffer.drawImage(bird2, cx, cy, 50, 50);}
     else if (frame1<3*RPM+1){ctxBuffer.drawImage(bird3, cx, cy, 50, 50);}
     else {ctxBuffer.drawImage(bird4, cx, cy, 50, 50);}
@@ -226,6 +235,18 @@ function update_HP(HPLOC, HPLEFT, HPLIMIT) {
 	topCTX.restore();
 };
 
+function update_score(ctx){
+	ctx.save();
+	if(GAME_STATE==1) score+=score_parameter;
+
+	var sco = score.toString();
+	ctx.font = "40px Arial";
+	ctx.fillStyle = "white";
+
+	ctx.fillText(sco,750-sco.length*10,70);
+	ctx.restore();
+}
+
 
 // update CURSORS in MAP UI
 function update_map_cursor(TIME_RELATED, DEATH_TIME) {
@@ -320,12 +341,16 @@ var indicate_time=3000/interval_speed;
 function ready_indicate(){
 	var count=Math.floor(indicate_time/interval_speed);
 	mainCtx.font="50px Arial";
-	mainCtx.fillStyle="#000000";	
+	mainCtx.fillStyle="#000000";
+
+	var str;	
 	if(count>0){
-		mainCtx.fillText(count,690,300);
+		str = count.toString();
+		mainCtx.fillText(count,750-str.length*12.5,300);
 	}
 	else{
-		mainCtx.fillText("START!",650,300);
+		str = "START";
+		mainCtx.fillText(str,750-str.length*15,300);
 	}
 	indicate_time-=1;
 }
@@ -372,6 +397,7 @@ function update_all() {
 			if(HPLEFT == 0)
 				GAME_STATE = 2;
 		break;
+
 		// on dead status
 		case 2:
 			/* TODO
@@ -381,6 +407,10 @@ function update_all() {
 				4. draw top
 				5. if all player died, go to GAME_STATE 3
 			*/
+			flying();
+			update_bg();
+			update_position();
+
 			global_time_tick++;		// time goes when playing game
 		break;
 		// all player dead status, or the time is over. the game is goning to be halt
@@ -438,10 +468,14 @@ function test() {
 function hitted() {
 	if(hit_state == 0) HPLEFT--, hit_state=30;
 	if(HPLEFT < 1) {
+		hit_state = -1;
+		GAME_STATE = 2;
+
 		HPLEFT = 0;
 		/* TODO
 			1. set dying motion time (ex) 2 second)
 		*/
 	}
+
 	return;
 }
