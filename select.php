@@ -87,18 +87,18 @@
 	var npink=0;
 
 	function changepic1(){
-		ndragon++;
-		if( (ndragon%2)==1){
-			document.getElementById('dragon').src="image/bird/dragon/pick.gif";}
+		nblue++;
+		if( (nblue%2)==1){
+			document.getElementById('blue').src="image/bird/blue/pick.gif";}
 		else{
-			document.getElementById('dragon').src="image/bird/dragon/dragon.gif";}
+			document.getElementById('blue').src="image/bird/blue/dragon.gif";}
 	}
 	function changepic2(){
-		ndragon++;
-		if( (ndragon%2)==1){
-			document.getElementById('dragon').src="image/bird/dragon/pick.gif";}
+		nchicken++;
+		if( (nchicken%2)==1){
+			document.getElementById('chicken').src="image/bird/chicken/pick.gif";}
 		else{
-			document.getElementById('dragon').src="image/bird/dragon/dragon.gif";}
+			document.getElementById('chicken').src="image/bird/chicken/chicken.gif";}
 	}
 	function changepic3(){
 		ndragon++;
@@ -108,25 +108,25 @@
 			document.getElementById('dragon').src="image/bird/dragon/dragon.gif";}
 	}
 	function changepic4(){
-		ndragon++;
-		if( (ndragon%2)==1){
-			document.getElementById('dragon').src="image/bird/dragon/pick.gif";}
+		nduck++;
+		if( (nduck%2)==1){
+			document.getElementById('duck').src="image/bird/duck/pick.gif";}
 		else{
-			document.getElementById('dragon').src="image/bird/dragon/dragon.gif";}
+			document.getElementById('duck').src="image/bird/duck/duck.gif";}
 	}
 	function changepic5(){
-		ndragon++;
-		if( (ndragon%2)==1){
-			document.getElementById('dragon').src="image/bird/dragon/pick.gif";}
+		nmonster++;
+		if( (nmonster%2)==1){
+			document.getElementById('monster').src="image/bird/monster/pick.gif";}
 		else{
-			document.getElementById('dragon').src="image/bird/dragon/dragon.gif";}
+			document.getElementById('monster').src="image/bird/monster/monster.gif";}
 	}
 	function changepic6(){
-		ndragon++;
-		if( (ndragon%2)==1){
-			document.getElementById('dragon').src="image/bird/dragon/pick.gif";}
+		npink++;
+		if( (npink%2)==1){
+			document.getElementById('pink').src="image/bird/pink/pick.gif";}
 		else{
-			document.getElementById('dragon').src="image/bird/dragon/dragon.gif";}
+			document.getElementById('pink').src="image/bird/pink/pink.gif";}
 	}
 
 
