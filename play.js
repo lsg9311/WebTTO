@@ -613,6 +613,7 @@ function game_halt() {
 	mainCtx.fillText(str,750-str.length*17,300);
 	setTimeout(function(){
 		STATE=4;
+		result_score=score;
 		state_change();},3000);
 
 	mainCtx.restore();	
