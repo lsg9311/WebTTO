@@ -360,28 +360,15 @@ function update_all() {
 		break;
 		// on running status
 		case 1:
-			$(document).on("keydown", function(e){
-				if(e.key == 'a'){
-					hitted();
-				} else if(e.key == 's'){
-					//FOR TESTING PURPOSE
-					GAME_STATE = 2;
-				} else if(e.key == 'd'){
-					//FOR TESTING PURPOSE
-					GAME_STATE = 3;
-				} else if(e.key == 'f'){
-					//FOR TESTING PURPOSE
-				}
-			});//
-
 			if(hit_state > 0) hit_state--;
-
 			//var intervalMAIN=setInterval(update_all, interval_speed);
 			flying();
 			update_bg();
 			update_position();
 			test();	// FOR TESTING PURPOSE
 			global_time_tick++;		// time goes when playing game
+			if(HPLEFT == 0)
+				GAME_STATE = 2;
 		break;
 		// on dead status
 		case 2:
@@ -394,6 +381,30 @@ function update_all() {
 		break;
 	}
 }
+// command for debug
+$(document).on("keydown", function(e){
+	switch(GAME_STATE) {
+	case 0:
+		break;
+	case 1:
+		if(e.key == 'a'){
+			hitted();
+		} else if(e.key == 's'){
+			//FOR TESTING PURPOSE
+			GAME_STATE = 2;
+		} else if(e.key == 'd'){
+			//FOR TESTING PURPOSE
+			GAME_STATE = 3;
+		} else if(e.key == 'f'){
+			//FOR TESTING PURPOSE
+		}
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	}
+});
 
 /* TODO
 1. clear all interval of drawing
@@ -416,10 +427,9 @@ function test() {
 
 //WHEN HITTED
 function hitted() {
-	
 	if(hit_state == 0) HPLEFT--, hit_state=30;
 	if(HPLEFT < 1) {
 		HPLEFT = 0;
-		GAME_STATE = 2;
 	}
+	return;
 }
