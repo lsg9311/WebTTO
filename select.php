@@ -49,7 +49,7 @@
 			width :1200px;
 			height:630px;
 			background :RoyalBlue;
-			margin-left: 300px;
+			margin-left: 150px;
 			margin-top :50px;
 		}
 
@@ -59,7 +59,7 @@
 	
 	<div id="bg">
 		<div> 
-			<img src="image/bird/blue/blue.gif" id="blue">
+			<img src="image/bird/blue/blue.gif" id="blue" onclick=changepic()>
 			<img src="image/bird/chicken/chicken.gif" id="chicken">
 			<img src="image/bird/dragon/dragon.gif" id="dragon">
 		</div>
@@ -77,5 +77,14 @@
 	<div style="clear:both; margin:auto; width:350px; height:75px;">
 		<input id="select" type="button" value="SELECT"/>
 	</div>
+
+	<script>
+	function changepic(){
+
+
+	}
+	</script>	
+
+
 </body>
 </html>

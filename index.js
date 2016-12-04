@@ -7,6 +7,8 @@
 5 : select.php
 */
 var STATE = 0;
+
+var name = "none";
 var result_score;
 
 function login_ready(){
@@ -15,6 +17,7 @@ function login_ready(){
 			alert("이름을 제대로 적으시오!");
 			return;
 		}
+		name = $('#nickname').val();
 
 		STATE=1;
 		state_change();
@@ -57,7 +60,7 @@ function state_change(){
 			$("body").load("login.php",function(){login_ready();});
 		break;
 		case 1:
-			$("body").load("lobby.php",{nick:$('#nickname').val()},function(){lobby_ready();});
+			$("body").load("lobby.php",{nick:name},function(){lobby_ready();});
 		break;
 		case 2:
 			$("body").load("room.php",function(){room_ready();});

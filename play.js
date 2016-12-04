@@ -103,6 +103,47 @@ var MIN_MAP_POINTER = 1070;
 var MAX_MAP_POINTER = 1449;
 var MAX_TIME = 1000;
 
+
+//check hit
+function checkhit(pointx,pointy,ox,oy,ow,oh){
+	if(pointx >= ox && pointx <= ox + ow && pointy >= oy && pointy <= oy +oh)
+		hitted();
+}
+
+//hit estimate
+function whetherhit(obx,oby,width,height){
+	var sx, sy, swidth, sheight;
+	sx = obx;
+	sy = oby + height*(2/7);
+	swidth = width * (5/7);
+	sheight = height * (5/7);
+
+	checkhit(cx,cy,sx,sy,swidth,sheight);
+	checkhit(cx+50,cy,sx,sy,swidth,sheight);
+	checkhit(cx,cy+50,sx,sy,swidth,sheight);
+	checkhit(cx+50,cy+50,sx,sy,swidth,sheight);
+
+	sx = obx + width*(1/6);
+	sy = oby;
+	swidth = width*(13/18);
+	sheight = height;
+
+	checkhit(cx,cy,sx,sy,swidth,sheight);
+	checkhit(cx+50,cy,sx,sy,swidth,sheight);
+	checkhit(cx,cy+50,sx,sy,swidth,sheight);
+	checkhit(cx+50,cy+50,sx,sy,swidth,sheight);
+
+	sx = obx + width / 2;
+	sy = oby + height * (2/7);
+	swidth = width / 2;
+	sheight = height * (4/7);
+
+	checkhit(cx,cy,sx,sy,swidth,sheight);
+	checkhit(cx+50,cy,sx,sy,swidth,sheight);
+	checkhit(cx,cy+50,sx,sy,swidth,sheight);
+	checkhit(cx+50,cy+50,sx,sy,swidth,sheight);
+}
+
 //allocate IMG
 function initIMG(){
 	//img Option
@@ -227,10 +268,15 @@ function draw_bg(){
     	ctxBuffer.drawImage(monster4, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck4, cx+50, cy, 50, 50);}
     	}
-    for(i=2;i<16;i++) ctxBuffer.drawImage(obstacle,ox[i]-mul[i]*scrollVal,oy[i],size[i],size[i]);
+
+    for(i=2;i<16;i++){
+    	ctxBuffer.drawImage(obstacle,ox[i]-mul[i]*scrollVal,oy[i],size[i],size[i]);
+    	
+    	whetherhit(ox[i]-mul[i]*scrollVal,oy[i],size[i],size[i]);
+    }
     //main canvas
     mainCanvas = document.getElementById("MAIN-CANVAS");
-	mainCtx = mainCanvas.getContext("2d");    
+		mainCtx = mainCanvas.getContext("2d");    
 
 	//draw on main canvas
     mainCtx.clearRect(0,0, canvasWidth, canvasHeight);
