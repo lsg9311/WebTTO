@@ -165,34 +165,34 @@ function draw_bg(){
     //frame1
     if(frame1<RPM+1){
     	ctxBuffer.drawImage(pink1, cx, cy, 50, 50);
-    	ctxBuffer.drawImage(blue1, cx+10, cy, 50, 50);
-    	ctxBuffer.drawImage(chicken1, cx+20, cy, 50, 50);
-    	ctxBuffer.drawImage(dragon1, cx+30, cy, 50, 50);
+    	ctxBuffer.drawImage(blue1, cx+20, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken1, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon1, cx+60, cy, 50, 50);
     	ctxBuffer.drawImage(monster1, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck1, cx+50, cy, 50, 50);}
 
 //frame1
     else if (frame1<2*RPM+1){
     	ctxBuffer.drawImage(pink2, cx, cy, 50, 50);
-    	ctxBuffer.drawImage(blue2, cx+10, cy, 50, 50);
-    	ctxBuffer.drawImage(chicken2, cx+20, cy, 50, 50);
-    	ctxBuffer.drawImage(dragon2, cx+30, cy, 50, 50);
+    	ctxBuffer.drawImage(blue2, cx+20, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken2, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon2, cx+60, cy, 50, 50);
     	ctxBuffer.drawImage(monster2, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck2, cx+50, cy, 50, 50);}
     	//frame1
     else if (frame1<3*RPM+1){
     	ctxBuffer.drawImage(pink3, cx, cy, 50, 50);
-    	ctxBuffer.drawImage(blue3, cx+10, cy, 50, 50);
-    	ctxBuffer.drawImage(chicken3, cx+20, cy, 50, 50);
-    	ctxBuffer.drawImage(dragon3, cx+30, cy, 50, 50);
+    	ctxBuffer.drawImage(blue3, cx+20, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken3, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon3, cx+60, cy, 50, 50);
     	ctxBuffer.drawImage(monster3, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck3, cx+50, cy, 50, 50);}
     	//frame1
     else {
     	ctxBuffer.drawImage(pink4, cx, cy, 50, 50);
-    	ctxBuffer.drawImage(blue4, cx+10, cy, 50, 50);
-    	ctxBuffer.drawImage(chicken4, cx+20, cy, 50, 50);
-    	ctxBuffer.drawImage(dragon4, cx+30, cy, 50, 50);
+    	ctxBuffer.drawImage(blue4, cx+20, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken4, cx+40, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon4, cx+60, cy, 50, 50);
     	ctxBuffer.drawImage(monster4, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck4, cx+50, cy, 50, 50);}
 
