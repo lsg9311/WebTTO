@@ -491,6 +491,13 @@ window.addEventListener("keydown",function(e){
 		}
 		break;
 	case 2:
+		if(e.key == '1'){
+			//FOR TESTING PURPOSE
+			GAME_STATE = 1;
+		} else if(e.key == '3'){
+			//FOR TESTING PURPOSE
+			GAME_STATE = 3;
+		} 
 		break;
 	case 3:
 		break;
@@ -504,7 +511,6 @@ window.addEventListener("keydown",function(e){
 */
 function game_halt() {
 	clearInterval(intervalMain);
-	GAME_STATE = 1;
 	return;
 }
 
