@@ -67,7 +67,7 @@ while (true) {
 			$user_x = $data->posX;
 			$user_y = $data->posY;
 			$user_hp = $data->HP;
-			$response_data = mask(json_encode(array('id'=>$user_id,'posX'=>$user_x,'posY'=$user_y,'HP'=>$user_HP)));
+			$response_data = mask(json_encode(array('id'=>$user_id,'posX'=>$user_x,'posY'=>$user_y,'HP'=>$user_HP)));
 				
 			send_message($response_data);
 			switch($msg_target) {
