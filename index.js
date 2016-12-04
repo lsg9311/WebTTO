@@ -149,6 +149,12 @@ function selected(color){
 	}
 
 }
+function room_show_my_char(){
+	$(document).ready(function(){
+	if(character!=null){
+		document.getElementById('sel_char').src="image/bird/"+character+"/"+character+".gif";
+	}});
+}
 
 function finish_select(){
 	websocket=new WebSocket(wsUri);
@@ -171,28 +177,7 @@ $(document).ready(function(){
 	state_change();
 });
 
-function state_change(){
-	switch(STATE){
-		case 0:
-			$("body").load("login.php",function(){login_ready();});
-		break;
-		case 1:
-			$("body").load("lobby.php",{nick:name},function(){lobby_ready();});
-		break;
-		case 2:
-			$("body").load("room.php",function(){room_ready();});
-		break;
-		case 3:
-			$("body").load("play.php",function(){my_character();});
-		break;
-		case 4:
-			$("body").load("result.php",function(){result_ready();});
-		break;
-		case 5:
-			$("body").load("select.php",function(){select_char();finish_select();});
-		break;
-	}
-}
+
 
 function ready_pic(cnt){
 	if(STATE==2){
@@ -237,7 +222,29 @@ function my_character(){
 	$(document).ready(function(){
 	get_id();
 	document.getElementById('mychar').height=myID
-	console.log(document.getElementById('mychar').height);
+	console.log(document.getElementById('mychar').height);});
+}
 
-});
+
+function state_change(){
+	switch(STATE){
+		case 0:
+			$("body").load("login.php",function(){login_ready();});
+		break;
+		case 1:
+			$("body").load("lobby.php",{nick:name},function(){lobby_ready();});
+		break;
+		case 2:
+			$("body").load("room.php",function(){room_ready();room_show_my_char();});
+		break;
+		case 3:
+			$("body").load("play.php",function(){my_character();});
+		break;
+		case 4:
+			$("body").load("result.php",function(){result_ready();});
+		break;
+		case 5:
+			$("body").load("select.php",function(){select_char();finish_select();});
+		break;
+	}
 }

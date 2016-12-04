@@ -86,6 +86,7 @@ var oy=new Array();
 var mul=new Array();
 var size = new Array();
 
+
 for(i=0;i<16;i++) {
 	ox[i] = (Math.floor(Math.random()*251)) + 250*(i+1);
 	oy[i] = Math.floor(Math.random()*76) + 100 + (Math.floor(i%3))*125;

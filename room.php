@@ -11,9 +11,9 @@
 	</style>
 
 </head>
-<body bgcolor = "#A9D0F5">
+<body>
 	<div id="entire">
-	<div id ="user_container" style="background-color:'#2E64FE';">
+	<div id ="user_container">
 		<div>
 			<img src="image/bird/chicken/chicken.gif" id="user1" width="120px" height="120px">
 			<img src="image/bird/pink/pink.gif" id="user2" width="120px" height="120px">
@@ -25,9 +25,10 @@
 			<img src="image/bird/dragon/dragon.gif" id="user6" width="120px" height="120px">
 		</div>
 	</div>
-	<div id="selected_character">
-		<img ></img>
+	<div>
+		<img id="selected_character" width="120px" height="120px"></img>
 	</div>
+
 	<div id ="ready_container">
 		<select id="map_select" name="Map Select">
 			<option value="map1">601호</option>
