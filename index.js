@@ -6,7 +6,7 @@
 4 : result.php
 5 : select.php
 */
-var STATE = 3;
+var STATE = 0;
 var result_score;
 
 function login_ready(){
