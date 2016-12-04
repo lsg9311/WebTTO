@@ -35,7 +35,6 @@ function lobby_ready(){
 }
 
 function room_ready(){
-	var cnt=0;
 	websocket=new WebSocket(wsUri);
 	$("#select_btn").on("click",function(){
 			STATE=5;
@@ -57,35 +56,28 @@ function room_ready(){
 		$("#ready_btn").on("click",function(){
 			var data = {type:"user_ready", user_id : name};
 			websocket.send(JSON.stringify(data));
-			cnt++;
+			
 		});
 	}
 	websocket.onmessage=function(msg){
-		var dataget=JSON.parse(msg.data);
-		var type=dataget.type;
-
+		var data=JSON.parse(msg.data);
+		var type=data.type;
 		if(type == "update_room_info") {
-			/*
+			
 			// do update room information with parsing data
-			for(var nud=0; nud<data.users.length+1; nud++) {
-				console.log(data.users[nud]);
-				console.log(nud);
+			var ready_cnt=0;
+			for(var aaa=0; aaa<data.users.length; aaa++) { 
+				console.log(data.users[aaa]);
 				console.log("ready_cnt="+ready_cnt);
-				ready_cnt+=data.users[nud].ready;
+				ready_cnt+=data.users[aaa].ready;
 			}
-			if(data.users.length+1 == ready_cnt) {
+			if(data.users.length == ready_cnt) {
 				STATE=3;
 				state_change();			
-			}*/
-			// to show how ready works
-			if(cnt==6){
-				cnt=0;
-				STATE=3;
-				state_change();
 			}
-
-
+			
 		} 
+
 		else if(type == "system") {
 			console.log(data);
 		}

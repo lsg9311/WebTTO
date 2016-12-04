@@ -87,9 +87,9 @@ while (true) {
 				$user_y = $data->posY;
 				$user_hp = $data->HP;
 				$response_data = mask(json_encode(array('type'=>'play','id'=>$user_id,'posX'=>$user_x,'posY'=>$user_y,'HP'=>$user_hp)));
-					
 				send_message($response_data);
 			}
+			 
 
 			//prepare data to be sent to client	 
 			//$res = array();
