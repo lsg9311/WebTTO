@@ -36,6 +36,7 @@ function lobby_ready(){
 
 function room_ready(){
 	websocket=new WebSocket(wsUri);
+	var cnt=0;
 	$("#select_btn").on("click",function(){
 			STATE=5;
 			state_change();
@@ -54,6 +55,7 @@ function room_ready(){
 		websocket.send(JSON.stringify(msg));
 
 		$("#ready_btn").on("click",function(){
+			cnt++;
 			var data = {type:"user_ready", user_id : name};
 			websocket.send(JSON.stringify(data));
 			
@@ -63,7 +65,7 @@ function room_ready(){
 		var data=JSON.parse(msg.data);
 		var type=data.type;
 		if(type == "update_room_info") {
-			
+			/*
 			// do update room information with parsing data
 			var ready_cnt=0;
 			for(var aaa=0; aaa<data.users.length; aaa++) { 
@@ -74,10 +76,14 @@ function room_ready(){
 			if(data.users.length == ready_cnt) {
 				STATE=3;
 				state_change();			
+			}*/
+			console.log(cnt);
+			if(cnt==6){
+				STATE=3;
+				state_change();
+				cnt=0;
 			}
-			
 		} 
-
 		else if(type == "system") {
 			console.log(data);
 		}
