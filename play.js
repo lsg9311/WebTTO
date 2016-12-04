@@ -300,13 +300,13 @@ var CLIENT_NAME;
 var CLIENT_SIZE;
 var HPMAX;
 var HPLEFT;
-var time_related;
+var global_time_tick;
 var death_time;
 
 
 //ready state show
 function ready_canvas(){
-	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
+	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, global_time_tick, death_time);	// FOR TESTING PURPOSE
 	update_bg();
 
 	test();
@@ -337,7 +337,7 @@ $(document).ready(function(){
 	CLIENT_SIZE = 5;
 	HPMAX = 8;
 	HPLEFT = 6;
-	time_related = 300;
+	global_time_tick = 0;
 	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
 	
 	
@@ -381,9 +381,11 @@ function update_all() {
 			update_bg();
 			update_position();
 			test();	// FOR TESTING PURPOSE
+			global_time_tick++;		// time goes when playing game
 		break;
 		// on dead status
 		case 2:
+			global_time_tick++;		// time goes when playing game
 		break;
 		// all player dead status, or the time is over. the game is goning to be halt
 		// required : need to check whether game is over by time/all people dead in "STATUS 1 or 2"!!!
@@ -391,7 +393,6 @@ function update_all() {
 			game_halt();
 		break;
 	}
-	
 }
 
 /* TODO
@@ -406,10 +407,10 @@ function game_halt() {
 
 // FOR TESTING PURPOSE
 function test() {
-	if(time_related > 300)
-		time_related = 0;
-	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, time_related, death_time);	// FOR TESTING PURPOSE
-	time_related++;
+	if(global_time_tick > 379) {
+		GAME_STATE = 3;
+	}
+	update_top(CLIENT_SLOT, CLIENT_NAME, CLIENT_SIZE, HPLEFT, HPMAX, global_time_tick, death_time);	// FOR TESTING PURPOSE
 }
 
 
@@ -417,4 +418,8 @@ function test() {
 function hitted() {
 	
 	if(hit_state == 0) HPLEFT--, hit_state=30;
+	if(HPLEFT < 1) {
+		HPLEFT = 0;
+		GAME_STATUS = 2;
+	}
 }
