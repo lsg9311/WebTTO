@@ -39,7 +39,11 @@ function lobby_ready(){
 
 function room_ready(){
 	websocket=new WebSocket(wsUri);
-	var gostart=0;
+	
+	$(document).ready(function(){
+		document.getElementById('user_name').value=name;
+	});
+
 	$("#select_btn").on("click",function(){
 			STATE=5;
 			state_change();
@@ -151,9 +155,12 @@ function selected(color){
 }
 function room_show_my_char(){
 	$(document).ready(function(){
-	if(character!=null){
-		document.getElementById('sel_char').src="image/bird/"+character+"/"+character+".gif";
-	}});
+	if(character==null){
+		document.getElementById('sel_char').src="image/bird/ghost/ghost1.png";
+	}else{
+		document.getElementById('sel_char').src="image/bird/"+character+"/flying.gif";
+	}
+});
 }
 
 function finish_select(){

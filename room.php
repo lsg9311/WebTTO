@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div>
-		<img id="selected_character" width="120px" height="120px"></img>
+		<img id="sel_char" width="120px" height="120px"></img>
 	</div>
 
 	<div id ="ready_container">
@@ -46,7 +46,7 @@
 
 	<div id="user_info">
 		<img src="image/teemo.png" id="user_my">
-		<div id="user_name">NAME</div>
+		<div id="user_name"></div>
 		<div id ="outer_bar">
 			<div id="inner_bar">
 
