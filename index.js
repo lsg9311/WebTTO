@@ -13,7 +13,7 @@ var slot_IMG = "";
 var result_score;
 var wsUri="ws://localhost:9000/WEBTTO/play_server.php";
 var	websocket;
-var character;
+var character=null;
 var cnt=0;
 
 function login_ready(){
@@ -153,29 +153,29 @@ function state_change(){
 
 function ready_pic(cnt){
 	if(STATE==2){
-	if(cnt=>1){
-		console.log("1");
-		document.getElementById('user5').src="image/bird/blue/pick.gif";
-	}
-	if(cnt=>2){
-		console.log("2");
-		document.getElementById('user1').src="image/bird/chicken/pick.gif";
-	}
-	if(cnt=>3){
-		console.log("3");
-		document.getElementById('user3').src="image/bird/monster/pick.gif";
-	}
-	if(cnt=>4){
-		console.log("4");
-		document.getElementById('user4').src="image/bird/duck/pick.gif";
-	}
-	if(cnt=>5){
-		console.log("5");
-		document.getElementById('user6').src="image/bird/dragon/pick.gif";
-	}
-	if(cnt=>6){
-		console.log("6");
-		document.getElementById('user2').src="image/bird/pink/pick.gif";
+		if(cnt>=1){
+			console.log("1");
+			document.getElementById('user5').src="image/bird/blue/pick.gif";
+		}
+		if(cnt>=2){
+			console.log("2");
+			document.getElementById('user1').src="image/bird/chicken/pick.gif";
+		}
+		if(cnt>=3){
+			console.log("3");
+			document.getElementById('user3').src="image/bird/monster/pick.gif";
+		}
+		if(cnt>=4){
+			console.log("4");
+			document.getElementById('user4').src="image/bird/duck/pick.gif";
+		}
+		if(cnt>=5){
+			console.log("5");
+			document.getElementById('user6').src="image/bird/dragon/pick.gif";
+		}
+		if(cnt>=6){
+			console.log("6");
+			document.getElementById('user2').src="image/bird/pink/pick.gif";
 	}
 	}
 }
