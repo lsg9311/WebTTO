@@ -107,8 +107,8 @@
 			width: 37%;
 			height: 28px;
 		}
-		#ready_btn{
-			font-size: 12pt;
+		.opt_btn{
+			font-size: 10pt;
 	    	padding: 20px auto;
 	    	margin: 10px 75px;
 	    	width: 100px;
@@ -140,7 +140,8 @@
 		</select>
 		<img id="map_image" src="" width="170px" height="170px">
 		<div>
-			<button class="btn btn-primary" id="ready_btn">준비</button>
+			<button class="btn btn-primary opt_btn" id="ready_btn">준비</button>
+			<button class="btn btn-primary opt_btn" id="select_btn">캐릭터 선택</button>
 		</div>
 	</div>
 	</div>
