@@ -35,9 +35,15 @@ function room_ready(){
 	});
 }
 
+function result_ready(){
+	$("#exit").on("click",function(){
+		STATE=1;
+		state_change();
+	});
+}
+
 $(document).ready(function(){
 	state_change();
-
 });
 
 function state_change(){
@@ -55,7 +61,7 @@ function state_change(){
 			$("body").load("play.php");
 		break;
 		case 4:
-			$("body").load("result.php");
+			$("body").load("result.php",function(){result_ready();});
 		break;
 		case 5:
 			$("body").load("select.php");
