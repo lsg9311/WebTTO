@@ -73,6 +73,8 @@ function room_ready(){
 				STATE=3;
 				state_change();
 			}
+		} else if(type == "system") {
+			console.log(data);
 		}
 	}
 	websocket.onclose=function(){

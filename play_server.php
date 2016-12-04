@@ -1,6 +1,7 @@
 <?php
 // used array for all around site
 $user = array();
+$user_fd_map = array();
 
 $host = 'localhost'; //host
 $port = '9000'; //port
@@ -55,18 +56,20 @@ while (true) {
 		{
 			$received_data = unmask($buf); //unmask data
 			$data = json_decode($received_data); //json decode
-			
-			if($data->type=="introduce") {
+			if(!isset($data->type)) {
+				echo $data;
+			} else if($data->type=="introduce") {
+				$user_fd_map[] = array("fd"=>$changed_socket, "user_id"=>$data->user_id);
 				$user[] = array("user_id"=>$data->user_id, "slot_IMG"=>$data->user_slot_IMG, "ready"=>0);
 				$response = mask(json_encode(array('type'=>"update_room_info", 'users'=>$user))); //prepare json data
 				send_message($response);
 			} else if($data->type=="user_ready"){
-				for($i=0; $i<count($user); $i++) {
-					if($user[$i]["user_id"] == $data->user_id) {
-						if($user[$i]["ready"]==0) {
-							$user[$i]["ready"]=1;
+				foreach ($user as &$u) {
+					if($u["user_id"] == $data->user_id) {
+						if($u["ready"]==0) {
+							$u["ready"]=1;
 						} else {
-							$user[$i]["ready"]=0;
+							$u["ready"]=0;
 						}
 						break;
 					}
@@ -116,11 +119,31 @@ while (true) {
 		
 		$buf = @socket_read($changed_socket, 1024, PHP_NORMAL_READ);
 		if ($buf === false) { // check disconnected client
+			$temp = array();
+			$temp2 = array();
+			foreach($user_fd_map as $i => $ufm) {
+				if($ufm["fd"] == $changed_socket) {
+					foreach($user as $j => $u) {
+						if($u["user_id"] == $ufm["user_id"]) {
+							unset($user[$j]);
+						}
+					}
+					unset($user_fd_map[$i]);
+				}
+			}
+			foreach($user_fd_map as $ufm) {
+				$temp[] = array("fd" => $ufm["fd"], "user_id" => $ufm["user_id"]);
+			}
+			$user_fd_map = $temp;
+			foreach($user as $u) {
+				$temp2[] = array("user_id"=>$u["user_id"], "slot_IMG"=>$u["slot_IMG"], "ready"=>$u["ready"]);
+			}
+			$user = $temp2;
+
 			// remove client for $clients array
 			$found_socket = array_search($changed_socket, $clients);
 			socket_getpeername($changed_socket, $ip);
 			unset($clients[$found_socket]);
-			
 			//notify all users about disconnected connection
 			$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' disconnected')));
 			send_message($response);
