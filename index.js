@@ -49,7 +49,7 @@ function room_ready(){
 	websocket.onmessage=function(msg){
 		var data=JSON.parse(msg.data);
 		console.log(data["start"]);
-		if(data.start>6){
+		if(data.start>=6){
 			STATE=3;
 			state_change();
 		}
