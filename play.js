@@ -302,6 +302,7 @@ var HPMAX;
 var HPLEFT;
 var global_time_tick;
 var death_time;
+// TODO : declare dying motion time (which related to dying and draw back motion in GAME_STATE 2.)
 
 
 //ready state show
@@ -372,6 +373,13 @@ function update_all() {
 		break;
 		// on dead status
 		case 2:
+			/* TODO
+				1. if dying motion time is not under 1, draw appropriate dying motion for that variable
+				2. draw background
+				3. update_position
+				4. draw top
+				5. if all player died, go to GAME_STATE 3
+			*/
 			global_time_tick++;		// time goes when playing game
 		break;
 		// all player dead status, or the time is over. the game is goning to be halt
@@ -407,7 +415,7 @@ $(document).on("keydown", function(e){
 });
 
 /* TODO
-1. clear all interval of drawing
+1. clear all interval of drawing (COMPLETE)
 2. after some time, go to result status/page with some data used for ranking (ex)dead time, live time, health point ...)
 */
 function game_halt() {
@@ -430,6 +438,9 @@ function hitted() {
 	if(hit_state == 0) HPLEFT--, hit_state=30;
 	if(HPLEFT < 1) {
 		HPLEFT = 0;
+		/* TODO
+			1. set dying motion time (ex) 2 second)
+		*/
 	}
 	return;
 }
