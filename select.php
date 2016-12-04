@@ -74,7 +74,7 @@
 		</div>
 	</div>
 
-	<div style="clear:both; margin:auto; width:350px; height:75px;">
+	<div style="clear:both; margin-left:600px; width:350px; height:75px;">
 		<input id="select" type="button" value="SELECT"/>
 	</div>
 
