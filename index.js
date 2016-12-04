@@ -59,7 +59,7 @@ function room_ready(){
 	websocket.onmessage=function(msg){
 		var data=JSON.parse(msg.data);
 		console.log(data["start"]);
-		if(data.start>6){
+		if(data.start>=6){
 			STATE=3;
 			state_change();
 		}
@@ -70,7 +70,7 @@ function room_ready(){
 }
 
 function result_ready(){
-	$("#gage_container").append("<h1> 최종 점수 : "+result_score+"</h1>");
+	$("#result").append("<span>"+result_score+"</span>");
 	$("#exit").on("click",function(){
 		STATE=1;
 		state_change();
