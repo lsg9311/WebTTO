@@ -161,11 +161,42 @@ function draw_bg(){
     ctxBuffer.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
     draw_wall(ctxBuffer,scrollVal,scrollWall);
 
-    //draw character
-    if(frame1<RPM+1){ctxBuffer.drawImage(pink1, cx, cy, 50, 50);}
-    else if (frame1<2*RPM+1){ctxBuffer.drawImage(pink2, cx, cy, 50, 50);}
-    else if (frame1<3*RPM+1){ctxBuffer.drawImage(pink3, cx, cy, 50, 50);}
-    else {ctxBuffer.drawImage(pink4, cx, cy, 50, 50);}
+    //draw character pink
+    //frame1
+    if(frame1<RPM+1){
+    	ctxBuffer.drawImage(pink1, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(blue1, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken1, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon1, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(monster1, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(duck1, cx, cy, 50, 50);}
+
+//frame1
+    else if (frame1<2*RPM+1){
+    	ctxBuffer.drawImage(pink2, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(blue2, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken2, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon2, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(monster2, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(duck2, cx, cy, 50, 50);}
+    	//frame1
+    else if (frame1<3*RPM+1){
+    	ctxBuffer.drawImage(pink3, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(blue3, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken3, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon3, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(duck3, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(monster3, cx, cy, 50, 50);}
+    	//frame1
+    else {
+    	ctxBuffer.drawImage(pink4, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(blue4, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(chicken4, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(dragon4, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(monster4, cx, cy, 50, 50);
+    	ctxBuffer.drawImage(duck4, cx, cy, 50, 50);}
+
+
 
     //main canvas
     mainCanvas = document.getElementById("MAIN-CANVAS");
