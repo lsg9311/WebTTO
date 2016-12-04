@@ -21,6 +21,10 @@ var pink1 = new Image();
 var pink2 = new Image();
 var pink3 = new Image();
 var pink4 = new Image();
+var pink1 = new Image();
+var pink2 = new Image();
+var pink3 = new Image();
+var pink4 = new Image();
 var blue1 = new Image();
 var blue2 = new Image();
 var blue3 = new Image();
@@ -114,7 +118,6 @@ function initIMG(){
 	monster2.src="image/bird/monster/flying/frame-2.png";
 	monster3.src="image/bird/monster/flying/frame-3.png";
 	monster4.src="image/bird/monster/flying/frame-4.png";
-
 
 }
 //allocate canvas
@@ -468,8 +471,9 @@ function update_all() {
 		break;
 	}
 }
+
 // command for debug
-$(document).on("keydown", function(e){
+window.addEventListener("keydown",function(e){
 	switch(GAME_STATE) {
 	case 0:
 		break;
@@ -491,6 +495,7 @@ $(document).on("keydown", function(e){
 	case 3:
 		break;
 	}
+	return;
 });
 
 /* TODO
