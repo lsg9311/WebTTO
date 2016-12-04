@@ -270,6 +270,7 @@ function draw_bg(){
     	
     	whetherhit(ox[i]-mul[i]*scrollVal,oy[i],size[i],size[i]);
     }
+    
     //main canvas
     mainCanvas = document.getElementById("MAIN-CANVAS");
 		mainCtx = mainCanvas.getContext("2d");    
@@ -442,10 +443,12 @@ function hitRock(){
 	var rockBottom = canvasHeight-100 - 50;
 	var rockTop = 100;
 	if(cy > rockBottom){
-		cy = rockBottom;
+		hitted();
+		cy = rockBottom+1;
 		gravitySpeed = 0;
 	}
 	if(cy < rockTop){
+		hitted();
 		cy = rockTop;
 		gravitySpeed = 0;
 	}
