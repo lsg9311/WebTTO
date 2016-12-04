@@ -36,6 +36,10 @@ function lobby_ready(){
 
 function room_ready(){
 	websocket=new WebSocket(wsUri);
+	$("#select_btn").on("click",function(){
+			STATE=5;
+			state_change();
+		});
 	websocket.onopen = function() { // connection is open 
 		console.log("Connected");
 		
@@ -52,10 +56,6 @@ function room_ready(){
 		$("#ready_btn").on("click",function(){
 			var data = {"type":"user_ready"};
 			websocket.send(JSON.stringify(data));
-		});
-		$("#select_btn").on("click",function(){
-			STATE=5;
-			state_change();
 		});
 	}
 	websocket.onmessage=function(msg){

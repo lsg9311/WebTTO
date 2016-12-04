@@ -59,18 +59,18 @@
 	
 	<div id="bg">
 		<div> 
-			<img src="image/bird/blue/blue.gif" id="blue" onclick=changepic()>
-			<img src="image/bird/chicken/chicken.gif" id="chicken">
-			<img src="image/bird/dragon/dragon.gif" id="dragon">
+			<img src="image/bird/blue/blue.gif" id="blue" onclick="changepic1()">
+			<img src="image/bird/chicken/chicken.gif" id="chicken" onclick="changepic2()">
+			<img src="image/bird/dragon/dragon.gif" id="dragon" onclick="changepic3()">
 		</div>
 		<div>
 			
 		</div>	
 		<div>
 		
-			<img src="image/bird/duck/duck.gif" id="duck">
-			<img src="image/bird/monster/monster.gif" id="monster">
-			<img src="image/bird/pink/pink.gif" id="pink">
+			<img src="image/bird/duck/duck.gif" id="duck" onclick="changepic4()">
+			<img src="image/bird/monster/monster.gif" id="monster" onclick="changepic5()">
+			<img src="image/bird/pink/pink.gif" id="pink" onclick="changepic6()">
 		</div>
 	</div>
 
@@ -79,10 +79,57 @@
 	</div>
 
 	<script>
-	function changepic(){
+	var nblue=0;
+	var nchicken=0;
+	var ndragon=0;
+	var nduck=0;
+	var nmonster=0;
+	var npink=0;
 
-
+	function changepic1(){
+		nblue++;
+		if( (nblue%2)==1){
+			document.getElementById('blue').src="image/bird/blue/pick.gif";}
+		else{
+			document.getElementById('blue').src="image/bird/blue/blue.gif";}
 	}
+	function changepic2(){
+		nchicken++;
+		if( (nchicken%2)==1){
+			document.getElementById('chicken').src="image/bird/chicken/pick.gif";}
+		else{
+			document.getElementById('chicken').src="image/bird/chicken/chicken.gif";}
+	}
+	function changepic3(){
+		ndragon++;
+		if( (ndragon%2)==1){
+			document.getElementById('dragon').src="image/bird/dragon/pick.gif";}
+		else{
+			document.getElementById('dragon').src="image/bird/dragon/dragon.gif";}
+	}
+	function changepic4(){
+		nduck++;
+		if( (nduck%2)==1){
+			document.getElementById('duck').src="image/bird/duck/pick.gif";}
+		else{
+			document.getElementById('duck').src="image/bird/duck/duck.gif";}
+	}
+	function changepic5(){
+		nmonster++;
+		if( (nmonster%2)==1){
+			document.getElementById('monster').src="image/bird/monster/pick.gif";}
+		else{
+			document.getElementById('monster').src="image/bird/monster/monster.gif";}
+	}
+	function changepic6(){
+		npink++;
+		if( (npink%2)==1){
+			document.getElementById('pink').src="image/bird/pink/pick.gif";}
+		else{
+			document.getElementById('pink').src="image/bird/pink/pink.gif";}
+	}
+
+
 	</script>	
 
 

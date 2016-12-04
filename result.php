@@ -4,7 +4,7 @@
 	<style>
 		#result{
 			margin-top :50px;
-			margin-left: 450px;
+			margin-left: 250px;
 		}
 		#gage_bnum{
 			padding-top:6px;
