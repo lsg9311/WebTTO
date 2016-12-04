@@ -5,7 +5,7 @@
 3 : play.php
 4 : result.php
 */
-var STATE = 0;
+var STATE = 3;
 
 
 

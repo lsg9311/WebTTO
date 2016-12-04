@@ -552,9 +552,10 @@ function game_halt() {
 	mainCtx.font="50px Arial";
 	mainCtx.fillStyle="red";
 	var str = "GAME OVER"
-	mainCtx.fillText(str,750-str.length*15,300);
-
-
+	mainCtx.fillText(str,750-str.length*17,300);
+	setTimeout(function(){
+		$('body').load("result.php");
+	},3000);
 	mainCtx.restore();
 	/* TODO
 		1. receive required data from server (ex) user id, user name, user img, score(or just live times and health point..) etc...)
