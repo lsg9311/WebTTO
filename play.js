@@ -75,6 +75,8 @@ var gravity = 0.3;
 var gravitySpeed = 0;
 var RPM = 8;
 var accel = false;
+var myID = 1;
+var myHP = 100; //temp HP.
 var ox=new Array();
 var oy=new Array();
 var mul=new Array();
@@ -100,6 +102,47 @@ var score_parameter = 32;
 var MIN_MAP_POINTER = 1070;
 var MAX_MAP_POINTER = 1449;
 var MAX_TIME = 1000;
+
+
+//check hit
+function checkhit(pointx,pointy,ox,oy,ow,oh){
+	if(pointx >= ox && pointx <= ox + ow && pointy >= oy && pointy <= oy +oh)
+		hitted();
+}
+
+//hit estimate
+function whetherhit(obx,oby,width,height){
+	var sx, sy, swidth, sheight;
+	sx = obx;
+	sy = oby + height*(2/7);
+	swidth = width * (5/7);
+	sheight = height * (5/7);
+
+	checkhit(cx,cy,sx,sy,swidth,sheight);
+	checkhit(cx+50,cy,sx,sy,swidth,sheight);
+	checkhit(cx,cy+50,sx,sy,swidth,sheight);
+	checkhit(cx+50,cy+50,sx,sy,swidth,sheight);
+
+	sx = obx + width*(1/6);
+	sy = oby;
+	swidth = width*(13/18);
+	sheight = height;
+
+	checkhit(cx,cy,sx,sy,swidth,sheight);
+	checkhit(cx+50,cy,sx,sy,swidth,sheight);
+	checkhit(cx,cy+50,sx,sy,swidth,sheight);
+	checkhit(cx+50,cy+50,sx,sy,swidth,sheight);
+
+	sx = obx + width / 2;
+	sy = oby + height * (2/7);
+	swidth = width / 2;
+	sheight = height * (4/7);
+
+	checkhit(cx,cy,sx,sy,swidth,sheight);
+	checkhit(cx+50,cy,sx,sy,swidth,sheight);
+	checkhit(cx,cy+50,sx,sy,swidth,sheight);
+	checkhit(cx+50,cy+50,sx,sy,swidth,sheight);
+}
 
 //allocate IMG
 function initIMG(){
@@ -182,6 +225,8 @@ function draw_bg(){
     draw_wall(ctxBuffer,scrollVal,scrollWall);
     update_score(ctxBuffer);
 
+    //Character Info sending
+    send_player();
     //draw character
     //frame1
     if(GAME_STATE > 1){
@@ -223,10 +268,15 @@ function draw_bg(){
     	ctxBuffer.drawImage(monster4, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck4, cx+50, cy, 50, 50);}
     	}
-    for(i=2;i<16;i++) ctxBuffer.drawImage(obstacle,ox[i]-mul[i]*scrollVal,oy[i],size[i],size[i]);
+
+    for(i=2;i<16;i++){
+    	ctxBuffer.drawImage(obstacle,ox[i]-mul[i]*scrollVal,oy[i],size[i],size[i]);
+    	
+    	whetherhit(ox[i]-mul[i]*scrollVal,oy[i],size[i],size[i]);
+    }
     //main canvas
     mainCanvas = document.getElementById("MAIN-CANVAS");
-	mainCtx = mainCanvas.getContext("2d");    
+		mainCtx = mainCanvas.getContext("2d");    
 
 	//draw on main canvas
     mainCtx.clearRect(0,0, canvasWidth, canvasHeight);
@@ -456,7 +506,34 @@ function ready_indicate(){
 	}
 	indicate_time-=1;
 }
+//Player Area
+//All value is temporary
+var Player = function(newId){
+	var X = 100;
+	var Y = 100;
+	var ID = newId;
+	var PH = 100;
+	var getX = function(){
+		return X;
+	}
+};
+function send_player(){
+	var msg = {
+		posX : cx,
+		posY : cy,
+		id : myID,
+		HP : myHP
+	};
+	websocket.send(JSON.stringify(msg));
+}
 
+var players = new Array();
+players.push(new Player(1));
+players.push(new Player(2));
+players.push(new Player(3));
+players.push(new Player(4));
+players.push(new Player(5));
+players.push(new Player(6));
 var intervalMain;
 $(document).ready(function(){
 	initIMG();
@@ -469,8 +546,20 @@ $(document).ready(function(){
 	HPLEFT = 6;
 	global_time_tick = 0;
 	death_time = [{CLIENT_ID : "#2", TIME : 10}, {CLIENT_ID : "#1", TIME : 125}];
-	
-	
+	//Websockek
+	var wsUri = "ws://localhost:9000/demo/server.php"; 	
+	websocket = new WebSocket(wsUri); 
+
+	websocket.onopen = function(ev){
+		console.log("connected");
+	}
+	websocket.onmessage = function(ev){
+		var msg = JSON.parse(ev.data);
+		var user_id = msg.id;
+		players[user_id].X = msg.posX;
+		players[user_id].Y = msg.posY;
+		players[user_id].HP = msg.HP;
+	}
 	intervalMain = setInterval(update_all, interval_speed);
 	/*
 	var intervalTEST=setInterval(test,interval_speed);	// FOR TESTING PURPOSE

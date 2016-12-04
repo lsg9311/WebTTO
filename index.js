@@ -6,7 +6,13 @@
 4 : result.php
 5 : select.php
 */
+<<<<<<< HEAD
 var STATE = 2;
+=======
+var STATE = 0;
+
+var name = "none";
+>>>>>>> ac227910fe737e45efbb5b884edb61b88db4270c
 var result_score;
 var wsUri="ws://localhost:9000/WEBTTO/play_server.php";
 var	websocket=new WebSocket(wsUri);
@@ -17,6 +23,7 @@ function login_ready(){
 			alert("이름을 제대로 적으시오!");
 			return;
 		}
+		name = $('#nickname').val();
 
 		STATE=1;
 		state_change();
@@ -73,7 +80,7 @@ function state_change(){
 			$("body").load("login.php",function(){login_ready();});
 		break;
 		case 1:
-			$("body").load("lobby.php",{nick:$('#nickname').val()},function(){lobby_ready();});
+			$("body").load("lobby.php",{nick:name},function(){lobby_ready();});
 		break;
 		case 2:
 			$("body").load("room.php",function(){room_ready();});
