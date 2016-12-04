@@ -4,19 +4,8 @@
 	<style>
 		#result{
 			margin-top :50px;
-			margin-left: 250px;
+			margin-left: 230px;
 		}
-		#gage_bnum{
-			padding-top:6px;
-			background-color: LightGray;
-			font-size: 40px;
-			text-align: center;
-			float: left;
-			width:70px;
-			height:64px;
-		}
-
-		
 		
 		#rank_container{
 			margin-top: 85px;
@@ -53,6 +42,25 @@
 		#name2, #name3{
 			margin-left: 70px;
 		}
+		#score1{
+			clear:both;
+		}
+		#score1, #score2, #score3{
+			font-size: 29px;
+			text-align: center;
+			color : white;
+			background-color: #BCE55C;
+			margin-top: 25px;
+			margin-left:135px;
+			float: left;
+			width:100px;
+			height:40px;
+			border-radius: 30px;
+		}
+		#score2, #score3{
+			margin-left: 120px;
+		}
+
 		#exit{
 			background-color: RoyalBlue;
 			margin-top: 25px;
@@ -74,15 +82,21 @@
 			width:70px;
 			height:70px;
 			margin-left: 150px;
-		}	
+		}
+		#rank6{
+			width:70px;
+			height:70px;
+			margin-left: 150px;
+		}		
 	</style>
 </head>
 <?PHP
 $my_id = "1";
-$user_size = 2;
+$user_size = 3;
 $user = array(
-	array("id"=>"Teemo", "src"=>"image/teemo2.png", "score"=>"33", "rank"=>"2"),
-	array("id"=>"IsCute", "src"=>"image/teemo.png", "score"=>"36", "rank"=>"1")
+	array("id"=>"HAHA", "src"=>"image/teemo3.png", "score"=>"99", "rank"=>"1"),
+	array("id"=>"Teemo", "src"=>"image/teemo2.png", "score"=>"53", "rank"=>"2"),
+	array("id"=>"IsCute", "src"=>"image/teemo.png", "score"=>"26", "rank"=>"6")
 );
 //use bubble sort
 ?>
@@ -95,6 +109,7 @@ $user = array(
 		<div id="rank_num">
 				<img src ="image/result/rank1.png" id="rank1"></img>
 				<img src ="image/result/rank2.png" id="rank2"></img>
+				<img src ="image/result/rank6.png" id="rank6"></img>
 		</div>
 		<div id="user_profile">
 			<?PHP
@@ -110,9 +125,16 @@ $user = array(
 			}
 			?>
 		</div>
+		<div id="score">
+			<?PHP
+			for($i=0; $i<$user_size; $i++) {
+				echo '<div id="score'.($i+1).'">'.$user[$i]["score"].'</div>';
+			}
+			?>
+		</div>
 	</div>
 	<div style="clear:both; margin:auto; width:350px; height:75px;">
-		<input id="exit" type="button" value="나가기"/>
+		<input id="exit" type="button" value="EXIT"/>
 	</div>
 </body>
 </html>

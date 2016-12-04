@@ -140,7 +140,7 @@
 			<option value="map2">정보관</option>
 			<option value="map3">닥터fish</option>
 		</select>
-		<img id="map_image" src="" width="170px" height="170px">
+		<img id="map_image" src="image/back_cave.png" width="170px" height="170px">
 		<div>
 			<button class="btn btn-primary opt_btn" id="ready_btn">준비</button>
 			<button class="btn btn-primary opt_btn" id="select_btn">캐릭터 선택</button>
