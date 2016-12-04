@@ -184,12 +184,14 @@ function draw_bg(){
     	ctxBuffer.drawImage(duck1, cx+50, cy, 50, 50);}
 	//frame2
     else if (frame1<2*RPM+1){
+    	if(hit_state==0){
     	ctxBuffer.drawImage(pink2, cx, cy, 50, 50);
     	ctxBuffer.drawImage(blue2, cx+20, cy, 50, 50);
     	ctxBuffer.drawImage(chicken2, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(dragon2, cx+60, cy, 50, 50);
     	ctxBuffer.drawImage(monster2, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck2, cx+50, cy, 50, 50);}
+    	}
     //frame3
     else if (frame1<3*RPM+1){
     	ctxBuffer.drawImage(pink3, cx, cy, 50, 50);
@@ -200,13 +202,14 @@ function draw_bg(){
     	ctxBuffer.drawImage(duck3, cx+50, cy, 50, 50);}
     //frame4
     else {
+    	if(hit_state==0){
     	ctxBuffer.drawImage(pink4, cx, cy, 50, 50);
     	ctxBuffer.drawImage(blue4, cx+20, cy, 50, 50);
     	ctxBuffer.drawImage(chicken4, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(dragon4, cx+60, cy, 50, 50);
     	ctxBuffer.drawImage(monster4, cx+40, cy, 50, 50);
     	ctxBuffer.drawImage(duck4, cx+50, cy, 50, 50);}
-
+    	}
     //main canvas
     mainCanvas = document.getElementById("MAIN-CANVAS");
 	mainCtx = mainCanvas.getContext("2d");    
@@ -562,7 +565,7 @@ function test() {
 
 //WHEN HITTED
 function hitted() {
-	if(hit_state == 0) HPLEFT--, hit_state=30;
+	if(hit_state == 0) HPLEFT--, hit_state=50;
 	if(HPLEFT < 1) {
 		hit_state = -1;
 		GAME_STATE = 2;
