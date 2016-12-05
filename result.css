@@ -1,11 +1,9 @@
 	body{
-		background-size:cover;
-		width:1300px;
-		height:800px;
+		
 	}
 	#result{
-			margin-top :50px;
-			margin-left: 200px;
+			margin-top :30px;
+			margin-left: 150px;
 		}
 		
 		#myscore{
@@ -22,7 +20,7 @@
 			
 		}
 		#rank_container{
-			margin-top: 85px;
+			margin-top: 40px;
 		}
 
 		#user1{

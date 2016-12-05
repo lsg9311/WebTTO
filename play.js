@@ -79,12 +79,8 @@ var gravity = 0.3;
 var gravitySpeed = 0;
 var RPM = 8;
 var accel = false;
-<<<<<<< HEAD
 var myID = document.getElementById('mychar').height;
 //Should be different from other players
-=======
-var myID;
->>>>>>> origin/jong
 var myHP = 100; //temp HP.
 var ox=new Array();	
 var oy=new Array();

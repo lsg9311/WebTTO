@@ -14,11 +14,11 @@ $user = array(
 //use bubble sort
 ?>
 
-<body  background="image/back_cave.png">
+<body background="image/back_cave.png">
 	<div id="result"> 
 		<img src= "image/result/result.png" id="result"></img>
 	</div>
-	<div id ="myscore" value="5000">333
+	<div id ="myscore">
 	</div>
 	<div id="rank_container">
 		<div id="rank_num">
