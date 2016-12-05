@@ -236,14 +236,13 @@ function draw_bg(){
     //draw character
     //frame1
     if(GAME_STATE > 1){
-    	if(frame1 < 15)
+    	if(frame1 < 15){
     	 	ctxBuffer.drawImage(ghost1, cx, cy, 70, 70);
-    		ctxBuffer.drawImage(friend1, 100, fy, 50, 50);
+    		ctxBuffer.drawImage(friend1, 100, fy, 50, 50);}
     	 else {
     	 	ctxBuffer.drawImage(ghost2, cx, cy, 70, 70);
     	 	ctxBuffer.drawImage(friend2, 100, fy, 50, 50);
-    	 }
-    }
+    	 	}}
     else if(frame1<RPM+1){
     	ctxBuffer.drawImage(pink1, players[0].X, players[0].Y, 50, 50);
     	ctxBuffer.drawImage(blue1, players[1].X+20, players[1].Y, 50, 50);
@@ -278,7 +277,8 @@ function draw_bg(){
     	ctxBuffer.drawImage(friend2, 100, fy, 50, 50);
     }
     //frame4
-    else {ctxBuffer.drawImage(friend2, 100, fy, 50, 50);
+    else {
+    	ctxBuffer.drawImage(friend2, 100, fy, 50, 50);
     	if(hit_state==0){
     	ctxBuffer.drawImage(pink4, players[0].X, players[0].Y, 50, 50);
     	ctxBuffer.drawImage(blue4, players[1].X+20, players[1].Y, 50, 50);

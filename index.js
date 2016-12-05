@@ -237,7 +237,7 @@ function get_id(){
 function my_character(){
 	$(document).ready(function(){
 	get_id();
-	document.getElementById('mychar').height=myID
+	document.getElementById('mychar').height=myID;
 	console.log(document.getElementById('mychar').height);});
 }
 
