@@ -80,6 +80,7 @@ var gravitySpeed = 0;
 var RPM = 8;
 var accel = false;
 
+//Should be different from other players
 var myID = document.getElementById('mychar').height;
 var myHP = 100; //temp HP.
 var ox=new Array();	
