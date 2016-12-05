@@ -182,7 +182,8 @@ function finish_select(){
 }
 
 function result_ready(){
-	$("#result").append("<span>"+result_score+"</span>");
+	$("#myscore").append(result_score);
+	document.getElementById('myscore').value=result_score.toString();
 	$("#exit").on("click",function(){
 		STATE=1;
 		state_change();
