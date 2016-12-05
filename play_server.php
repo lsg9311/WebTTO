@@ -54,8 +54,8 @@ while (true) {
 		//check for any incomming data
 		while(socket_recv($changed_socket, $buf, 4096, 0) >= 1)
 		{
-			$received_data = unmask($buf); //unmask data
-			$data = json_decode($received_data); //json decode
+			$data = unmask($buf); //unmask data
+			//$data = json_decode($received_data); //json decode
 			if(!isset($data->type)) {
 				echo $data->type;
 			} else if($data->type=="introduce") {

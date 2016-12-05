@@ -582,7 +582,7 @@ function send_player(){
 		HP : myHP,
 		name : name
 	};
-	websocket.send(JSON.stringify(msg));
+	websocket.send(strencode(msg));
 }
 function init_player(){
 	players.push(new Player(1));
@@ -625,7 +625,7 @@ $(document).ready(function(){
 		console.log("connected");
 	}
 	websocket.onmessage = function(ev){
-		var msg = JSON.parse(ev.data);
+		var msg = strdecode(ev.data);
 		if(msg.type=="play_ready"){
 			var user_name = msg.name;
 			var user_id = msg.id;
@@ -638,7 +638,7 @@ $(document).ready(function(){
 						name : user_name
 			};
 			console.log("ID "+data.id+", name : "+msg.name);
-			websocket.send(JSON.stringify(data));
+			websocket.send(strencode(data));
 		}
 		else if(msg.type=="play"){
 			var user_id = msg.id;
