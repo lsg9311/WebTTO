@@ -52,7 +52,7 @@ while (true) {
 	foreach ($changed as $changed_socket) {	
 		
 		//check for any incomming data
-		while(socket_recv($changed_socket, $buf, 1024, 0) >= 1)
+		while(socket_recv($changed_socket, $buf, 4096, 0) >= 1)
 		{
 			$received_data = unmask($buf); //unmask data
 			$data = json_decode($received_data); //json decode
