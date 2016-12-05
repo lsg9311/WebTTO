@@ -2,7 +2,7 @@
 // used array for all around site
 $user = array();
 $user_fd_map = array();
-
+$player = array();
 $host = 'localhost'; //host
 $port = '9000'; //port
 $null = NULL; //null var
@@ -81,12 +81,28 @@ while (true) {
 				$response = mask(json_encode(array('type'=> "start", 'start'=>$ready))); //prepare json data
 				send_message($response); //notify all users about new connection
 				*/
-			} else if($data->type=="play") {
+			}else if($data->type=="transition"){
+				//$player[] = array("user_id"=>$data->user_id);
+				$index = 0;
+				$user_id_id = 0;
+				/*foreach ($user as $u) {
+					if($u["user_id"] == $data->name) {
+						$user_id_id = 1;
+					}
+					$index = $index+1;
+				}*/
+				$user_name = $data->name;
+				echo "<script>alert('Transition');</script>";
+				$response_data = mask(json_encode(array('type'=>'play_ready','name'=>$user_name,'id'=>$user_id_id)));
+				send_message($response_data);
+			} 
+			else if($data->type=="play") {
 				$user_id = $data->id;
+				$user_name = $data->name;
 				$user_x = $data->posX;
 				$user_y = $data->posY;
 				$user_hp = $data->HP;
-				$response_data = mask(json_encode(array('type'=>'play','id'=>$user_id,'posX'=>$user_x,'posY'=>$user_y,'HP'=>$user_hp)));
+				$response_data = mask(json_encode(array('type'=>'play','id'=>$user_id,'posX'=>$user_x,'posY'=>$user_y,'HP'=>$user_hp,'name'=>$user_name)));
 					
 				send_message($response_data);
 			}

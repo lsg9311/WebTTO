@@ -79,8 +79,12 @@ var gravity = 0.3;
 var gravitySpeed = 0;
 var RPM = 8;
 var accel = false;
+<<<<<<< HEAD
 var myID = document.getElementById('mychar').height;
 //Should be different from other players
+=======
+var myID;
+>>>>>>> origin/jong
 var myHP = 100; //temp HP.
 var ox=new Array();	
 var oy=new Array();
@@ -227,6 +231,9 @@ function draw_bg(){
 	ctxBuffer.canvas.width=canvasWidth;
 	ctxBuffer.canvas.height=canvasHeight;
 	
+    //Character Info sending
+    send_player();
+
 	//draw bg
     ctxBuffer.drawImage(backgroundIMG,2000-scrollVal,0,2000,canvasHeight);
     ctxBuffer.drawImage(backgroundIMG,scrollVal,0,2000,2000,0, 0, 2000,canvasHeight);
@@ -291,7 +298,14 @@ function draw_bg(){
     	else
     		ctxBuffer.drawImage(pink4_hit, players[0].X, players[0].Y, 50, 50);
     }
-
+    //Writing Nickname
+    for(i=0;i<6;i++){
+    //	console.log("Name["+i+"] : " +  players[i].name);
+    ctxBuffer.font = "20px Comic Sans MS";
+    ctxBuffer.fillStyle = "white";
+    ctxBuffer.textAlign = "center";
+    ctxBuffer.fillText(players[i].name,players[i].X+25,players[i].Y+65);
+	}
     for(i=2;i<16;i++){
     	ctxBuffer.drawImage(obstacle,ox[i]-mul[i]*scrollVal,oy[i],size[i],size[i]);
     	whetherhit(ox[i]-mul[i]*scrollVal,oy[i],size[i],size[i]);
@@ -465,8 +479,6 @@ function newPos(){ //Goes up and down
 	gravitySpeed += gravity;
 	cy += gravitySpeed;
 	hitRock();
-    //Character Info sending
-    send_player();
 }
 function hitRock(){
 	var rockBottom = canvasHeight-100 - 50;
@@ -570,20 +582,26 @@ function send_player(){
 		posX : cx,
 		posY : cy,
 		id : myID,
-		HP : myHP
+		HP : myHP,
+		name : name
 	};
 	websocket.send(JSON.stringify(msg));
 }
+function init_player(){
+	players.push(new Player(1));
+	players.push(new Player(2));
+	players.push(new Player(3));
+	players.push(new Player(4));
+	players.push(new Player(5));
+	players.push(new Player(6));
+
+}
 
 var players = new Array();
-players.push(new Player(1));
-players.push(new Player(2));
-players.push(new Player(3));
-players.push(new Player(4));
-players.push(new Player(5));
-players.push(new Player(6));
+
 var intervalMain;
 $(document).ready(function(){
+	init_player();
 	initIMG();
 	initCanvas();
 	
@@ -603,17 +621,31 @@ $(document).ready(function(){
 	}
 	websocket.onmessage = function(ev){
 		var msg = JSON.parse(ev.data);
-		if(msg.type=="play"){
-		var user_id = msg.id;
-		players[user_id].X = msg.posX;
-		players[user_id].Y = msg.posY;
-		players[user_id].HP = msg.HP;
-		console.log("posX " + msg.posX + ", posY " + msg.posY);
-		console.log(document.getElementById('mychar').height.toString());
-		console.log(myID.toString());
+		if(msg.type=="play_ready"){
+			var user_name = msg.name;
+			var user_id = msg.id;
+			var data = {
+						type : "play",
+						posX : cx,
+						posY : cy,
+						id : user_id,
+						HP : myHP,
+						name : user_name
+			};
+			console.log("ID "+data.id+", name : "+msg.name);
+			websocket.send(JSON.stringify(data));
 		}
-		else
-			;
+		else if(msg.type=="play"){
+			var user_id = msg.id;
+			console.log("posX " + msg.posX + ", posY " + msg.posY);
+			console.log("user_id : "+user_id);
+			console.log(document.getElementById('mychar').height.toString());
+			console.log(myID.toString());
+			players[user_id].X = msg.posX;
+			players[user_id].Y = msg.posY;
+			players[user_id].HP = msg.HP;
+			players[user_id].name = msg.name;
+		}
 
 	}
 	websocket.onclose = function(ev){
