@@ -150,7 +150,7 @@ function whetherhit(obx,oby,width,height){
 }
 
 //allocate IMG
-//function initIMG(){
+function initIMG(){
 	//img Option
 	backgroundIMG.src="image/back_cave.png";
 	TOP_SLOT_IMG1.src = "image/TOP_CLIENTSLOT1.png";
@@ -194,7 +194,7 @@ function whetherhit(obx,oby,width,height){
 	obstacle.src = "image/spr_boulder_0.png";
 	friend1.src="image/bird/friend/frame-1.png";
 	friend2.src="image/bird/friend/frame-2.png";
-//}	
+}	
 //allocate canvas
 function initCanvas(){
 	mainCanvas = document.getElementById("MAIN-CANVAS");
@@ -252,7 +252,7 @@ function draw_bg(){
     	ctxBuffer.drawImage(blue1, players[1].X+20, players[1].Y, 50, 50);
     	ctxBuffer.drawImage(chicken1, players[2].X+40, players[2].Y, 50, 50);
     	ctxBuffer.drawImage(dragon1, players[3].X+60, players[3].Y, 50, 50);
-    	ctxBuffer.drawImage(monster1, payers[4].X+40, players[4].Y, 50, 50);
+    	ctxBuffer.drawImage(monster1, players[4].X+40, players[4].Y, 50, 50);
     	ctxBuffer.drawImage(duck1, players[5].X+50, players[5].Y, 50, 50);
     	ctxBuffer.drawImage(friend1, 100, fy, 50, 50);
     }
@@ -596,10 +596,18 @@ function init_player(){
 
 var players = new Array();
 
+function strencode( data ) {
+   return encodeURIComponent(JSON.stringify( data ) );
+ }
+
+function strdecode( data ) {
+  return JSON.parse(decodeURIComponent(data).substr(1, decodeURIComponent(data).length-2));  
+}
+
 var intervalMain;
 $(document).ready(function(){
 	init_player();
-	//initIMG();
+	initIMG();
 	initCanvas();
 	
 	CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];

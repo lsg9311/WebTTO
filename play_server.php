@@ -134,7 +134,7 @@ while (true) {
 			break 2; //exist this loop
 		}
 		
-		$buf = @socket_read($changed_socket, 1024, PHP_NORMAL_READ);
+		$buf = @socket_read($changed_socket, 4096, PHP_NORMAL_READ);
 		if ($buf === false) { // check disconnected client
 			$temp = array();
 			$temp2 = array();
@@ -245,7 +245,7 @@ function perform_handshaking($receved_header,$client_conn, $host, $port)
 	"Upgrade: websocket\r\n" .
 	"Connection: Upgrade\r\n" .
 	"WebSocket-Origin: $host\r\n" .
-	"WebSocket-Location: ws://$host:$port/draw/server.php\r\n".
+	"WebSocket-Location: ws://$host:$port/WEBTTO/play_server.php\r\n".
 	"Sec-WebSocket-Accept:$secAccept\r\n\r\n";
 	socket_write($client_conn,$upgrade,strlen($upgrade));
 }
