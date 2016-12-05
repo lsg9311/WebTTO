@@ -153,8 +153,8 @@ function whetherhit(obx,oby,width,height){
 //function initIMG(){
 	//img Option
 	backgroundIMG.src="image/back_cave.png";
-	TOP_SLOT_IMG1.src = "image/TOP_ClIENTSLOT1.png";
-	TOP_SLOT_IMG2.src = "image/TOP_ClIENTSLOT2.png";
+	TOP_SLOT_IMG1.src = "image/TOP_CLIENTSLOT1.png";
+	TOP_SLOT_IMG2.src = "image/TOP_CLIENTSLOT2.png";
 	TOP_SLOT_EMPTY_IMG.src = "image/TOP_CLIENTSLOT_EMPTY.png";
 	TOP_MAP_IMG.src = "image/TOP_MAP.png";
 	wallIMG.src = "image/wall.png";
@@ -252,7 +252,7 @@ function draw_bg(){
     	ctxBuffer.drawImage(blue1, players[1].X+20, players[1].Y, 50, 50);
     	ctxBuffer.drawImage(chicken1, players[2].X+40, players[2].Y, 50, 50);
     	ctxBuffer.drawImage(dragon1, players[3].X+60, players[3].Y, 50, 50);
-    	ctxBuffer.drawImage(monster1, players[4].X+40, players[4].Y, 50, 50);
+    	ctxBuffer.drawImage(monster1, payers[4].X+40, players[4].Y, 50, 50);
     	ctxBuffer.drawImage(duck1, players[5].X+50, players[5].Y, 50, 50);
     	ctxBuffer.drawImage(friend1, 100, fy, 50, 50);
     }
