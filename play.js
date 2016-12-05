@@ -621,6 +621,9 @@ $(document).ready(function(){
 	//var wsUri = "ws://localhost:9000/demo/server.php"; 	
 	//websocket = new WebSocket(wsUri); 
 
+	websocket.onerror=function(){
+		websocket = new WebSocket(wsUri);		
+	}
 	websocket.onopen = function(ev){
 		console.log("connected");
 	}
