@@ -150,7 +150,7 @@ function whetherhit(obx,oby,width,height){
 }
 
 //allocate IMG
-function initIMG(){
+//function initIMG(){
 	//img Option
 	backgroundIMG.src="image/back_cave.png";
 	TOP_SLOT_IMG1.src = "image/TOP_ClIENTSLOT1.png";
@@ -194,7 +194,7 @@ function initIMG(){
 	obstacle.src = "image/spr_boulder_0.png";
 	friend1.src="image/bird/friend/frame-1.png";
 	friend2.src="image/bird/friend/frame-2.png";
-}	
+//}	
 //allocate canvas
 function initCanvas(){
 	mainCanvas = document.getElementById("MAIN-CANVAS");
@@ -599,7 +599,7 @@ var players = new Array();
 var intervalMain;
 $(document).ready(function(){
 	init_player();
-	initIMG();
+	//initIMG();
 	initCanvas();
 	
 	CLIENT_SLOT = [TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1, TOP_SLOT_IMG2, TOP_SLOT_IMG1];
