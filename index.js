@@ -40,9 +40,9 @@ function lobby_ready(){
 function room_ready(){
 	websocket=new WebSocket(wsUri);
 	
-	$(document).ready(function(){
+	/*$(document).ready(function(){
 		document.getElementById('user_name').value=name;
-	});
+	});*/
 	$("#exit_btn").on("click",function(){
 		STATE=1;
 		state_change();
@@ -53,7 +53,13 @@ function room_ready(){
 		});
 	//start the game
 	$("#start_btn").on("click",function(){
-		//	if(cnt==6){gostart=1;}
+		
+		//캐릭터 안고름 
+		if(character==null){
+			alert("Chooooose the character!");
+			return;
+		}
+		//6명다 레디함 
 		if(cnt==6){
 		cnt=0;
 		STATE=3;
